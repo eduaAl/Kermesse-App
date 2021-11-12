@@ -1,0 +1,963 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KERMESSEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="tbl_arqueocaja">
+    <Key>
+      <PropertyRef Name="id_arqueocaja" />
+    </Key>
+    <Property Name="id_arqueocaja" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idkermesse" Type="Int32" Nullable="false" />
+    <Property Name="fecha_arqueo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="gran_total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="usuario_creacion" Type="Int32" Nullable="false" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="usuario_modificacion" Type="Int32" />
+    <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+    <Property Name="usuario_eliminacion" Type="Int32" />
+    <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_arqueocaja_det" Relationship="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja" FromRole="tbl_arqueocaja" ToRole="tbl_arqueocaja_det" />
+    <NavigationProperty Name="tbl_kermesse" Relationship="Self.FK_tbl_arqueocaja_tbl_kermesse" FromRole="tbl_arqueocaja" ToRole="tbl_kermesse" />
+    <NavigationProperty Name="tbl_usuario" Relationship="Self.FK_tbl_arqueocaja_tbl_usuario" FromRole="tbl_arqueocaja" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_usuario1" Relationship="Self.FK_tbl_arqueocaja_tbl_usuario1" FromRole="tbl_arqueocaja" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_usuario2" Relationship="Self.FK_tbl_arqueocaja_tbl_usuario2" FromRole="tbl_arqueocaja" ToRole="tbl_usuario" />
+  </EntityType>
+  <EntityType Name="tbl_arqueocaja_det">
+    <Key>
+      <PropertyRef Name="id_arqueocaja_det" />
+    </Key>
+    <Property Name="id_arqueocaja_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_arqueocaja" Type="Int32" Nullable="false" />
+    <Property Name="id_moneda" Type="Int32" Nullable="false" />
+    <Property Name="id_denominacion" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="tbl_arqueocaja" Relationship="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja" FromRole="tbl_arqueocaja_det" ToRole="tbl_arqueocaja" />
+    <NavigationProperty Name="tbl_denominacion" Relationship="Self.FK_tbl_arqueocaja_det_tbl_denominacion" FromRole="tbl_arqueocaja_det" ToRole="tbl_denominacion" />
+    <NavigationProperty Name="tbl_moneda" Relationship="Self.FK_tbl_arqueocaja_det_tbl_moneda" FromRole="tbl_arqueocaja_det" ToRole="tbl_moneda" />
+  </EntityType>
+  <EntityType Name="tbl_bonos">
+    <Key>
+      <PropertyRef Name="id_bono" />
+    </Key>
+    <Property Name="id_bono" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="valor" Type="Double" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_ingresocom_det" Relationship="Self.FK_tbl_ingresocom_det_tbl_bonos" FromRole="tbl_bonos" ToRole="tbl_ingresocom_det" />
+  </EntityType>
+  <EntityType Name="tbl_cat_gastos">
+    <Key>
+      <PropertyRef Name="id_cat_gasto" />
+    </Key>
+    <Property Name="id_cat_gasto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_cat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="desc_cat" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_gastos" Relationship="Self.FK_tbl_gastos_tbl_cat_gastos" FromRole="tbl_cat_gastos" ToRole="tbl_gastos" />
+  </EntityType>
+  <EntityType Name="tbl_cat_producto">
+    <Key>
+      <PropertyRef Name="id_cat_producto" />
+    </Key>
+    <Property Name="id_cat_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_productos" Relationship="Self.FK_tbl_productos_tbl_cat_producto" FromRole="tbl_cat_producto" ToRole="tbl_productos" />
+  </EntityType>
+  <EntityType Name="tbl_comunidad">
+    <Key>
+      <PropertyRef Name="id_comunidad" />
+    </Key>
+    <Property Name="id_comunidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="responsable" Type="String" MaxLength="80" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="desc_contribucion" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_ingreso_com" Relationship="Self.FK_tbl_ingreso_com_tbl_comunidad" FromRole="tbl_comunidad" ToRole="tbl_ingreso_com" />
+    <NavigationProperty Name="tbl_productos" Relationship="Self.FK_tbl_productos_tbl_comunidad" FromRole="tbl_comunidad" ToRole="tbl_productos" />
+  </EntityType>
+  <EntityType Name="tbl_denominacion">
+    <Key>
+      <PropertyRef Name="id_denominacion" />
+    </Key>
+    <Property Name="id_denominacion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_moneda" Type="Int32" Nullable="false" />
+    <Property Name="valor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="valor_letras" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_arqueocaja_det" Relationship="Self.FK_tbl_arqueocaja_det_tbl_denominacion" FromRole="tbl_denominacion" ToRole="tbl_arqueocaja_det" />
+    <NavigationProperty Name="tbl_moneda" Relationship="Self.FK_tbl_denominacion_tbl_moneda" FromRole="tbl_denominacion" ToRole="tbl_moneda" />
+  </EntityType>
+  <EntityType Name="tbl_gastos">
+    <Key>
+      <PropertyRef Name="id_gasto" />
+    </Key>
+    <Property Name="id_gasto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_kermesse" Type="Int32" Nullable="false" />
+    <Property Name="id_cat_gasto" Type="Int32" Nullable="false" />
+    <Property Name="fecha_gasto" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="concepto" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="monto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="usuario_creacion" Type="Int32" Nullable="false" />
+    <Property Name="usuario_modificacion" Type="Int32" />
+    <Property Name="usuario_eliminacion" Type="Int32" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+    <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tbl_cat_gastos" Relationship="Self.FK_tbl_gastos_tbl_cat_gastos" FromRole="tbl_gastos" ToRole="tbl_cat_gastos" />
+    <NavigationProperty Name="tbl_kermesse" Relationship="Self.FK_tbl_gastos_tbl_kermesse" FromRole="tbl_gastos" ToRole="tbl_kermesse" />
+    <NavigationProperty Name="tbl_usuario" Relationship="Self.FK_tbl_gastos_tbl_usuario" FromRole="tbl_gastos" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_usuario1" Relationship="Self.FK_tbl_gastos_tbl_usuario1" FromRole="tbl_gastos" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_usuario2" Relationship="Self.FK_tbl_gastos_tbl_usuario2" FromRole="tbl_gastos" ToRole="tbl_usuario" />
+  </EntityType>
+  <EntityType Name="tbl_ingreso_com">
+    <Key>
+      <PropertyRef Name="id_ingresocom" />
+    </Key>
+    <Property Name="id_ingresocom" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_kermesse" Type="Int32" Nullable="false" />
+    <Property Name="id_comunidad" Type="Int32" Nullable="false" />
+    <Property Name="id_producto" Type="Int32" Nullable="false" />
+    <Property Name="cant_producto" Type="Int32" Nullable="false" />
+    <Property Name="precio_producto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="total_bonos" Type="Int32" Nullable="false" />
+    <Property Name="usuario_creacion" Type="Int32" Nullable="false" />
+    <Property Name="usuario_modificacion" Type="Int32" />
+    <Property Name="usuario_eliminacion" Type="Int32" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+    <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_comunidad" Relationship="Self.FK_tbl_ingreso_com_tbl_comunidad" FromRole="tbl_ingreso_com" ToRole="tbl_comunidad" />
+    <NavigationProperty Name="tbl_kermesse" Relationship="Self.FK_tbl_ingreso_com_tbl_kermesse" FromRole="tbl_ingreso_com" ToRole="tbl_kermesse" />
+    <NavigationProperty Name="tbl_productos" Relationship="Self.FK_tbl_ingreso_com_tbl_productos" FromRole="tbl_ingreso_com" ToRole="tbl_productos" />
+    <NavigationProperty Name="tbl_usuario" Relationship="Self.FK_tbl_ingreso_com_tbl_usuario" FromRole="tbl_ingreso_com" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_usuario1" Relationship="Self.FK_tbl_ingreso_com_tbl_usuario1" FromRole="tbl_ingreso_com" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_usuario2" Relationship="Self.FK_tbl_ingreso_com_tbl_usuario2" FromRole="tbl_ingreso_com" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_ingresocom_det" Relationship="Self.FK_tbl_ingresocom_det_tbl_ingreso_com" FromRole="tbl_ingreso_com" ToRole="tbl_ingresocom_det" />
+  </EntityType>
+  <EntityType Name="tbl_ingresocom_det">
+    <Key>
+      <PropertyRef Name="id_ingresocom_det" />
+    </Key>
+    <Property Name="id_ingresocom_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_ingresocom" Type="Int32" Nullable="false" />
+    <Property Name="id_bono" Type="Int32" Nullable="false" />
+    <Property Name="denominacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="tbl_bonos" Relationship="Self.FK_tbl_ingresocom_det_tbl_bonos" FromRole="tbl_ingresocom_det" ToRole="tbl_bonos" />
+    <NavigationProperty Name="tbl_ingreso_com" Relationship="Self.FK_tbl_ingresocom_det_tbl_ingreso_com" FromRole="tbl_ingresocom_det" ToRole="tbl_ingreso_com" />
+  </EntityType>
+  <EntityType Name="tbl_kermesse">
+    <Key>
+      <PropertyRef Name="id_kermesse" />
+    </Key>
+    <Property Name="id_kermesse" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_parroquia" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="desc_general" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="usuario_creacion" Type="Int32" Nullable="false" />
+    <Property Name="usuario_modificacion" Type="Int32" />
+    <Property Name="usuario_eliminacion" Type="Int32" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+    <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="tbl_arqueocaja" Relationship="Self.FK_tbl_arqueocaja_tbl_kermesse" FromRole="tbl_kermesse" ToRole="tbl_arqueocaja" />
+    <NavigationProperty Name="tbl_gastos" Relationship="Self.FK_tbl_gastos_tbl_kermesse" FromRole="tbl_kermesse" ToRole="tbl_gastos" />
+    <NavigationProperty Name="tbl_ingreso_com" Relationship="Self.FK_tbl_ingreso_com_tbl_kermesse" FromRole="tbl_kermesse" ToRole="tbl_ingreso_com" />
+    <NavigationProperty Name="tbl_parroquia" Relationship="Self.FK_tbl_kermesse_tbl_parroquia" FromRole="tbl_kermesse" ToRole="tbl_parroquia" />
+    <NavigationProperty Name="tbl_usuario" Relationship="Self.FK_tbl_kermesse_tbl_usuario" FromRole="tbl_kermesse" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_usuario1" Relationship="Self.FK_tbl_kermesse_tbl_usuario1" FromRole="tbl_kermesse" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_usuario2" Relationship="Self.FK_tbl_kermesse_tbl_usuario2" FromRole="tbl_kermesse" ToRole="tbl_usuario" />
+    <NavigationProperty Name="tbl_listaprecio" Relationship="Self.FK_tbl_listaprecio_tbl_kermesse" FromRole="tbl_kermesse" ToRole="tbl_listaprecio" />
+  </EntityType>
+  <EntityType Name="tbl_listaprecio">
+    <Key>
+      <PropertyRef Name="id_listaprecio" />
+    </Key>
+    <Property Name="id_listaprecio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_kermesse" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_kermesse" Relationship="Self.FK_tbl_listaprecio_tbl_kermesse" FromRole="tbl_listaprecio" ToRole="tbl_kermesse" />
+    <NavigationProperty Name="tbl_listaprecio_det" Relationship="Self.FK_tbl_listaprecio_det_tbl_listaprecio" FromRole="tbl_listaprecio" ToRole="tbl_listaprecio_det" />
+  </EntityType>
+  <EntityType Name="tbl_listaprecio_det">
+    <Key>
+      <PropertyRef Name="id_listaprecio_det" />
+    </Key>
+    <Property Name="id_listaprecio_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_listaprecio" Type="Int32" Nullable="false" />
+    <Property Name="id_producto" Type="Int32" Nullable="false" />
+    <Property Name="precio_venta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <NavigationProperty Name="tbl_listaprecio" Relationship="Self.FK_tbl_listaprecio_det_tbl_listaprecio" FromRole="tbl_listaprecio_det" ToRole="tbl_listaprecio" />
+    <NavigationProperty Name="tbl_productos" Relationship="Self.FK_tbl_listaprecio_det_tbl_productos" FromRole="tbl_listaprecio_det" ToRole="tbl_productos" />
+  </EntityType>
+  <EntityType Name="tbl_moneda">
+    <Key>
+      <PropertyRef Name="id_moneda" />
+    </Key>
+    <Property Name="id_moneda" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="signo" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_arqueocaja_det" Relationship="Self.FK_tbl_arqueocaja_det_tbl_moneda" FromRole="tbl_moneda" ToRole="tbl_arqueocaja_det" />
+    <NavigationProperty Name="tbl_denominacion" Relationship="Self.FK_tbl_denominacion_tbl_moneda" FromRole="tbl_moneda" ToRole="tbl_denominacion" />
+    <NavigationProperty Name="tbl_tasacambio" Relationship="Self.FK_tbl_tasacambio_tbl_moneda" FromRole="tbl_moneda" ToRole="tbl_tasacambio" />
+    <NavigationProperty Name="tbl_tasacambio1" Relationship="Self.FK_tbl_tasacambio_tbl_moneda1" FromRole="tbl_moneda" ToRole="tbl_tasacambio" />
+  </EntityType>
+  <EntityType Name="tbl_opciones">
+    <Key>
+      <PropertyRef Name="id_opciones" />
+    </Key>
+    <Property Name="id_opciones" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="opcion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_rol_opcion" Relationship="Self.FK_tbl_rol_opcion_tbl_opciones" FromRole="tbl_opciones" ToRole="tbl_rol_opcion" />
+  </EntityType>
+  <EntityType Name="tbl_parroquia">
+    <Key>
+      <PropertyRef Name="idparroquia" />
+    </Key>
+    <Property Name="idparroquia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="direccion" Type="String" MaxLength="400" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="telefono" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="parroco" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="url_logo" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="sitio_web" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="tbl_kermesse" Relationship="Self.FK_tbl_kermesse_tbl_parroquia" FromRole="tbl_parroquia" ToRole="tbl_kermesse" />
+  </EntityType>
+  <EntityType Name="tbl_productos">
+    <Key>
+      <PropertyRef Name="id_producto" />
+    </Key>
+    <Property Name="id_producto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_comunidad" Type="Int32" Nullable="false" />
+    <Property Name="id_cat_producto" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="desc_presentacion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="precio_venta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_cat_producto" Relationship="Self.FK_tbl_productos_tbl_cat_producto" FromRole="tbl_productos" ToRole="tbl_cat_producto" />
+    <NavigationProperty Name="tbl_comunidad" Relationship="Self.FK_tbl_productos_tbl_comunidad" FromRole="tbl_productos" ToRole="tbl_comunidad" />
+    <NavigationProperty Name="tbl_ingreso_com" Relationship="Self.FK_tbl_ingreso_com_tbl_productos" FromRole="tbl_productos" ToRole="tbl_ingreso_com" />
+    <NavigationProperty Name="tbl_listaprecio_det" Relationship="Self.FK_tbl_listaprecio_det_tbl_productos" FromRole="tbl_productos" ToRole="tbl_listaprecio_det" />
+  </EntityType>
+  <EntityType Name="tbl_rol">
+    <Key>
+      <PropertyRef Name="id_rol" />
+    </Key>
+    <Property Name="id_rol" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rol" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_rol_opcion" Relationship="Self.FK_tbl_rol_opcion_tbl_rol" FromRole="tbl_rol" ToRole="tbl_rol_opcion" />
+    <NavigationProperty Name="tbl_rol_usuario" Relationship="Self.FK_tbl_rol_usuario_tbl_rol" FromRole="tbl_rol" ToRole="tbl_rol_usuario" />
+  </EntityType>
+  <EntityType Name="tbl_rol_opcion">
+    <Key>
+      <PropertyRef Name="id_rol_opcion" />
+    </Key>
+    <Property Name="id_rol_opcion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_rol" Type="Int32" Nullable="false" />
+    <Property Name="id_opcion" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_opciones" Relationship="Self.FK_tbl_rol_opcion_tbl_opciones" FromRole="tbl_rol_opcion" ToRole="tbl_opciones" />
+    <NavigationProperty Name="tbl_rol" Relationship="Self.FK_tbl_rol_opcion_tbl_rol" FromRole="tbl_rol_opcion" ToRole="tbl_rol" />
+  </EntityType>
+  <EntityType Name="tbl_rol_usuario">
+    <Key>
+      <PropertyRef Name="id_rol_usuario" />
+    </Key>
+    <Property Name="id_rol_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" Nullable="false" />
+    <Property Name="id_rol" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_rol" Relationship="Self.FK_tbl_rol_usuario_tbl_rol" FromRole="tbl_rol_usuario" ToRole="tbl_rol" />
+    <NavigationProperty Name="tbl_usuario" Relationship="Self.FK_tbl_rol_usuario_tbl_usuario" FromRole="tbl_rol_usuario" ToRole="tbl_usuario" />
+  </EntityType>
+  <EntityType Name="tbl_tasacambio">
+    <Key>
+      <PropertyRef Name="id_tasacambio" />
+    </Key>
+    <Property Name="id_tasacambio" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_monedaO" Type="Int32" Nullable="false" />
+    <Property Name="id_monedaC" Type="Int32" Nullable="false" />
+    <Property Name="mes" Type="Int32" Nullable="false" />
+    <Property Name="anio" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_moneda" Relationship="Self.FK_tbl_tasacambio_tbl_moneda" FromRole="tbl_tasacambio" ToRole="tbl_moneda" />
+    <NavigationProperty Name="tbl_moneda1" Relationship="Self.FK_tbl_tasacambio_tbl_moneda1" FromRole="tbl_tasacambio" ToRole="tbl_moneda" />
+    <NavigationProperty Name="tbl_tasacambio_det" Relationship="Self.FK_tbl_tasacambio_det_tbl_tasacambio" FromRole="tbl_tasacambio" ToRole="tbl_tasacambio_det" />
+  </EntityType>
+  <EntityType Name="tbl_tasacambio_det">
+    <Key>
+      <PropertyRef Name="id_tasacambio_det" />
+    </Key>
+    <Property Name="id_tasacambio_det" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_tasacambio" Type="Int32" Nullable="false" />
+    <Property Name="fecha" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="tipo_cambio" Type="Decimal" Precision="18" Scale="4" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_tasacambio" Relationship="Self.FK_tbl_tasacambio_det_tbl_tasacambio" FromRole="tbl_tasacambio_det" ToRole="tbl_tasacambio" />
+  </EntityType>
+  <EntityType Name="tbl_usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="pwd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tbl_arqueocaja" Relationship="Self.FK_tbl_arqueocaja_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_arqueocaja" />
+    <NavigationProperty Name="tbl_arqueocaja1" Relationship="Self.FK_tbl_arqueocaja_tbl_usuario1" FromRole="tbl_usuario" ToRole="tbl_arqueocaja" />
+    <NavigationProperty Name="tbl_arqueocaja2" Relationship="Self.FK_tbl_arqueocaja_tbl_usuario2" FromRole="tbl_usuario" ToRole="tbl_arqueocaja" />
+    <NavigationProperty Name="tbl_gastos" Relationship="Self.FK_tbl_gastos_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_gastos" />
+    <NavigationProperty Name="tbl_gastos1" Relationship="Self.FK_tbl_gastos_tbl_usuario1" FromRole="tbl_usuario" ToRole="tbl_gastos" />
+    <NavigationProperty Name="tbl_gastos2" Relationship="Self.FK_tbl_gastos_tbl_usuario2" FromRole="tbl_usuario" ToRole="tbl_gastos" />
+    <NavigationProperty Name="tbl_ingreso_com" Relationship="Self.FK_tbl_ingreso_com_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_ingreso_com" />
+    <NavigationProperty Name="tbl_ingreso_com1" Relationship="Self.FK_tbl_ingreso_com_tbl_usuario1" FromRole="tbl_usuario" ToRole="tbl_ingreso_com" />
+    <NavigationProperty Name="tbl_ingreso_com2" Relationship="Self.FK_tbl_ingreso_com_tbl_usuario2" FromRole="tbl_usuario" ToRole="tbl_ingreso_com" />
+    <NavigationProperty Name="tbl_kermesse" Relationship="Self.FK_tbl_kermesse_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
+    <NavigationProperty Name="tbl_kermesse1" Relationship="Self.FK_tbl_kermesse_tbl_usuario1" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
+    <NavigationProperty Name="tbl_kermesse2" Relationship="Self.FK_tbl_kermesse_tbl_usuario2" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
+    <NavigationProperty Name="tbl_rol_usuario" Relationship="Self.FK_tbl_rol_usuario_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_rol_usuario" />
+  </EntityType>
+  <Association Name="FK_tbl_arqueocaja_det_tbl_arqueocaja">
+    <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="1" />
+    <End Role="tbl_arqueocaja_det" Type="Self.tbl_arqueocaja_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_arqueocaja">
+        <PropertyRef Name="id_arqueocaja" />
+      </Principal>
+      <Dependent Role="tbl_arqueocaja_det">
+        <PropertyRef Name="id_arqueocaja" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_arqueocaja_tbl_kermesse">
+    <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="1" />
+    <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_kermesse">
+        <PropertyRef Name="id_kermesse" />
+      </Principal>
+      <Dependent Role="tbl_arqueocaja">
+        <PropertyRef Name="idkermesse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_arqueocaja_tbl_usuario">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="1" />
+    <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_arqueocaja">
+        <PropertyRef Name="usuario_creacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_arqueocaja_tbl_usuario1">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+    <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_arqueocaja">
+        <PropertyRef Name="usuario_modificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_arqueocaja_tbl_usuario2">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+    <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_arqueocaja">
+        <PropertyRef Name="usuario_eliminacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_arqueocaja_det_tbl_denominacion">
+    <End Role="tbl_denominacion" Type="Self.tbl_denominacion" Multiplicity="1" />
+    <End Role="tbl_arqueocaja_det" Type="Self.tbl_arqueocaja_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_denominacion">
+        <PropertyRef Name="id_denominacion" />
+      </Principal>
+      <Dependent Role="tbl_arqueocaja_det">
+        <PropertyRef Name="id_denominacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_arqueocaja_det_tbl_moneda">
+    <End Role="tbl_moneda" Type="Self.tbl_moneda" Multiplicity="1" />
+    <End Role="tbl_arqueocaja_det" Type="Self.tbl_arqueocaja_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_moneda">
+        <PropertyRef Name="id_moneda" />
+      </Principal>
+      <Dependent Role="tbl_arqueocaja_det">
+        <PropertyRef Name="id_moneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ingresocom_det_tbl_bonos">
+    <End Role="tbl_bonos" Type="Self.tbl_bonos" Multiplicity="1" />
+    <End Role="tbl_ingresocom_det" Type="Self.tbl_ingresocom_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_bonos">
+        <PropertyRef Name="id_bono" />
+      </Principal>
+      <Dependent Role="tbl_ingresocom_det">
+        <PropertyRef Name="id_bono" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_gastos_tbl_cat_gastos">
+    <End Role="tbl_cat_gastos" Type="Self.tbl_cat_gastos" Multiplicity="1" />
+    <End Role="tbl_gastos" Type="Self.tbl_gastos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_cat_gastos">
+        <PropertyRef Name="id_cat_gasto" />
+      </Principal>
+      <Dependent Role="tbl_gastos">
+        <PropertyRef Name="id_cat_gasto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_productos_tbl_cat_producto">
+    <End Role="tbl_cat_producto" Type="Self.tbl_cat_producto" Multiplicity="1" />
+    <End Role="tbl_productos" Type="Self.tbl_productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_cat_producto">
+        <PropertyRef Name="id_cat_producto" />
+      </Principal>
+      <Dependent Role="tbl_productos">
+        <PropertyRef Name="id_cat_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ingreso_com_tbl_comunidad">
+    <End Role="tbl_comunidad" Type="Self.tbl_comunidad" Multiplicity="1" />
+    <End Role="tbl_ingreso_com" Type="Self.tbl_ingreso_com" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_comunidad">
+        <PropertyRef Name="id_comunidad" />
+      </Principal>
+      <Dependent Role="tbl_ingreso_com">
+        <PropertyRef Name="id_comunidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_productos_tbl_comunidad">
+    <End Role="tbl_comunidad" Type="Self.tbl_comunidad" Multiplicity="1" />
+    <End Role="tbl_productos" Type="Self.tbl_productos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_comunidad">
+        <PropertyRef Name="id_comunidad" />
+      </Principal>
+      <Dependent Role="tbl_productos">
+        <PropertyRef Name="id_comunidad" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_denominacion_tbl_moneda">
+    <End Role="tbl_moneda" Type="Self.tbl_moneda" Multiplicity="1" />
+    <End Role="tbl_denominacion" Type="Self.tbl_denominacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_moneda">
+        <PropertyRef Name="id_moneda" />
+      </Principal>
+      <Dependent Role="tbl_denominacion">
+        <PropertyRef Name="id_moneda" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_gastos_tbl_kermesse">
+    <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="1" />
+    <End Role="tbl_gastos" Type="Self.tbl_gastos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_kermesse">
+        <PropertyRef Name="id_kermesse" />
+      </Principal>
+      <Dependent Role="tbl_gastos">
+        <PropertyRef Name="id_kermesse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_gastos_tbl_usuario">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="1" />
+    <End Role="tbl_gastos" Type="Self.tbl_gastos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_gastos">
+        <PropertyRef Name="usuario_creacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_gastos_tbl_usuario1">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+    <End Role="tbl_gastos" Type="Self.tbl_gastos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_gastos">
+        <PropertyRef Name="usuario_modificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_gastos_tbl_usuario2">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+    <End Role="tbl_gastos" Type="Self.tbl_gastos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_gastos">
+        <PropertyRef Name="usuario_eliminacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ingreso_com_tbl_kermesse">
+    <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="1" />
+    <End Role="tbl_ingreso_com" Type="Self.tbl_ingreso_com" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_kermesse">
+        <PropertyRef Name="id_kermesse" />
+      </Principal>
+      <Dependent Role="tbl_ingreso_com">
+        <PropertyRef Name="id_kermesse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ingreso_com_tbl_productos">
+    <End Role="tbl_productos" Type="Self.tbl_productos" Multiplicity="1" />
+    <End Role="tbl_ingreso_com" Type="Self.tbl_ingreso_com" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_productos">
+        <PropertyRef Name="id_producto" />
+      </Principal>
+      <Dependent Role="tbl_ingreso_com">
+        <PropertyRef Name="id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ingreso_com_tbl_usuario">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="1" />
+    <End Role="tbl_ingreso_com" Type="Self.tbl_ingreso_com" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_ingreso_com">
+        <PropertyRef Name="usuario_creacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ingreso_com_tbl_usuario1">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+    <End Role="tbl_ingreso_com" Type="Self.tbl_ingreso_com" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_ingreso_com">
+        <PropertyRef Name="usuario_modificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ingreso_com_tbl_usuario2">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+    <End Role="tbl_ingreso_com" Type="Self.tbl_ingreso_com" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_ingreso_com">
+        <PropertyRef Name="usuario_eliminacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_ingresocom_det_tbl_ingreso_com">
+    <End Role="tbl_ingreso_com" Type="Self.tbl_ingreso_com" Multiplicity="1" />
+    <End Role="tbl_ingresocom_det" Type="Self.tbl_ingresocom_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_ingreso_com">
+        <PropertyRef Name="id_ingresocom" />
+      </Principal>
+      <Dependent Role="tbl_ingresocom_det">
+        <PropertyRef Name="id_ingresocom" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_kermesse_tbl_parroquia">
+    <End Role="tbl_parroquia" Type="Self.tbl_parroquia" Multiplicity="1" />
+    <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_parroquia">
+        <PropertyRef Name="idparroquia" />
+      </Principal>
+      <Dependent Role="tbl_kermesse">
+        <PropertyRef Name="id_parroquia" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_kermesse_tbl_usuario">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="1" />
+    <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_kermesse">
+        <PropertyRef Name="usuario_creacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_kermesse_tbl_usuario1">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+    <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_kermesse">
+        <PropertyRef Name="usuario_modificacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_kermesse_tbl_usuario2">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="0..1" />
+    <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_kermesse">
+        <PropertyRef Name="usuario_eliminacion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_listaprecio_tbl_kermesse">
+    <End Role="tbl_kermesse" Type="Self.tbl_kermesse" Multiplicity="1" />
+    <End Role="tbl_listaprecio" Type="Self.tbl_listaprecio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_kermesse">
+        <PropertyRef Name="id_kermesse" />
+      </Principal>
+      <Dependent Role="tbl_listaprecio">
+        <PropertyRef Name="id_kermesse" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_listaprecio_det_tbl_listaprecio">
+    <End Role="tbl_listaprecio" Type="Self.tbl_listaprecio" Multiplicity="1" />
+    <End Role="tbl_listaprecio_det" Type="Self.tbl_listaprecio_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_listaprecio">
+        <PropertyRef Name="id_listaprecio" />
+      </Principal>
+      <Dependent Role="tbl_listaprecio_det">
+        <PropertyRef Name="id_listaprecio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_listaprecio_det_tbl_productos">
+    <End Role="tbl_productos" Type="Self.tbl_productos" Multiplicity="1" />
+    <End Role="tbl_listaprecio_det" Type="Self.tbl_listaprecio_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_productos">
+        <PropertyRef Name="id_producto" />
+      </Principal>
+      <Dependent Role="tbl_listaprecio_det">
+        <PropertyRef Name="id_producto" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_tasacambio_tbl_moneda">
+    <End Role="tbl_moneda" Type="Self.tbl_moneda" Multiplicity="1" />
+    <End Role="tbl_tasacambio" Type="Self.tbl_tasacambio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_moneda">
+        <PropertyRef Name="id_moneda" />
+      </Principal>
+      <Dependent Role="tbl_tasacambio">
+        <PropertyRef Name="id_monedaO" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_tasacambio_tbl_moneda1">
+    <End Role="tbl_moneda" Type="Self.tbl_moneda" Multiplicity="1" />
+    <End Role="tbl_tasacambio" Type="Self.tbl_tasacambio" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_moneda">
+        <PropertyRef Name="id_moneda" />
+      </Principal>
+      <Dependent Role="tbl_tasacambio">
+        <PropertyRef Name="id_monedaC" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_rol_opcion_tbl_opciones">
+    <End Role="tbl_opciones" Type="Self.tbl_opciones" Multiplicity="1" />
+    <End Role="tbl_rol_opcion" Type="Self.tbl_rol_opcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_opciones">
+        <PropertyRef Name="id_opciones" />
+      </Principal>
+      <Dependent Role="tbl_rol_opcion">
+        <PropertyRef Name="id_opcion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_rol_opcion_tbl_rol">
+    <End Role="tbl_rol" Type="Self.tbl_rol" Multiplicity="1" />
+    <End Role="tbl_rol_opcion" Type="Self.tbl_rol_opcion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="tbl_rol_opcion">
+        <PropertyRef Name="id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_rol_usuario_tbl_rol">
+    <End Role="tbl_rol" Type="Self.tbl_rol" Multiplicity="1" />
+    <End Role="tbl_rol_usuario" Type="Self.tbl_rol_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_rol">
+        <PropertyRef Name="id_rol" />
+      </Principal>
+      <Dependent Role="tbl_rol_usuario">
+        <PropertyRef Name="id_rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_rol_usuario_tbl_usuario">
+    <End Role="tbl_usuario" Type="Self.tbl_usuario" Multiplicity="1" />
+    <End Role="tbl_rol_usuario" Type="Self.tbl_rol_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="tbl_rol_usuario">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tbl_tasacambio_det_tbl_tasacambio">
+    <End Role="tbl_tasacambio" Type="Self.tbl_tasacambio" Multiplicity="1" />
+    <End Role="tbl_tasacambio_det" Type="Self.tbl_tasacambio_det" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tbl_tasacambio">
+        <PropertyRef Name="id_tasacambio" />
+      </Principal>
+      <Dependent Role="tbl_tasacambio_det">
+        <PropertyRef Name="id_tasacambio" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KERMESSEEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="tbl_arqueocaja" EntityType="Self.tbl_arqueocaja" />
+    <EntitySet Name="tbl_arqueocaja_det" EntityType="Self.tbl_arqueocaja_det" />
+    <EntitySet Name="tbl_bonos" EntityType="Self.tbl_bonos" />
+    <EntitySet Name="tbl_cat_gastos" EntityType="Self.tbl_cat_gastos" />
+    <EntitySet Name="tbl_cat_producto" EntityType="Self.tbl_cat_producto" />
+    <EntitySet Name="tbl_comunidad" EntityType="Self.tbl_comunidad" />
+    <EntitySet Name="tbl_denominacion" EntityType="Self.tbl_denominacion" />
+    <EntitySet Name="tbl_gastos" EntityType="Self.tbl_gastos" />
+    <EntitySet Name="tbl_ingreso_com" EntityType="Self.tbl_ingreso_com" />
+    <EntitySet Name="tbl_ingresocom_det" EntityType="Self.tbl_ingresocom_det" />
+    <EntitySet Name="tbl_kermesse" EntityType="Self.tbl_kermesse" />
+    <EntitySet Name="tbl_listaprecio" EntityType="Self.tbl_listaprecio" />
+    <EntitySet Name="tbl_listaprecio_det" EntityType="Self.tbl_listaprecio_det" />
+    <EntitySet Name="tbl_moneda" EntityType="Self.tbl_moneda" />
+    <EntitySet Name="tbl_opciones" EntityType="Self.tbl_opciones" />
+    <EntitySet Name="tbl_parroquia" EntityType="Self.tbl_parroquia" />
+    <EntitySet Name="tbl_productos" EntityType="Self.tbl_productos" />
+    <EntitySet Name="tbl_rol" EntityType="Self.tbl_rol" />
+    <EntitySet Name="tbl_rol_opcion" EntityType="Self.tbl_rol_opcion" />
+    <EntitySet Name="tbl_rol_usuario" EntityType="Self.tbl_rol_usuario" />
+    <EntitySet Name="tbl_tasacambio" EntityType="Self.tbl_tasacambio" />
+    <EntitySet Name="tbl_tasacambio_det" EntityType="Self.tbl_tasacambio_det" />
+    <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
+    <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_arqueocaja" Association="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja">
+      <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
+      <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_arqueocaja_tbl_kermesse" Association="Self.FK_tbl_arqueocaja_tbl_kermesse">
+      <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
+      <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_arqueocaja_tbl_usuario" Association="Self.FK_tbl_arqueocaja_tbl_usuario">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_arqueocaja_tbl_usuario1" Association="Self.FK_tbl_arqueocaja_tbl_usuario1">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_arqueocaja_tbl_usuario2" Association="Self.FK_tbl_arqueocaja_tbl_usuario2">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_denominacion" Association="Self.FK_tbl_arqueocaja_det_tbl_denominacion">
+      <End Role="tbl_denominacion" EntitySet="tbl_denominacion" />
+      <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_moneda" Association="Self.FK_tbl_arqueocaja_det_tbl_moneda">
+      <End Role="tbl_moneda" EntitySet="tbl_moneda" />
+      <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ingresocom_det_tbl_bonos" Association="Self.FK_tbl_ingresocom_det_tbl_bonos">
+      <End Role="tbl_bonos" EntitySet="tbl_bonos" />
+      <End Role="tbl_ingresocom_det" EntitySet="tbl_ingresocom_det" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_gastos_tbl_cat_gastos" Association="Self.FK_tbl_gastos_tbl_cat_gastos">
+      <End Role="tbl_cat_gastos" EntitySet="tbl_cat_gastos" />
+      <End Role="tbl_gastos" EntitySet="tbl_gastos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_productos_tbl_cat_producto" Association="Self.FK_tbl_productos_tbl_cat_producto">
+      <End Role="tbl_cat_producto" EntitySet="tbl_cat_producto" />
+      <End Role="tbl_productos" EntitySet="tbl_productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ingreso_com_tbl_comunidad" Association="Self.FK_tbl_ingreso_com_tbl_comunidad">
+      <End Role="tbl_comunidad" EntitySet="tbl_comunidad" />
+      <End Role="tbl_ingreso_com" EntitySet="tbl_ingreso_com" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_productos_tbl_comunidad" Association="Self.FK_tbl_productos_tbl_comunidad">
+      <End Role="tbl_comunidad" EntitySet="tbl_comunidad" />
+      <End Role="tbl_productos" EntitySet="tbl_productos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_denominacion_tbl_moneda" Association="Self.FK_tbl_denominacion_tbl_moneda">
+      <End Role="tbl_moneda" EntitySet="tbl_moneda" />
+      <End Role="tbl_denominacion" EntitySet="tbl_denominacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_gastos_tbl_kermesse" Association="Self.FK_tbl_gastos_tbl_kermesse">
+      <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
+      <End Role="tbl_gastos" EntitySet="tbl_gastos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_gastos_tbl_usuario" Association="Self.FK_tbl_gastos_tbl_usuario">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_gastos" EntitySet="tbl_gastos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_gastos_tbl_usuario1" Association="Self.FK_tbl_gastos_tbl_usuario1">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_gastos" EntitySet="tbl_gastos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_gastos_tbl_usuario2" Association="Self.FK_tbl_gastos_tbl_usuario2">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_gastos" EntitySet="tbl_gastos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ingreso_com_tbl_kermesse" Association="Self.FK_tbl_ingreso_com_tbl_kermesse">
+      <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
+      <End Role="tbl_ingreso_com" EntitySet="tbl_ingreso_com" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ingreso_com_tbl_productos" Association="Self.FK_tbl_ingreso_com_tbl_productos">
+      <End Role="tbl_productos" EntitySet="tbl_productos" />
+      <End Role="tbl_ingreso_com" EntitySet="tbl_ingreso_com" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ingreso_com_tbl_usuario" Association="Self.FK_tbl_ingreso_com_tbl_usuario">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_ingreso_com" EntitySet="tbl_ingreso_com" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ingreso_com_tbl_usuario1" Association="Self.FK_tbl_ingreso_com_tbl_usuario1">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_ingreso_com" EntitySet="tbl_ingreso_com" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ingreso_com_tbl_usuario2" Association="Self.FK_tbl_ingreso_com_tbl_usuario2">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_ingreso_com" EntitySet="tbl_ingreso_com" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_ingresocom_det_tbl_ingreso_com" Association="Self.FK_tbl_ingresocom_det_tbl_ingreso_com">
+      <End Role="tbl_ingreso_com" EntitySet="tbl_ingreso_com" />
+      <End Role="tbl_ingresocom_det" EntitySet="tbl_ingresocom_det" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_kermesse_tbl_parroquia" Association="Self.FK_tbl_kermesse_tbl_parroquia">
+      <End Role="tbl_parroquia" EntitySet="tbl_parroquia" />
+      <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_kermesse_tbl_usuario" Association="Self.FK_tbl_kermesse_tbl_usuario">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_kermesse_tbl_usuario1" Association="Self.FK_tbl_kermesse_tbl_usuario1">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_kermesse_tbl_usuario2" Association="Self.FK_tbl_kermesse_tbl_usuario2">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_listaprecio_tbl_kermesse" Association="Self.FK_tbl_listaprecio_tbl_kermesse">
+      <End Role="tbl_kermesse" EntitySet="tbl_kermesse" />
+      <End Role="tbl_listaprecio" EntitySet="tbl_listaprecio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_listaprecio_det_tbl_listaprecio" Association="Self.FK_tbl_listaprecio_det_tbl_listaprecio">
+      <End Role="tbl_listaprecio" EntitySet="tbl_listaprecio" />
+      <End Role="tbl_listaprecio_det" EntitySet="tbl_listaprecio_det" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_listaprecio_det_tbl_productos" Association="Self.FK_tbl_listaprecio_det_tbl_productos">
+      <End Role="tbl_productos" EntitySet="tbl_productos" />
+      <End Role="tbl_listaprecio_det" EntitySet="tbl_listaprecio_det" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_tasacambio_tbl_moneda" Association="Self.FK_tbl_tasacambio_tbl_moneda">
+      <End Role="tbl_moneda" EntitySet="tbl_moneda" />
+      <End Role="tbl_tasacambio" EntitySet="tbl_tasacambio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_tasacambio_tbl_moneda1" Association="Self.FK_tbl_tasacambio_tbl_moneda1">
+      <End Role="tbl_moneda" EntitySet="tbl_moneda" />
+      <End Role="tbl_tasacambio" EntitySet="tbl_tasacambio" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_rol_opcion_tbl_opciones" Association="Self.FK_tbl_rol_opcion_tbl_opciones">
+      <End Role="tbl_opciones" EntitySet="tbl_opciones" />
+      <End Role="tbl_rol_opcion" EntitySet="tbl_rol_opcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_rol_opcion_tbl_rol" Association="Self.FK_tbl_rol_opcion_tbl_rol">
+      <End Role="tbl_rol" EntitySet="tbl_rol" />
+      <End Role="tbl_rol_opcion" EntitySet="tbl_rol_opcion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_rol_usuario_tbl_rol" Association="Self.FK_tbl_rol_usuario_tbl_rol">
+      <End Role="tbl_rol" EntitySet="tbl_rol" />
+      <End Role="tbl_rol_usuario" EntitySet="tbl_rol_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_rol_usuario_tbl_usuario" Association="Self.FK_tbl_rol_usuario_tbl_usuario">
+      <End Role="tbl_usuario" EntitySet="tbl_usuario" />
+      <End Role="tbl_rol_usuario" EntitySet="tbl_rol_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tbl_tasacambio_det_tbl_tasacambio" Association="Self.FK_tbl_tasacambio_det_tbl_tasacambio">
+      <End Role="tbl_tasacambio" EntitySet="tbl_tasacambio" />
+      <End Role="tbl_tasacambio_det" EntitySet="tbl_tasacambio_det" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

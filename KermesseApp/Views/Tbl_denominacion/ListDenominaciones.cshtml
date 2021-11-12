@@ -1,0 +1,65 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_denominacion>
+
+@{
+    ViewBag.Title = "Lista Denominaciones";
+}
+
+<h2>Gestión de Denominaciones</h2>
+
+<p>
+    @Html.ActionLink("Nueva Denominacion", "VistaGuardarDenominacion", "", new { @class = "btn btn-primary" })
+</p>
+
+@using (Html.BeginForm("FiltrarDenominacion", "Tbl_denominacion", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            <span class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
+                <button type="submit" class="btn btn-block col-md-1">Buscar</button>
+            </span>
+        </div>
+    </div>
+}
+
+<div class="row"></div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.tbl_moneda.nombre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.valor)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.valor_letras)
+            </th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_moneda.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor_letras)
+                </td>
+                <td>
+                    <a href="@Url.Action("VerDenominacion", new { id = item.id_denominacion})"><i class="btn btn-outline-primary">Ver</i></a> |
+                    <a href="@Url.Action("EditarDenominacion", new { id = item.id_denominacion})"><i class="btn btn-outline-info">Editar</i></a>  |
+                    <a href="@Url.Action("EliminarDenominacion", new { id = item.id_denominacion})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    <tbody>
+</table>

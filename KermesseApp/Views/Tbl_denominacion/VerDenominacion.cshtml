@@ -1,0 +1,51 @@
+﻿@model KermesseApp.Models.tbl_denominacion
+
+@{
+    ViewBag.Title = "Ver Denominacion";
+}
+
+<h2>Ver datos de la Denominacion seleccionada</h2>
+
+<div>
+    <h4>Denominación</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.tbl_moneda.nombre)
+            </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.tbl_moneda.nombre)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.valor)
+        </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.valor)
+        </dd>
+
+        <h5 class=" mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.valor_letras)
+        </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.valor_letras)
+        </dd>
+    </dl>
+</div>
+
+<div class="container mt-3 col-xs-1" align="center">
+    <div class="form-group">
+        <p>
+            @Html.ActionLink("Regresar", "ListDenominaciones", "", new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

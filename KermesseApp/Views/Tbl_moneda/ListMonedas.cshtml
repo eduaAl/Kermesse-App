@@ -1,0 +1,58 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_moneda>
+
+@{
+    ViewBag.Title = "Lista Monedas";
+}
+
+<h2>Gestión de Monedas</h2>
+
+<p>
+    @Html.ActionLink("Nueva Moneda", "VwGuardarMoneda", "", new { @class = "btn btn-primary" })
+</p>
+
+@using (Html.BeginForm("FiltrarMoneda", "Tbl_moneda", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            <span class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
+                <button type="submit" class="btn btn-block col-md-1">Buscar</button>
+            </span>
+        </div>
+    </div>
+}
+
+<div class="row"></div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.signo)
+            </th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.signo)
+                </td>
+                <td>
+                    <a href="@Url.Action("VerMoneda", new { id = item.id_moneda})"><i class="btn btn-outline-primary">Ver</i></a> |
+                    <a href="@Url.Action("EditarMoneda", new { id = item.id_moneda})"><i class="btn btn-outline-info">Editar</i></a>  |
+                    <a href="@Url.Action("EliminarMoneda", new { id = item.id_moneda})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    <tbody>
+</table>

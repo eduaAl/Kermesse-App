@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="KERMESSEModelStoreContainer" CdmEntityContainer="KERMESSEEntities">
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="KERMESSEModel.sysdiagrams">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_arqueocaja">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_arqueocaja">
+        <MappingFragment StoreEntitySet="tbl_arqueocaja">
+          <ScalarProperty Name="id_arqueocaja" ColumnName="id_arqueocaja" />
+          <ScalarProperty Name="idkermesse" ColumnName="idkermesse" />
+          <ScalarProperty Name="fecha_arqueo" ColumnName="fecha_arqueo" />
+          <ScalarProperty Name="gran_total" ColumnName="gran_total" />
+          <ScalarProperty Name="usuario_creacion" ColumnName="usuario_creacion" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="usuario_modificacion" ColumnName="usuario_modificacion" />
+          <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+          <ScalarProperty Name="usuario_eliminacion" ColumnName="usuario_eliminacion" />
+          <ScalarProperty Name="fecha_eliminacion" ColumnName="fecha_eliminacion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_arqueocaja_det">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_arqueocaja_det">
+        <MappingFragment StoreEntitySet="tbl_arqueocaja_det">
+          <ScalarProperty Name="id_arqueocaja_det" ColumnName="id_arqueocaja_det" />
+          <ScalarProperty Name="id_arqueocaja" ColumnName="id_arqueocaja" />
+          <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+          <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_bonos">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_bonos">
+        <MappingFragment StoreEntitySet="tbl_bonos">
+          <ScalarProperty Name="id_bono" ColumnName="id_bono" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_cat_gastos">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_cat_gastos">
+        <MappingFragment StoreEntitySet="tbl_cat_gastos">
+          <ScalarProperty Name="id_cat_gasto" ColumnName="id_cat_gasto" />
+          <ScalarProperty Name="nombre_cat" ColumnName="nombre_cat" />
+          <ScalarProperty Name="desc_cat" ColumnName="desc_cat" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_cat_producto">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_cat_producto">
+        <MappingFragment StoreEntitySet="tbl_cat_producto">
+          <ScalarProperty Name="id_cat_producto" ColumnName="id_cat_producto" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_comunidad">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_comunidad">
+        <MappingFragment StoreEntitySet="tbl_comunidad">
+          <ScalarProperty Name="id_comunidad" ColumnName="id_comunidad" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="responsable" ColumnName="responsable" />
+          <ScalarProperty Name="desc_contribucion" ColumnName="desc_contribucion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_denominacion">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_denominacion">
+        <MappingFragment StoreEntitySet="tbl_denominacion">
+          <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+          <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="valor_letras" ColumnName="valor_letras" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_gastos">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_gastos">
+        <MappingFragment StoreEntitySet="tbl_gastos">
+          <ScalarProperty Name="id_gasto" ColumnName="id_gasto" />
+          <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+          <ScalarProperty Name="id_cat_gasto" ColumnName="id_cat_gasto" />
+          <ScalarProperty Name="fecha_gasto" ColumnName="fecha_gasto" />
+          <ScalarProperty Name="concepto" ColumnName="concepto" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="usuario_creacion" ColumnName="usuario_creacion" />
+          <ScalarProperty Name="usuario_modificacion" ColumnName="usuario_modificacion" />
+          <ScalarProperty Name="usuario_eliminacion" ColumnName="usuario_eliminacion" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+          <ScalarProperty Name="fecha_eliminacion" ColumnName="fecha_eliminacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ingreso_com">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_ingreso_com">
+        <MappingFragment StoreEntitySet="tbl_ingreso_com">
+          <ScalarProperty Name="id_ingresocom" ColumnName="id_ingresocom" />
+          <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+          <ScalarProperty Name="id_comunidad" ColumnName="id_comunidad" />
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+          <ScalarProperty Name="cant_producto" ColumnName="cant_producto" />
+          <ScalarProperty Name="precio_producto" ColumnName="precio_producto" />
+          <ScalarProperty Name="total_bonos" ColumnName="total_bonos" />
+          <ScalarProperty Name="usuario_creacion" ColumnName="usuario_creacion" />
+          <ScalarProperty Name="usuario_modificacion" ColumnName="usuario_modificacion" />
+          <ScalarProperty Name="usuario_eliminacion" ColumnName="usuario_eliminacion" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+          <ScalarProperty Name="fecha_eliminacion" ColumnName="fecha_eliminacion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_ingresocom_det">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_ingresocom_det">
+        <MappingFragment StoreEntitySet="tbl_ingresocom_det">
+          <ScalarProperty Name="id_ingresocom_det" ColumnName="id_ingresocom_det" />
+          <ScalarProperty Name="id_ingresocom" ColumnName="id_ingresocom" />
+          <ScalarProperty Name="id_bono" ColumnName="id_bono" />
+          <ScalarProperty Name="denominacion" ColumnName="denominacion" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_kermesse">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_kermesse">
+        <MappingFragment StoreEntitySet="tbl_kermesse">
+          <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+          <ScalarProperty Name="id_parroquia" ColumnName="id_parroquia" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="desc_general" ColumnName="desc_general" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="usuario_creacion" ColumnName="usuario_creacion" />
+          <ScalarProperty Name="usuario_modificacion" ColumnName="usuario_modificacion" />
+          <ScalarProperty Name="usuario_eliminacion" ColumnName="usuario_eliminacion" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+          <ScalarProperty Name="fecha_eliminacion" ColumnName="fecha_eliminacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_listaprecio">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_listaprecio">
+        <MappingFragment StoreEntitySet="tbl_listaprecio">
+          <ScalarProperty Name="id_listaprecio" ColumnName="id_listaprecio" />
+          <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_listaprecio_det">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_listaprecio_det">
+        <MappingFragment StoreEntitySet="tbl_listaprecio_det">
+          <ScalarProperty Name="id_listaprecio_det" ColumnName="id_listaprecio_det" />
+          <ScalarProperty Name="id_listaprecio" ColumnName="id_listaprecio" />
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+          <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_moneda">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_moneda">
+        <MappingFragment StoreEntitySet="tbl_moneda">
+          <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="signo" ColumnName="signo" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_opciones">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_opciones">
+        <MappingFragment StoreEntitySet="tbl_opciones">
+          <ScalarProperty Name="id_opciones" ColumnName="id_opciones" />
+          <ScalarProperty Name="opcion" ColumnName="opcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_parroquia">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_parroquia">
+        <MappingFragment StoreEntitySet="tbl_parroquia">
+          <ScalarProperty Name="idparroquia" ColumnName="idparroquia" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="parroco" ColumnName="parroco" />
+          <ScalarProperty Name="url_logo" ColumnName="url_logo" />
+          <ScalarProperty Name="sitio_web" ColumnName="sitio_web" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_productos">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_productos">
+        <MappingFragment StoreEntitySet="tbl_productos">
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+          <ScalarProperty Name="id_comunidad" ColumnName="id_comunidad" />
+          <ScalarProperty Name="id_cat_producto" ColumnName="id_cat_producto" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="desc_presentacion" ColumnName="desc_presentacion" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_rol">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_rol">
+        <MappingFragment StoreEntitySet="tbl_rol">
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="rol" ColumnName="rol" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_rol_opcion">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_rol_opcion">
+        <MappingFragment StoreEntitySet="tbl_rol_opcion">
+          <ScalarProperty Name="id_rol_opcion" ColumnName="id_rol_opcion" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+          <ScalarProperty Name="id_opcion" ColumnName="id_opcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_rol_usuario">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_rol_usuario">
+        <MappingFragment StoreEntitySet="tbl_rol_usuario">
+          <ScalarProperty Name="id_rol_usuario" ColumnName="id_rol_usuario" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_rol" ColumnName="id_rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_tasacambio">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_tasacambio">
+        <MappingFragment StoreEntitySet="tbl_tasacambio">
+          <ScalarProperty Name="id_tasacambio" ColumnName="id_tasacambio" />
+          <ScalarProperty Name="id_monedaO" ColumnName="id_monedaO" />
+          <ScalarProperty Name="id_monedaC" ColumnName="id_monedaC" />
+          <ScalarProperty Name="mes" ColumnName="mes" />
+          <ScalarProperty Name="anio" ColumnName="anio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_tasacambio_det">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_tasacambio_det">
+        <MappingFragment StoreEntitySet="tbl_tasacambio_det">
+          <ScalarProperty Name="id_tasacambio_det" ColumnName="id_tasacambio_det" />
+          <ScalarProperty Name="id_tasacambio" ColumnName="id_tasacambio" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="tipo_cambio" ColumnName="tipo_cambio" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbl_usuario">
+      <EntityTypeMapping TypeName="KERMESSEModel.tbl_usuario">
+        <MappingFragment StoreEntitySet="tbl_usuario">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="pwd" ColumnName="pwd" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

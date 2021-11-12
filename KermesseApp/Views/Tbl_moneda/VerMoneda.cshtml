@@ -1,0 +1,42 @@
+﻿@model KermesseApp.Models.tbl_moneda
+
+@{
+    ViewBag.Title = "Ver Moneda";
+}
+
+<h2>Ver datos de la Moneda seleccionada</h2>
+
+<div>
+    <h4>Moneda</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <h5 class="mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.signo)
+            </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.signo)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="container mt-3 col-xs-1" align="center">
+    <div class="form-group">
+        <p>
+            @Html.ActionLink("Regresar", "ListMonedas", "", new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>
