@@ -15,12 +15,12 @@ namespace KermesseApp.Controllers
         // GET: Tbl_denominacion
         public ActionResult ListDenominaciones()
         {
-            return View(db.tbl_denominacion.ToList());
+            return View(db.tbl_denominacion.Where(model => model.estado != 3));
         }
 
         public ActionResult VistaGuardarDenominacion()
         {
-            ViewBag.id_moneda = new SelectList(db.tbl_moneda, "id_moneda", "nombre");
+            ViewBag.id_moneda = new SelectList(db.tbl_moneda.Where(model => model.estado != 3), "id_moneda", "nombre");
             return View();
         }
 
@@ -42,7 +42,7 @@ namespace KermesseApp.Controllers
 
                 return RedirectToAction("ListDenominaciones");
             }
-            ViewBag.id_moneda = new SelectList(db.tbl_moneda, "id_moneda", "nombre");
+            ViewBag.id_moneda = new SelectList(db.tbl_moneda.Where(model => model.estado != 3), "id_moneda", "nombre");
             return View("VistaGuardarDenominacion");
         }
 
@@ -51,11 +51,28 @@ namespace KermesseApp.Controllers
             tbl_denominacion tDen = new tbl_denominacion();
 
             tDen = db.tbl_denominacion.Find(id);
-            db.tbl_denominacion.Remove(tDen);
-            db.SaveChanges();
+            this.LogicalDelete(tDen);
+            return RedirectToAction("ListDenominaciones");
+        }
 
-            var list = db.tbl_denominacion.ToList();
-            return View("ListDenominaciones", list);
+        [HttpPost]
+        public ActionResult LogicalDelete(tbl_denominacion td)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    td.estado = 3;
+                    db.Entry(td).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ListDenominaciones");
+            }
+            catch (Exception)
+            {
+                return View();
+                throw;
+            }
         }
 
         public ActionResult VerDenominacion(int id)
@@ -73,7 +90,7 @@ namespace KermesseApp.Controllers
             }
             else
             {
-                ViewBag.id_moneda = new SelectList(db.tbl_moneda, "id_moneda", "nombre");
+                ViewBag.id_moneda = new SelectList(db.tbl_moneda.Where(model => model.estado != 3), "id_moneda", "nombre");
                 return View(tDen);
             }
         }
@@ -89,7 +106,7 @@ namespace KermesseApp.Controllers
                     db.Entry(td).State = EntityState.Modified;
                     db.SaveChanges();
                 }
-                ViewBag.id_moneda = new SelectList(db.tbl_moneda, "id_moneda", "nombre");
+                ViewBag.id_moneda = new SelectList(db.tbl_moneda.Where(model => model.estado != 3), "id_moneda", "nombre");
                 return RedirectToAction("ListDenominaciones");
             }
             catch
@@ -109,7 +126,8 @@ namespace KermesseApp.Controllers
             }
             else
             {
-                var listFiltrada = db.tbl_denominacion.Where(x => x.valor.ToString().Contains(cadena) || x.valor_letras.Contains(cadena));
+                var listFiltrada = db.tbl_denominacion.Where(x => x.valor.ToString().Contains(cadena) || x.valor_letras.Contains(cadena) ||
+                 x.tbl_moneda.nombre.Contains(cadena));
                 return View("ListDenominaciones", listFiltrada);
             }
         }

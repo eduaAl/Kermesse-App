@@ -15,7 +15,7 @@ namespace KermesseApp.Controllers
         // GET: Tbl_moneda
         public ActionResult ListMonedas()
         {
-            return View(db.tbl_moneda.ToList());
+            return View(db.tbl_moneda.Where(model => model.estado != 3));
         }
 
         public ActionResult VwGuardarMoneda()
@@ -48,11 +48,28 @@ namespace KermesseApp.Controllers
             tbl_moneda tMod = new tbl_moneda();
 
             tMod = db.tbl_moneda.Find(id);
-            db.tbl_moneda.Remove(tMod);
-            db.SaveChanges();
+            this.LogicalDelete(tMod);
+            return RedirectToAction("ListMonedas");
+        }
 
-            var list = db.tbl_moneda.ToList();
-            return View("ListMonedas", list);
+        [HttpPost]
+        public ActionResult LogicalDelete(tbl_moneda tm)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    tm.estado = 3;
+                    db.Entry(tm).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                return RedirectToAction("ListMonedas");
+            }
+            catch (Exception)
+            {
+                return View();
+                throw;
+            }
         }
 
         public ActionResult VerMoneda(int id)

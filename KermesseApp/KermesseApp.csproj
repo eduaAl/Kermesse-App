@@ -130,11 +130,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Tbl_arqueocajaController.cs" />
-    <Compile Include="Controllers\Tbl_arqueocaja_detController.cs" />
     <Compile Include="Controllers\Tbl_denominacionController.cs" />
     <Compile Include="Controllers\Tbl_monedaController.cs" />
-    <Compile Include="Controllers\Tbl_tasacambioController.cs" />
-    <Compile Include="Controllers\Tbl_tasacambio_detController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -328,12 +325,14 @@
     <Content Include="Views\Tbl_denominacion\VerDenominacion.cshtml" />
     <Content Include="Views\Tbl_denominacion\EditarDenominacion.cshtml" />
     <Content Include="Views\Tbl_arqueocaja\VistaGuardarArqueo.cshtml" />
+    <Content Include="Views\Tbl_arqueocaja\ListArqueos.cshtml" />
+    <Content Include="Views\Tbl_arqueocaja\ListArqueoCajaDet.cshtml" />
+    <Content Include="Views\Tbl_arqueocaja\EditarArqueo.cshtml" />
+    <Content Include="Views\Tbl_arqueocaja\VistaGuardarArqueoCajaDet.cshtml" />
+    <Content Include="Views\Tbl_arqueocaja\EditarArqueoCajaDet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Tbl_arqueocaja_det\" />
-    <Folder Include="Views\Tbl_tasacambio\" />
-    <Folder Include="Views\Tbl_tasacambio_det\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

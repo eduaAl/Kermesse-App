@@ -16,7 +16,7 @@
         <div class="form-group col-xs-8 col-md-8">
             <span class="input-group">
                 @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
-                <button type="submit" class="btn btn-block col-md-1">Buscar</button>
+                <button type="submit" class="btn btn-success col-md-1">Buscar</button>
             </span>
         </div>
     </div>
@@ -55,8 +55,8 @@
                     @Html.DisplayFor(modelItem => item.valor_letras)
                 </td>
                 <td>
-                    <a href="@Url.Action("VerDenominacion", new { id = item.id_denominacion})"><i class="btn btn-outline-primary">Ver</i></a> |
                     <a href="@Url.Action("EditarDenominacion", new { id = item.id_denominacion})"><i class="btn btn-outline-info">Editar</i></a>  |
+                    <a href="@Url.Action("VerDenominacion", new { id = item.id_denominacion})"><i class="btn btn-outline-primary">Ver</i></a> |
                     <a href="@Url.Action("EliminarDenominacion", new { id = item.id_denominacion})"><i class="btn btn-outline-danger">Eliminar</i></a>
                 </td>
             </tr>

@@ -1,0 +1,82 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_arqueocaja_det>
+
+@{
+    ViewBag.Title = "Detalle del Arqueo seleccionado";
+}
+
+<h2>Detalle del Arqueo</h2>
+
+@{
+    var id = Request.Params["id"];
+    int n = 0;
+    int idArqueo = 0;
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.tbl_moneda.nombre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.tbl_denominacion.valor)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.cantidad)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.subtotal)
+            </th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (n == 0)
+            {
+                <p>
+                    <a href="@Url.Action("VistaGuardarArqueoCajaDet", new { id = item.id_arqueocaja})"><i class="btn btn-primary">Nuevo Detalle</i></a>
+                </p>
+
+                n++;
+                idArqueo = item.id_arqueocaja;
+
+                using (Html.BeginForm("FiltrarArqueoCajaDet", "Tbl_arqueocaja", FormMethod.Post))
+                {
+                    <div class="row">
+                        <div class="form-group col-xs-8 col-md-8">
+                            <span class="input-group">
+                                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
+                                @Html.Hidden("id", new { value = idArqueo })
+                                <button type="submit" class="btn btn-success col-md-1">Buscar</button>
+                            </span>
+                        </div>
+                    </div>
+                }
+
+                <div class="row"></div>
+            }
+
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_moneda.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_denominacion.valor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.subtotal)
+                </td>
+                <td>
+                    <a href="@Url.Action("EditarArqueoCajaDet", new { id = item.id_arqueocaja_det})"><i class="btn btn-outline-info">Editar</i></a>  |
+                    <a href="@Url.Action("EliminarArqueoCajaDet", new { id = item.id_arqueocaja_det})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+<tbody>
+</table>

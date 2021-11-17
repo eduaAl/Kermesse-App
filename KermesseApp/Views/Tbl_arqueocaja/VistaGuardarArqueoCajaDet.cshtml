@@ -1,36 +1,24 @@
 ﻿@model KermesseApp.Models.tbl_arqueocaja
 
 @{
-    ViewBag.Title = "Guardar Arqueo";
+    ViewBag.Title = "Nuevo(s) Detalle(s) de Arqueo";
 }
 
-<h2>Insertar nuevo Arqueo de Caja</h2>
+<h2>Añada nuevos detalles al arqueo</h2>
 
-@using (Html.BeginForm("GuardarArqueo", "Tbl_arqueocaja", FormMethod.Post))
+@using (Html.BeginForm("GuardarArqueoCajaDet", "Tbl_arqueocaja", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    <h4>Nuevo Arqueo Caja</h4>
+    <h4>Ingrese los datos del nuevo detalle</h4>
     <hr />
-    <div class="container">
 
+    <div class="container">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.gran_total)
+        @Html.HiddenFor(model => model.id_arqueocaja)
+        @{
+            int id = Model.id_arqueocaja;
+        }
 
-        <div class="form-group row">
-            <label class="form-label mt-2 row">Kermesse: </label>
-            @Html.DropDownListFor(model => model.idkermesse, ViewBag.id_kermesse as SelectList, "Seleccione una Kermesse...", htmlAttributes: new { @class = "form-select" })
-            @Html.ValidationMessageFor(model => model.idkermesse, "", new { @class = "text-danger row" })
-        </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.fecha_arqueo, htmlAttributes: new { @class = "form-label mt-2 row" })
-            @Html.EditorFor(model => model.fecha_arqueo, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.fecha_arqueo, "", new { @class = "text-danger row" })
-        </div>
-    </div>
-
-    <hr />
-    <div class="container">
         <div class="form-group row">
             <label class="form-label mt-2 row">Moneda: </label>
             @Html.DropDownListFor(model => model.detalle.id_moneda, ViewBag.id_moneda as SelectList, "Seleccione una moneda...", htmlAttributes: new { @class = "form-select", @id = "moneda" })
@@ -55,34 +43,33 @@
             </div>
         </div>
 
-    </div>
+        <br />
+        <br />
 
-    <div class="row" id="divArqueo" style="display: none;">
-        <table id="tablaArqueo" class="table table-hover" style="width:100%;">
-            <thead>
-                <tr>
-                    <th>Moneda</th>
-                    <th>Denominación</th>
-                    <th>Cantidad</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-        </table>
-    </div>
+        <div class="row" id="divArqueo" style="display: none;">
+            <table id="tablaArqueo" class="table table-hover" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>Moneda</th>
+                        <th>Denominación</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
 
-    <div class="container mt-3 col-xs-1" align="center">
-        <div class="form-group">
-            <input type="submit" value="Guardar" class="btn btn-primary" />
-            <input type="reset" value="Cancelar" class="btn btn-danger" />
-            @Html.ActionLink("Regresar", "ListArqueos", "", new { @class = "btn btn-primary" })
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <a href="@Url.Action("ListArqueoCajaDet", new {id})"><i class="btn btn-primary">Regresar</i></a>
+            </div>
         </div>
     </div>
 }
 
 <script>
     var num = 0;
-    var total = 0;
-
     function AgregarDetalle() {
         let moneda = document.getElementById("moneda").value;
         let monedaNombre = $("#moneda option:selected").text()
@@ -145,10 +132,9 @@
         divArqueo.appendChild(HiddenSubtotal);
 
         document.getElementById("cantidad").value = "";
-        $("#moneda").val("");
-        $("#denominacion").val("");
-        num++;
-        total += subtotal;
-        document.getElementById("gran_total").value = total;
+        $("#moneda").val("")
+        $("#denominacion").val("")
+        num++
     }
 </script>
+

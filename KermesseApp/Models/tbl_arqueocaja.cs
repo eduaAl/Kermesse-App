@@ -28,6 +28,7 @@ namespace KermesseApp.Models
 
         [Display(Name = "Fecha del arqueo: ")]
         [Required(ErrorMessage = "Escriba la fecha del arqueo.")]
+        [DisplayFormat(DataFormatString = "{0:d}")]
         public System.DateTime fecha_arqueo { get; set; }
 
         [Display(Name = "Gran Total: ")]
@@ -40,7 +41,9 @@ namespace KermesseApp.Models
         public Nullable<int> usuario_eliminacion { get; set; }
         public Nullable<System.DateTime> fecha_eliminacion { get; set; }
         public int estado { get; set; }
-    
+        public tbl_arqueocaja_det detalle { get; set; }
+        public List<tbl_arqueocaja_det> tbl_arqueocaja_dets { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_arqueocaja_det> tbl_arqueocaja_det { get; set; }
         public virtual tbl_kermesse tbl_kermesse { get; set; }

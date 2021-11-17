@@ -1,0 +1,64 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_arqueocaja>
+
+@{
+    ViewBag.Title = "Lista Arqueos";
+}
+
+<h2>Gestión de Arqueos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo Arqueo", "VistaGuardarArqueo", "", new { @class = "btn btn-primary" })
+</p>
+
+@using (Html.BeginForm("FiltrarArqueo", "Tbl_arqueocaja", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            <span class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
+                <button type="submit" class="btn btn-success col-md-1">Buscar</button>
+            </span>
+        </div>
+    </div>
+}
+
+<div class="row"></div>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.fecha_arqueo)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.gran_total)
+            </th>
+            <th scope="col">Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_arqueo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.gran_total)
+                </td>
+                <td>
+                    <a href="@Url.Action("EditarArqueo", new { id = item.id_arqueocaja})"><i class="btn btn-outline-info">Editar</i></a>  |
+                    <a href="@Url.Action("ListArqueoCajaDet", new { id = item.id_arqueocaja})"><i class="btn btn-outline-primary">Detalles</i></a> |
+                    <a href="@Url.Action("EliminarArqueo", new { id = item.id_arqueocaja})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    <tbody>
+</table>
