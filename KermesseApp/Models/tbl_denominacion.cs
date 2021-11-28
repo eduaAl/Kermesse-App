@@ -20,7 +20,7 @@ namespace KermesseApp.Models
         {
             this.tbl_arqueocaja_det = new HashSet<tbl_arqueocaja_det>();
         }
-    
+
         public int id_denominacion { get; set; }
 
         [Display(Name = "Moneda: ")]
@@ -35,7 +35,7 @@ namespace KermesseApp.Models
         [StringLength(250, ErrorMessage = "La cantidad máxima de caracteres permitidos es de 250")]
         public string valor_letras { get; set; }
         public int estado { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_arqueocaja_det> tbl_arqueocaja_det { get; set; }
         public virtual tbl_moneda tbl_moneda { get; set; }

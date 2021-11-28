@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KermesseApp.Models;
+using Microsoft.Reporting.WebForms;
+using System.IO;
 
 namespace KermesseApp.Controllers
 {
@@ -130,6 +132,35 @@ namespace KermesseApp.Controllers
                  x.tbl_moneda.nombre.Contains(cadena));
                 return View("ListDenominaciones", listFiltrada);
             }
+        }
+
+        public ActionResult VerRptDenominacion(String tipo, String cadena)
+        {
+            LocalReport rpt = new LocalReport();
+            string mt, enc, f;
+            string[] s;
+            Warning[] w;
+
+            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptDenominacion.rdlc");
+            rpt.ReportPath = ruta;
+
+            ReportDataSource rd = null;
+            if (String.IsNullOrEmpty(cadena))
+            {
+                var listFiltrada = db.Vw_denominacion.Where(x => x.estado != 3);
+                rd = new ReportDataSource("dsRptDenominacion", listFiltrada);
+            }
+            else
+            {
+                var listFiltrada = db.Vw_denominacion.Where(x => x.estado !=3 && (x.nombre.Contains(cadena) || x.valor.ToString().Contains(cadena) ||
+                x.valor_letras.Contains(cadena))); ;
+                rd = new ReportDataSource("dsRptDenominacion", listFiltrada);
+            }
+
+            rpt.DataSources.Add(rd);
+            //tipo = "PDF";
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+            return new FileContentResult(b, mt);
         }
     }
 }

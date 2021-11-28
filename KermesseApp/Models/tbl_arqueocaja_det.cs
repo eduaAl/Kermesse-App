@@ -16,7 +16,7 @@ namespace KermesseApp.Models
     public partial class tbl_arqueocaja_det
     {
         public int id_arqueocaja_det { get; set; }
-        
+
         [Display(Name = "Arqueo Caja: ")]
         public int id_arqueocaja { get; set; }
 
@@ -33,7 +33,7 @@ namespace KermesseApp.Models
         [Display(Name = "Subtotal: ")]
         [Required(ErrorMessage = "Escriba el subtotal.")]
         public decimal subtotal { get; set; }
-    
+
         public virtual tbl_arqueocaja tbl_arqueocaja { get; set; }
         public virtual tbl_denominacion tbl_denominacion { get; set; }
         public virtual tbl_moneda tbl_moneda { get; set; }

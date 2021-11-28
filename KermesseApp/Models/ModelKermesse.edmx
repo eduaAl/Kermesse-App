@@ -273,6 +273,78 @@
           <Property Name="email" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="estado" Type="int" Nullable="false" />
         </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.view_usuario_rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="view_usuario_rol">
+          <Key>
+            <PropertyRef Name="nombres" />
+            <PropertyRef Name="apellidos" />
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="rol" />
+          </Key>
+          <Property Name="nombres" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="apellidos" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="usuario" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_arqueoCaja' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Vw_arqueoCaja">
+          <Key>
+            <PropertyRef Name="id_arqueocaja" />
+            <PropertyRef Name="id_kermesse" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="fecha_arqueo" />
+            <PropertyRef Name="gran_total" />
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="id_arqueocaja" Type="int" Nullable="false" />
+          <Property Name="id_kermesse" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="fecha_arqueo" Type="date" Nullable="false" />
+          <Property Name="gran_total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_arqueoCajaDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Vw_arqueoCajaDet">
+          <Key>
+            <PropertyRef Name="id_arqueocaja" />
+            <PropertyRef Name="fecha_arqueo" />
+            <PropertyRef Name="id_moneda" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="subtotal" />
+            <PropertyRef Name="valor" />
+          </Key>
+          <Property Name="id_arqueocaja" Type="int" Nullable="false" />
+          <Property Name="fecha_arqueo" Type="date" Nullable="false" />
+          <Property Name="id_moneda" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="id_denominacion" Type="int" Nullable="false" />
+          <Property Name="cantidad" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_denominacion' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+        <EntityType Name="Vw_denominacion">
+          <Key>
+            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_moneda" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="valor" />
+            <PropertyRef Name="valor_letras" />
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="id_denominacion" Type="int" Nullable="false" />
+          <Property Name="id_moneda" Type="int" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="valor_letras" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="estado" Type="int" Nullable="false" />
+        </EntityType>
         <Association Name="FK_tbl_arqueocaja_det_tbl_arqueocaja">
           <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="1" />
           <End Role="tbl_arqueocaja_det" Type="Self.tbl_arqueocaja_det" Multiplicity="*" />
@@ -742,6 +814,46 @@
           <EntitySet Name="tbl_tasacambio" EntityType="Self.tbl_tasacambio" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_tasacambio_det" EntityType="Self.tbl_tasacambio_det" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="view_usuario_rol" EntityType="Self.view_usuario_rol" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [view_usuario_rol].[nombres] AS [nombres], 
+    [view_usuario_rol].[apellidos] AS [apellidos], 
+    [view_usuario_rol].[usuario] AS [usuario], 
+    [view_usuario_rol].[rol] AS [rol]
+    FROM [dbo].[view_usuario_rol] AS [view_usuario_rol]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vw_arqueoCaja" EntityType="Self.Vw_arqueoCaja" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_arqueoCaja].[id_arqueocaja] AS [id_arqueocaja], 
+    [Vw_arqueoCaja].[id_kermesse] AS [id_kermesse], 
+    [Vw_arqueoCaja].[nombre] AS [nombre], 
+    [Vw_arqueoCaja].[fecha_arqueo] AS [fecha_arqueo], 
+    [Vw_arqueoCaja].[gran_total] AS [gran_total], 
+    [Vw_arqueoCaja].[estado] AS [estado]
+    FROM [dbo].[Vw_arqueoCaja] AS [Vw_arqueoCaja]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vw_arqueoCajaDet" EntityType="Self.Vw_arqueoCajaDet" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_arqueoCajaDet].[id_arqueocaja] AS [id_arqueocaja], 
+    [Vw_arqueoCajaDet].[fecha_arqueo] AS [fecha_arqueo], 
+    [Vw_arqueoCajaDet].[id_moneda] AS [id_moneda], 
+    [Vw_arqueoCajaDet].[nombre] AS [nombre], 
+    [Vw_arqueoCajaDet].[id_denominacion] AS [id_denominacion], 
+    [Vw_arqueoCajaDet].[cantidad] AS [cantidad], 
+    [Vw_arqueoCajaDet].[subtotal] AS [subtotal], 
+    [Vw_arqueoCajaDet].[valor] AS [valor]
+    FROM [dbo].[Vw_arqueoCajaDet] AS [Vw_arqueoCajaDet]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Vw_denominacion" EntityType="Self.Vw_denominacion" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Vw_denominacion].[id_denominacion] AS [id_denominacion], 
+    [Vw_denominacion].[id_moneda] AS [id_moneda], 
+    [Vw_denominacion].[nombre] AS [nombre], 
+    [Vw_denominacion].[valor] AS [valor], 
+    [Vw_denominacion].[valor_letras] AS [valor_letras], 
+    [Vw_denominacion].[estado] AS [estado]
+    FROM [dbo].[Vw_denominacion] AS [Vw_denominacion]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_arqueocaja" Association="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja">
             <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
             <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />
@@ -1238,6 +1350,70 @@
           <NavigationProperty Name="tbl_kermesse2" Relationship="Self.FK_tbl_kermesse_tbl_usuario2" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
           <NavigationProperty Name="tbl_rol_usuario" Relationship="Self.FK_tbl_rol_usuario_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_rol_usuario" />
         </EntityType>
+        <EntityType Name="view_usuario_rol">
+          <Key>
+            <PropertyRef Name="nombres" />
+            <PropertyRef Name="apellidos" />
+            <PropertyRef Name="usuario" />
+            <PropertyRef Name="rol" />
+          </Key>
+          <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rol" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vw_arqueoCaja">
+          <Key>
+            <PropertyRef Name="id_arqueocaja" />
+            <PropertyRef Name="id_kermesse" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="fecha_arqueo" />
+            <PropertyRef Name="gran_total" />
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="id_arqueocaja" Type="Int32" Nullable="false" />
+          <Property Name="id_kermesse" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fecha_arqueo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="gran_total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vw_arqueoCajaDet">
+          <Key>
+            <PropertyRef Name="id_arqueocaja" />
+            <PropertyRef Name="fecha_arqueo" />
+            <PropertyRef Name="id_moneda" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="cantidad" />
+            <PropertyRef Name="subtotal" />
+            <PropertyRef Name="valor" />
+          </Key>
+          <Property Name="id_arqueocaja" Type="Int32" Nullable="false" />
+          <Property Name="fecha_arqueo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="id_moneda" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="id_denominacion" Type="Int32" Nullable="false" />
+          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vw_denominacion">
+          <Key>
+            <PropertyRef Name="id_denominacion" />
+            <PropertyRef Name="id_moneda" />
+            <PropertyRef Name="nombre" />
+            <PropertyRef Name="valor" />
+            <PropertyRef Name="valor_letras" />
+            <PropertyRef Name="estado" />
+          </Key>
+          <Property Name="id_denominacion" Type="Int32" Nullable="false" />
+          <Property Name="id_moneda" Type="Int32" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="valor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="valor_letras" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="estado" Type="Int32" Nullable="false" />
+        </EntityType>
         <Association Name="FK_tbl_arqueocaja_det_tbl_arqueocaja">
           <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="1" />
           <End Role="tbl_arqueocaja_det" Type="Self.tbl_arqueocaja_det" Multiplicity="*" />
@@ -1707,6 +1883,10 @@
           <EntitySet Name="tbl_tasacambio" EntityType="Self.tbl_tasacambio" />
           <EntitySet Name="tbl_tasacambio_det" EntityType="Self.tbl_tasacambio_det" />
           <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
+          <EntitySet Name="view_usuario_rol" EntityType="Self.view_usuario_rol" />
+          <EntitySet Name="Vw_arqueoCaja" EntityType="Self.Vw_arqueoCaja" />
+          <EntitySet Name="Vw_arqueoCajaDet" EntityType="Self.Vw_arqueoCajaDet" />
+          <EntitySet Name="Vw_denominacion" EntityType="Self.Vw_denominacion" />
           <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_arqueocaja" Association="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja">
             <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
             <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />
@@ -2150,6 +2330,54 @@
                 <ScalarProperty Name="nombres" ColumnName="nombres" />
                 <ScalarProperty Name="apellidos" ColumnName="apellidos" />
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="view_usuario_rol">
+            <EntityTypeMapping TypeName="KERMESSEModel.view_usuario_rol">
+              <MappingFragment StoreEntitySet="view_usuario_rol">
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="usuario" ColumnName="usuario" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_arqueoCaja">
+            <EntityTypeMapping TypeName="KERMESSEModel.Vw_arqueoCaja">
+              <MappingFragment StoreEntitySet="Vw_arqueoCaja">
+                <ScalarProperty Name="id_arqueocaja" ColumnName="id_arqueocaja" />
+                <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="fecha_arqueo" ColumnName="fecha_arqueo" />
+                <ScalarProperty Name="gran_total" ColumnName="gran_total" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_arqueoCajaDet">
+            <EntityTypeMapping TypeName="KERMESSEModel.Vw_arqueoCajaDet">
+              <MappingFragment StoreEntitySet="Vw_arqueoCajaDet">
+                <ScalarProperty Name="id_arqueocaja" ColumnName="id_arqueocaja" />
+                <ScalarProperty Name="fecha_arqueo" ColumnName="fecha_arqueo" />
+                <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vw_denominacion">
+            <EntityTypeMapping TypeName="KERMESSEModel.Vw_denominacion">
+              <MappingFragment StoreEntitySet="Vw_denominacion">
+                <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+                <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="valor_letras" ColumnName="valor_letras" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>

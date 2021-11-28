@@ -49,5 +49,9 @@ namespace KermesseApp.Models
         public virtual DbSet<tbl_tasacambio> tbl_tasacambio { get; set; }
         public virtual DbSet<tbl_tasacambio_det> tbl_tasacambio_det { get; set; }
         public virtual DbSet<tbl_usuario> tbl_usuario { get; set; }
+        public virtual DbSet<view_usuario_rol> view_usuario_rol { get; set; }
+        public virtual DbSet<Vw_arqueoCaja> Vw_arqueoCaja { get; set; }
+        public virtual DbSet<Vw_arqueoCajaDet> Vw_arqueoCajaDet { get; set; }
+        public virtual DbSet<Vw_denominacion> Vw_denominacion { get; set; }
     }
 }

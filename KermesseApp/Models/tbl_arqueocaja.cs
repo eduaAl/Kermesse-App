@@ -20,7 +20,7 @@ namespace KermesseApp.Models
         {
             this.tbl_arqueocaja_det = new HashSet<tbl_arqueocaja_det>();
         }
-    
+
         public int id_arqueocaja { get; set; }
 
         [Display(Name = "Kermesse: ")]

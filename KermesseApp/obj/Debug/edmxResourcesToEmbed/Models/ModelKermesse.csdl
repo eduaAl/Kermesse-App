@@ -342,6 +342,70 @@
     <NavigationProperty Name="tbl_kermesse2" Relationship="Self.FK_tbl_kermesse_tbl_usuario2" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
     <NavigationProperty Name="tbl_rol_usuario" Relationship="Self.FK_tbl_rol_usuario_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_rol_usuario" />
   </EntityType>
+  <EntityType Name="view_usuario_rol">
+    <Key>
+      <PropertyRef Name="nombres" />
+      <PropertyRef Name="apellidos" />
+      <PropertyRef Name="usuario" />
+      <PropertyRef Name="rol" />
+    </Key>
+    <Property Name="nombres" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="apellidos" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="rol" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vw_arqueoCaja">
+    <Key>
+      <PropertyRef Name="id_arqueocaja" />
+      <PropertyRef Name="id_kermesse" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="fecha_arqueo" />
+      <PropertyRef Name="gran_total" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_arqueocaja" Type="Int32" Nullable="false" />
+    <Property Name="id_kermesse" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fecha_arqueo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="gran_total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vw_arqueoCajaDet">
+    <Key>
+      <PropertyRef Name="id_arqueocaja" />
+      <PropertyRef Name="fecha_arqueo" />
+      <PropertyRef Name="id_moneda" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="id_denominacion" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="subtotal" />
+      <PropertyRef Name="valor" />
+    </Key>
+    <Property Name="id_arqueocaja" Type="Int32" Nullable="false" />
+    <Property Name="fecha_arqueo" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="id_moneda" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_denominacion" Type="Int32" Nullable="false" />
+    <Property Name="cantidad" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="valor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vw_denominacion">
+    <Key>
+      <PropertyRef Name="id_denominacion" />
+      <PropertyRef Name="id_moneda" />
+      <PropertyRef Name="nombre" />
+      <PropertyRef Name="valor" />
+      <PropertyRef Name="valor_letras" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_denominacion" Type="Int32" Nullable="false" />
+    <Property Name="id_moneda" Type="Int32" Nullable="false" />
+    <Property Name="nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="valor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="valor_letras" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
   <Association Name="FK_tbl_arqueocaja_det_tbl_arqueocaja">
     <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="1" />
     <End Role="tbl_arqueocaja_det" Type="Self.tbl_arqueocaja_det" Multiplicity="*" />
@@ -811,6 +875,10 @@
     <EntitySet Name="tbl_tasacambio" EntityType="Self.tbl_tasacambio" />
     <EntitySet Name="tbl_tasacambio_det" EntityType="Self.tbl_tasacambio_det" />
     <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
+    <EntitySet Name="view_usuario_rol" EntityType="Self.view_usuario_rol" />
+    <EntitySet Name="Vw_arqueoCaja" EntityType="Self.Vw_arqueoCaja" />
+    <EntitySet Name="Vw_arqueoCajaDet" EntityType="Self.Vw_arqueoCajaDet" />
+    <EntitySet Name="Vw_denominacion" EntityType="Self.Vw_denominacion" />
     <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_arqueocaja" Association="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja">
       <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
       <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />

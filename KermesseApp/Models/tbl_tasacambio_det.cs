@@ -11,22 +11,12 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tbl_tasacambio_det
     {
         public int id_tasacambio_det { get; set; }
-
-        [Display(Name = "Tasa Cambio: ")]
-        [Required(ErrorMessage = "Escriba la tasa de cambio.")]
         public int id_tasacambio { get; set; }
-
-        [Display(Name = "Fecha: ")]
-        [Required(ErrorMessage = "Escriba la fecha.")]
         public System.DateTime fecha { get; set; }
-
-        [Display(Name = "Tipo de cambio: ")]
-        [Required(ErrorMessage = "Escriba el tipo de cambio.")]
         public decimal tipo_cambio { get; set; }
         public int estado { get; set; }
     

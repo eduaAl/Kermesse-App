@@ -293,5 +293,53 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="view_usuario_rol">
+      <EntityTypeMapping TypeName="KERMESSEModel.view_usuario_rol">
+        <MappingFragment StoreEntitySet="view_usuario_rol">
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="rol" ColumnName="rol" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vw_arqueoCaja">
+      <EntityTypeMapping TypeName="KERMESSEModel.Vw_arqueoCaja">
+        <MappingFragment StoreEntitySet="Vw_arqueoCaja">
+          <ScalarProperty Name="id_arqueocaja" ColumnName="id_arqueocaja" />
+          <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="fecha_arqueo" ColumnName="fecha_arqueo" />
+          <ScalarProperty Name="gran_total" ColumnName="gran_total" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vw_arqueoCajaDet">
+      <EntityTypeMapping TypeName="KERMESSEModel.Vw_arqueoCajaDet">
+        <MappingFragment StoreEntitySet="Vw_arqueoCajaDet">
+          <ScalarProperty Name="id_arqueocaja" ColumnName="id_arqueocaja" />
+          <ScalarProperty Name="fecha_arqueo" ColumnName="fecha_arqueo" />
+          <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vw_denominacion">
+      <EntityTypeMapping TypeName="KERMESSEModel.Vw_denominacion">
+        <MappingFragment StoreEntitySet="Vw_denominacion">
+          <ScalarProperty Name="id_denominacion" ColumnName="id_denominacion" />
+          <ScalarProperty Name="id_moneda" ColumnName="id_moneda" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="valor_letras" ColumnName="valor_letras" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

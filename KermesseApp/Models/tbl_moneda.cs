@@ -12,7 +12,7 @@ namespace KermesseApp.Models
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    
+
     public partial class tbl_moneda
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -23,12 +23,12 @@ namespace KermesseApp.Models
             this.tbl_tasacambio = new HashSet<tbl_tasacambio>();
             this.tbl_tasacambio1 = new HashSet<tbl_tasacambio>();
         }
-    
+
         public int id_moneda { get; set; }
 
         [Display(Name = "Nombre: ")]
         [Required(ErrorMessage = "Escriba el nombre de la moneda.")]
-        [StringLength(50, ErrorMessage ="La cantidad máxima de caracteres permitidos es de 50")]
+        [StringLength(50, ErrorMessage = "La cantidad máxima de caracteres permitidos es de 50")]
         public string nombre { get; set; }
 
         [Display(Name = "Signo: ")]
@@ -36,7 +36,7 @@ namespace KermesseApp.Models
         [StringLength(10, ErrorMessage = "La cantidad máxima de caracteres permitidos es de 10")]
         public string signo { get; set; }
         public int estado { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_arqueocaja_det> tbl_arqueocaja_det { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

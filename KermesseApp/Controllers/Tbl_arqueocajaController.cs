@@ -161,7 +161,7 @@ namespace KermesseApp.Controllers
             return RedirectToAction("ListArqueos");
         }
 
-        public ActionResult EliminarArqueoCajaDet(int id)
+        public ActionResult EliminarArqueoCajaDet(int id) 
         {
             tbl_arqueocaja_det tacdet = new tbl_arqueocaja_det();
 
