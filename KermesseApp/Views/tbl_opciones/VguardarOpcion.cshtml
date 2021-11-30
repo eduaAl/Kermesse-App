@@ -1,0 +1,77 @@
+﻿@using KermesseApp.Models;
+    @{
+        /*Instanciamos objetos y variables */
+        KERMESSEEntities ke = new KERMESSEEntities();
+        tbl_usuario tu = new tbl_usuario();
+        tbl_rol_usuario tru = new tbl_rol_usuario();
+        List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+        Int32 idRol = 0;
+        String opcion = "";
+        Int32 longitud = 0;
+        Boolean acceso = false;
+
+        /* Obtenemos la sesion */
+        tu = Session["usuario"] as tbl_usuario;
+
+        /* Obtenemos el rol del usuario*/
+        tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+        idRol = tru.id_rol;
+        /* Obtenemos la lista de opciones del rol*/
+        listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+        string url = HttpContext.Current.Request.Url.AbsoluteUri;
+        string[] separado = url.Split('/');
+        string opcionActual = separado[separado.Length - 1];
+
+        longitud = listopc.Count();//Obtenemos la cantidad de elementos
+        for (int i = 0; i < longitud; i++)
+        {
+            //obtenemos la columna opcion de la matriz y/o lista de elementos
+            opcion = listopc[i].opcion;
+            if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+            {
+                acceso = true; //ACCESO CONCEDIDO
+                break;
+            }
+        }
+        if (!acceso)
+        {
+            Response.Redirect("~/Home/Error");
+        }
+
+
+    }
+@model KermesseApp.Models.tbl_opciones
+@{
+    ViewBag.Title = "guardarOpcion";
+}
+
+<h2>Guarde una nueva opcion</h2>
+
+
+@using (Html.BeginForm("guardarOpcion", "tbl_opciones", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <div class="form-group">
+            <label>Nombre de la opcion</label>
+            @Html.ValidationMessageFor(x => x.opcion, "", new { @class = "text-danger" })
+            @Html.TextAreaFor(x => x.opcion, new { @class = "form-control" })
+
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="reset" class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+
+
+    </div>
+}
+<div>
+    @Html.ActionLink("Regresar", "ListOpciones")
+</div>
+

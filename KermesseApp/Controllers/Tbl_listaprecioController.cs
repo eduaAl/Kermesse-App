@@ -281,7 +281,7 @@ namespace KermesseApp.Controllers
             }
             else
             {
-                var listFiltrada = db.vw_listaprecio.Where(x => x.estado != 3 && (x.lista_precio.Contains(cadena) || x.descripcion.Contains(cadena))); ;
+                var listFiltrada = db.vw_listaprecio.Where(x => x.estado != 3 && (x.nombre.Contains(cadena) || x.descripcion.Contains(cadena))); ;
                 rd = new ReportDataSource("dsListaPrecio", listFiltrada);
             }
             lrpt.DataSources.Add(rd);

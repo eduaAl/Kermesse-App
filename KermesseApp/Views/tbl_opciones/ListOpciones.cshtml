@@ -1,0 +1,105 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string opcionActual;
+    string[] separado = url.Split('/');
+    if (separado.Length == 5)
+    {
+        opcionActual = separado[separado.Length - 1];
+    }
+    else
+    {
+        opcionActual = separado[separado.Length - 2];
+    }
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+@model IEnumerable<KermesseApp.Models.tbl_opciones>
+
+@{
+    ViewBag.Title = "tbl_opciones";
+}
+
+<h2>Opciones</h2>
+
+<p>
+    @Html.ActionLink("Crear nueva opcion", "VguardarOpcion")
+</p>
+
+@using (Html.BeginForm("filtrarOpcion", "tbl_opciones", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4" align="right">
+            @Html.ActionLink("PDF", "Placeholder", new { tipo = "PDF" }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Word", "Placeholder", new { tipo = "Word" }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Excel", "Placeholder", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+}
+
+<table class="table table-hover">
+    <tr>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.opcion)
+        </th>
+        <th scope="col">Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-active">
+            <td>
+                @Html.DisplayFor(modelItem => item.opcion)
+            </td>
+            <td>
+                <a href="@Url.Action("editOpcion", new { id = item.id_opciones})"><i class="btn btn-outline-primary">Editar</i></a> |
+                <a href="@Url.Action("verOpcion", new { id = item.id_opciones})"><i class="btn btn-outline-primary">Visualizar</i></a> |
+                <a href="@Url.Action("deleteOpcion", new { id = item.id_opciones})"><i class="btn btn-outline-danger">Eliminar</i></a>
+            </td>
+        </tr>
+    }
+
+</table>

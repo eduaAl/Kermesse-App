@@ -1,0 +1,92 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string opcionActual;
+    string[] separado = url.Split('/');
+    if (separado.Length == 5)
+    {
+        opcionActual = separado[separado.Length - 1];
+    }
+    else
+    {
+        opcionActual = separado[separado.Length - 2];
+    }
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+
+@model IEnumerable<KermesseApp.Models.tbl_rol_opcion>
+
+@{
+    ViewBag.Title = "tbl_rol_opcion";
+}
+
+<h2>ListRolOpcion</h2>
+
+<p>
+    @Html.ActionLink("Crear una nueva opcion para un rol", "VguardarRolOpcion")
+</p>
+<table class="table table-hover">
+    <tr>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.tbl_opciones.opcion)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.tbl_rol.rol)
+        </th>
+        <th>Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-active">
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_opciones.opcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tbl_rol.rol)
+            </td>
+            <td>
+                <a href="@Url.Action("editRolOpcion", new { id = item.id_rol_opcion})"><i class="btn btn-outline-primary">Editar</i></a> |
+                <a href="@Url.Action("verRolOpcion", new { id = item.id_rol_opcion})"><i class="btn btn-outline-primary">Visualizar</i></a> |
+                <a href="@Url.Action("deleteRolOpcion", new { id = item.id_rol_opcion})"><i class="btn btn-outline-danger">Eliminar</i></a>
+            </td>
+        </tr>
+    }
+
+</table>

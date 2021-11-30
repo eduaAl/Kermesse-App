@@ -1,0 +1,94 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+
+@model KermesseApp.Models.tbl_rol_usuario
+
+@{
+    ViewBag.Title = "guardarRolUsuario";
+}
+
+<h2>Guarde un rol para un usuario</h2>
+
+@using (Html.BeginForm("guardarRolUsuario", "tbl_rolUsuario", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Tabla de rol y usuario</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_usuario, "Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*Html.DropDownList("id_usuario", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.id_usuario, ViewBag.id_usuario as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_usuario, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_rol, "Rol", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*Html.DropDownList("id_rol", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownListFor(model => model.id_rol, ViewBag.id_rol as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_rol, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                    <input type="reset" value="Cancelar" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "ListRolUsuario")
+</div>

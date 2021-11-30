@@ -1,0 +1,93 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 2];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+
+@model KermesseApp.Models.tbl_opciones
+
+
+@{
+    ViewBag.Title = "editOpcion";
+}
+
+<h2>Edite una opcion</h2>
+
+@using (Html.BeginForm("updateOpcion", "tbl_opciones", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Tabla de opciones</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_opciones)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.opcion, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.opcion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.opcion, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.estado, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.estado, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.estado, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Regresar", "ListOpciones")
+</div>

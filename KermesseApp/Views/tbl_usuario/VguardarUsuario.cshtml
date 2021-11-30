@@ -1,0 +1,94 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+@model KermesseApp.Models.tbl_usuario
+@{
+    ViewBag.Title = "guardarUsuario";
+}
+
+<h2>Guarde un usuario</h2>
+
+@using (Html.BeginForm("guardarUsuario", "tbl_usuario", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group">
+            <label>Usuario</label>
+            @Html.ValidationMessageFor(x => x.usuario, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.usuario, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Pwd</label>
+            @Html.ValidationMessageFor(x => x.pwd, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.pwd, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Nombre</label>
+            @Html.ValidationMessageFor(x => x.nombres, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.nombres, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Apellido</label>
+            @Html.ValidationMessageFor(x => x.apellidos, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.apellidos, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            @Html.ValidationMessageFor(x => x.email, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.email, new { @class = "form-control" })
+        </div>
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <button type="reset" class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+
+
+    </div>
+}
+<div>
+    @Html.ActionLink("Regresar", "ListUsuario")
+</div>
+
+

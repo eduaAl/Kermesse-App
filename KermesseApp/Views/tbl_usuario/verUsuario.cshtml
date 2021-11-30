@@ -1,0 +1,118 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 2];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+
+}
+@model KermesseApp.Models.tbl_usuario
+
+@{
+    ViewBag.Title = "verUsuario";
+}
+
+<h2>verUsuario</h2>
+
+<div>
+    <h4>Tabla Usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.usuario)
+            </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pwd)
+        </dt>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.pwd)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nombres)
+        </dt>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.nombres)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.apellidos)
+        </dt>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.apellidos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        @*<dt>
+                @Html.DisplayNameFor(model => model.estado)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.estado)
+            </dd>*@
+
+    </dl>
+</div>
+<div class="container mt-3 col-xs-1" align="center">
+    <div class="form-group">
+        <p>
+            @*Html.ActionLink("Edit", "Edit", new { id = Model.id_rol_usuario })*@ |
+            @Html.ActionLink("Regresar", "ListUsuario")
+        </p>
+    </div>
+</div>

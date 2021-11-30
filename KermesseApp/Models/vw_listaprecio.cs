@@ -14,11 +14,15 @@ namespace KermesseApp.Models
     
     public partial class vw_listaprecio
     {
-        public int id_listaprecio { get; set; }
-        public string lista_precio { get; set; }
         public int id_kermesse { get; set; }
         public string kermesse { get; set; }
+        public string nombre { get; set; }
         public string descripcion { get; set; }
         public int estado { get; set; }
+        public int id_listaprecio_det { get; set; }
+        public int id_listaprecio { get; set; }
+        public decimal precio_venta { get; set; }
+        public int id_producto { get; set; }
+        public string producto { get; set; }
     }
 }

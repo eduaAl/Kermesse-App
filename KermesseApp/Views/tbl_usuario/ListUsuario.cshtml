@@ -1,0 +1,129 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string opcionActual;
+    string[] separado = url.Split('/');
+    if (separado.Length == 5)
+    {
+        opcionActual = separado[separado.Length - 1];
+    }
+    else
+    {
+        opcionActual = separado[separado.Length - 2];
+    }
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+@model IEnumerable<KermesseApp.Models.tbl_usuario>
+
+@{
+    ViewBag.Title = "tbl_usuario";
+}
+
+<h2>Usuarios</h2>
+
+<p>
+    @Html.ActionLink("Crear un nuevo usuario", "VguardarUsuario")
+</p>
+
+@using (Html.BeginForm("filtrarUsuario", "tbl_usuario", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4" align="right">
+            @Html.ActionLink("PDF", "Placeholder", new { tipo = "PDF" }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Word", "Placeholder", new { tipo = "Word" }, new { @class = "btn btn-info" })
+            @Html.ActionLink("Excel", "Placeholder", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+
+}
+
+<table class="table table-hover">
+    <tr>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.usuario)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.pwd)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.nombres)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.apellidos)
+        </th>
+        <th scope="col">
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th scope="col">Acciones</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr class="table-active">
+            <td>
+                @Html.DisplayFor(modelItem => item.usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pwd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombres)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.apellidos)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                <a href="@Url.Action("editUsuario", new { id = item.id_usuario})"><i class="btn btn-outline-primary">Editar</i></a> |
+                <a href="@Url.Action("verUsuario", new { id = item.id_usuario})"><i class="btn btn-outline-primary">Visualizar</i></a> |
+                <a href="@Url.Action("deleteUsuario", new { id = item.id_usuario})"><i class="btn btn-outline-danger">Eliminar</i></a>
+            </td>
+        </tr>
+    }
+
+</table>

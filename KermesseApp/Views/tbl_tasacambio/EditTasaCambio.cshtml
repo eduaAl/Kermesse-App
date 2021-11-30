@@ -1,0 +1,97 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 2];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+
+@model KermesseApp.Models.tbl_tasacambio
+
+@{
+    ViewBag.Title = "Editar Tasa de Cambio";
+}
+
+<h2>EditTasaCambio</h2>
+
+@using (Html.BeginForm("UpdateTasaCambio", "Tbl_tasacambio", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>Tabla de tasa de cambio</h4>
+    <hr />
+    <div class="container">
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_tasacambio)
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_monedaO, "Moneda #1", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownListFor(model => model.id_monedaO, null, htmlAttributes: new { @class = "form-select" })
+            @Html.ValidationMessageFor(model => model.id_monedaO, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_monedaC, "Moneda #2", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownListFor(model => model.id_monedaC, null, htmlAttributes: new { @class = "form-select" })
+            @Html.ValidationMessageFor(model => model.id_monedaC, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.mes, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.mes, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.mes, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.anio, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.EditorFor(model => model.anio, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.anio, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input type="submit" value="Guardar Cambios" class="btn btn-success" />
+                @Html.ActionLink("Regresar a la vista", "LisTasaCambio", null, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+

@@ -33,7 +33,7 @@
                             <a class="dropdown-item" href="@Url.Action("ListMonedas", "Tbl_moneda")">Moneda</a>
                             <a class="dropdown-item" href="@Url.Action("ListDenominaciones", "Tbl_denominacion")">Denominación</a>
                             <a class="dropdown-item" href="@Url.Action("ListArqueos", "Tbl_arqueocaja")">Arqueo</a>
-                            <a class="dropdown-item" href="@Url.Action("ListMonedas", "Tbl_moneda")">Tasa Cambio</a>
+                            <a class="dropdown-item" href="@Url.Action("LisTasaCambio", "tbl_tasacambio")">Tasa Cambio</a>
                         </div>
                     </li>
                     <li class="dropdown">
@@ -65,7 +65,20 @@
                             <a class="dropdown-item" href="@Url.Action("ListListaprecio", "Tbl_listaprecio")">Lista de precio</a>
                         </div>
                     </li>
+                    <li class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown1" data-toggle="dropdown">
+                            Seguridad
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("ListUsuario", "tbl_usuario")">Usuario</a>
+                            <a class="dropdown-item" href="@Url.Action("ListRol", "tbl_rol")">Rol</a>
+                            <a class="dropdown-item" href="@Url.Action("ListOpciones", "tbl_opciones")">Opciones</a>
+                            <a class="dropdown-item" href="@Url.Action("ListRolOpcion", "tbl_rolOpcion")">Rol - Opciones</a>
+                            <a class="dropdown-item" href="@Url.Action("ListRolUsuario", "tbl_rolUsuario")">Rol - Usuario</a>
+                        </div>
+                    </li>
                     <li>@Html.ActionLink("Reportes especiales", "Vw_RptFrm", "rptFrm", "", new { @class = "nav-link" })</li>
+                    <li class="nav-item">@Html.ActionLink("Cerrar Sesión", "Logout", "tbl_usuario", null, new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>

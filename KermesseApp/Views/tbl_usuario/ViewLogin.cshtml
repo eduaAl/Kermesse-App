@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = null;
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Mi aplicación ASP.NET</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div class="container body-content">
+
+        <h2 align="center">Acceso de Usuarios</h2>
+        @if (@ViewBag.error != null)
+        {
+            <div class="mb-3" align="center" style="border: 1px solid red">
+                <p style="color: red">&nbsp;@ViewBag.error</p>
+            </div>
+        }
+
+        <div class="card bg-light mb-3" align="center" style="max-width: 30rem; right:-400px;">
+            <div class="card-body" align="center">
+                <div class="col-md-12" align="center">
+                    @using (Html.BeginForm("Login", "tbl_usuario", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                    <div class="form-horizontal" align="center">
+                        <h4>Inicio de sesion</h4>
+                        <hr />
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group" align="center">
+                            <label for="username" class="form-label col-md-2">Usuario:</label>
+                            <div class="col-md-10">
+                                @Html.TextBox("username", null, new { @class = "form-control col-md-4", placeholder = "Usuario", required = "required" })
+                            </div>
+                        </div>
+                        <div class="form-group" align="center">
+                            <label for="password" class="form-label col-md-2">Contraseña:</label>
+                            <div class="col-md-10">
+                                @Html.TextBox("password", null, new { @class = "form-control col-md-4", type = "password", placeholder = "Contraseña", required = "required" })
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10" align="center">
+                                <input type="submit" value="Entrar" class="btn btn-primary" />
+                                <input type="reset" value="Cancelar" class="btn btn-danger" />
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+       
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap-sketchy")
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>
+
+

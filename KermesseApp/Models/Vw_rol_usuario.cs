@@ -12,11 +12,12 @@ namespace KermesseApp.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class view_usuario_rol
+    public partial class Vw_rol_usuario
     {
-        public string nombres { get; set; }
-        public string apellidos { get; set; }
+        public int id_rol_usuario { get; set; }
+        public int id_usuario { get; set; }
         public string usuario { get; set; }
+        public int id_rol { get; set; }
         public string rol { get; set; }
     }
 }

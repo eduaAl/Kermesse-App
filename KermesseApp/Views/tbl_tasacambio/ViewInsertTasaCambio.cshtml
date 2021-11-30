@@ -1,0 +1,171 @@
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+
+
+}
+
+@model KermesseApp.Models.tbl_tasacambio
+
+@{
+    ViewBag.Title = "ViewInsertTasaCambio";
+}
+
+<h2>Insertar una nueva tasa cambio</h2>
+
+@using (Html.BeginForm("InsertarTasaCambio", "tbl_tasacambio", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_monedaO, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.DropDownListFor(model => model.id_monedaO, ViewBag.id_monedaO as SelectList, "Seleccione una moneda...", htmlAttributes: new { @class = "form-select" })
+            @Html.ValidationMessageFor(model => model.id_monedaO, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.id_monedaC, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.DropDownListFor(model => model.id_monedaC, ViewBag.id_monedaC as SelectList, "Seleccione una moneda...", htmlAttributes: new { @class = "form-select" })
+        @Html.ValidationMessageFor(model => model.id_monedaC, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.mes, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.mes, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.mes, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.anio, htmlAttributes: new { @class = "control-label col-md-2" })
+        @Html.EditorFor(model => model.anio, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.anio, "", new { @class = "text-danger" })
+    </div>
+
+
+    <hr />
+    <div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.detalle.fecha, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(model => model.detalle.fecha, new { @class = "form-control", @id = "fecha" })
+            @Html.ValidationMessageFor(model => model.detalle.fecha, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.detalle.tipo_cambio, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(model => model.detalle.tipo_cambio, new { @class = "form-control", @id = "tipo_cambio" })
+            @Html.ValidationMessageFor(model => model.detalle.tipo_cambio, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input value="Agregar" class="btn btn-outline-success" type="button" onclick="AgregarTasaCambio(); return false;" />
+            </div>
+        </div>
+
+    </div>
+
+    <div id="divTasaCambio" style="display: none;">
+        <table id="tablaTasaCambio" class="table table-hover" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Tipo Cambio</th>
+                </tr>
+            </thead>
+
+        </table>
+
+
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            <input type="reset" value="Cancelar" class="btn btn-danger" />
+            @Html.ActionLink("Regresar a la vista", "LisTasaCambio", null, new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+<script>
+    var num = 0;
+    function AgregarTasaCambio() {
+        let fecha = document.getElementById("fecha").value;
+        let cambio = document.getElementById("tipo_cambio").value;
+
+        //agregamos a la tabla
+        $("#divTasaCambio").show();
+        let tabla = document.getElementById("tablaTasaCambio");
+
+        let TR = document.createElement("tr");
+        let TDfecha = document.createElement("td");
+        let TDcambio = document.createElement("td");
+        TR.appendChild(TDfecha);
+        TR.appendChild(TDcambio);
+        TDfecha.innerHTML = fecha;
+        TDcambio.innerHTML = cambio;
+        tabla.appendChild(TR);
+
+        //agregamos hiddens
+        let DivProducto = document.getElementById("divTasaCambio");
+        let HiddenIndex = document.createElement("input");
+        let HiddenFecha = document.createElement("input");
+        let HiddenCambio = document.createElement("input");
+        HiddenIndex.name = "tasacambio_Dets.Index";
+        HiddenIndex.value = num;
+        HiddenIndex.type = "hidden";
+        HiddenFecha.name = "tasacambio_Dets[" + num + "].fecha";
+        HiddenFecha.value = fecha;
+        HiddenFecha.type = "hidden";
+        HiddenCambio.name = "tasacambio_Dets[" + num + "].tipo_cambio";
+        HiddenCambio.value = cambio;
+        HiddenCambio.type = "hidden";
+        DivProducto.appendChild(HiddenIndex);
+        DivProducto.appendChild(HiddenFecha);
+        DivProducto.appendChild(HiddenCambio);
+
+        document.getElementById("tipo_cambio").value = "";
+        document.getElementById("fecha").value = "";
+        num++
+    }
+</script>
+
+
