@@ -1,0 +1,43 @@
+﻿@model KermesseApp.Models.tbl_ingresocom_det
+@{
+    ViewBag.Title = "Editar detalle de un ingreso por comunidad";
+}
+
+<h2>Vw_Edit_ingresocomdet</h2>
+@using (Html.BeginForm("Edit_ingresocomdet", "IngresoCom", FormMethod.Post))
+{
+    <div class="container">
+        <h4>Registro a modificar</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_ingresocom_det)
+        @Html.HiddenFor(model => model.id_ingresocom)
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_bono, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(model => model.id_bono, null, htmlAttributes: new { @class = "form-select" })
+            @Html.ValidationMessageFor(model => model.id_bono, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.denominacion, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.EditorFor(model => model.denominacion, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.denominacion, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.cantidad, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.EditorFor(model => model.cantidad, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cantidad, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar cambios" class="btn btn-success" />
+                <a href="@Url.Action("Vw_Details_ingresocom", new { id = Model.id_ingresocom})"><i class="btn btn-primary">Regresar</i></a>
+            </div>
+        </div>
+    </div>
+}

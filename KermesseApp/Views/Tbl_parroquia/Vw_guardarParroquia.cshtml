@@ -1,0 +1,59 @@
+﻿@model KermesseApp.Models.tbl_parroquia
+@{
+    ViewBag.Title = "Guardar parroquia";
+}
+
+<h2>Guardar nueva parroquia</h2>
+
+@using (Html.BeginForm("GuardarParroquia", "Tbl_parroquia", FormMethod.Post))
+{
+<div class="container">
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Nombre parroquia: </label>
+        @Html.ValidationMessageFor(x => x.nombre, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Dirección de la parroquia: </label>
+        @Html.ValidationMessageFor(x => x.direccion, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(x => x.direccion, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Teléfono: </label>
+        @Html.ValidationMessageFor(x => x.telefono, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.telefono, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Nombre del párroco: </label>
+        @Html.ValidationMessageFor(x => x.parroco, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.parroco, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">URL imagen del Logo: </label>
+        @Html.ValidationMessageFor(x => x.url_logo, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.url_logo, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Sitio web de la parroquia: </label>
+        @Html.ValidationMessageFor(x => x.sitio_web, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.sitio_web, new { @class = "form-control" })
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            <input type="reset" value="Cancelar" class="btn btn-danger" />
+            @Html.ActionLink("Regresar a la vista", "Vw_tbl_parroquia", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+</div>
+}
+
+

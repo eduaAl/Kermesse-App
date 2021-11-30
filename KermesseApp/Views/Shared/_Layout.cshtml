@@ -15,10 +15,57 @@
                 @Html.ActionLink("Kermesse App", "Index", "Home", "", new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="nav-item">@Html.ActionLink("Moneda", "ListMonedas", "Tbl_moneda", "", new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Denominación", "ListDenominaciones", "Tbl_denominacion", "", new { @class = "nav-link" })</li>
-                    <li class="nav-item">@Html.ActionLink("Arqueo Caja", "ListArqueos", "Tbl_arqueocaja", "", new { @class = "nav-link" })</li>
+                <ul class="navbar-nav me-auto">
+                    <li class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown1" data-toggle="dropdown">
+                            General
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("Vw_tbl_parroquia", "tbl_parroquia")">Parroquia</a>
+                            <a class="dropdown-item" href="@Url.Action("Vw_tbl_kermesse", "tbl_kermesse")">Kermesse</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown1" data-toggle="dropdown">
+                            Arqueo Caja
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("ListMonedas", "Tbl_moneda")">Moneda</a>
+                            <a class="dropdown-item" href="@Url.Action("ListDenominaciones", "Tbl_denominacion")">Denominación</a>
+                            <a class="dropdown-item" href="@Url.Action("ListArqueos", "Tbl_arqueocaja")">Arqueo</a>
+                            <a class="dropdown-item" href="@Url.Action("ListMonedas", "Tbl_moneda")">Tasa Cambio</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown1" data-toggle="dropdown">
+                            Gastos
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("Vw_tbl_cat_gastos", "tbl_cat_gastos")">Categoría Gastos</a>
+                            <a class="dropdown-item" href="@Url.Action("Vw_tbl_gastos", "tbl_gastos")">Gastos</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown1" data-toggle="dropdown">
+                            Ingresos
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("Vw_tbl_bono", "tbl_bono")">Bonos</a>
+                            <a class="dropdown-item" href="@Url.Action("Vw_tbl_comunidad", "tbl_comunidad")">Comunidad</a>
+                            <a class="dropdown-item" href="@Url.Action("Vw_tbl_IngresoCom", "IngresoCom")">Ingreso Comunidad</a>
+                        </div>
+                    </li>
+                    <li class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown1" data-toggle="dropdown">
+                            Precios
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="@Url.Action("ListCatProductos", "Tbl_cat_producto")">Categoría de productos</a>
+                            <a class="dropdown-item" href="@Url.Action("ListProductos", "Tbl_producto")">Productos</a>
+                            <a class="dropdown-item" href="@Url.Action("ListListaprecio", "Tbl_listaprecio")">Lista de precio</a>
+                        </div>
+                    </li>
+                    <li>@Html.ActionLink("Reportes especiales", "Vw_RptFrm", "rptFrm", "", new { @class = "nav-link" })</li>
                 </ul>
             </div>
         </div>
@@ -37,6 +84,7 @@
     @Scripts.Render("~/bundles/bootstrap-sketchy")
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

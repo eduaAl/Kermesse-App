@@ -342,6 +342,30 @@
     <NavigationProperty Name="tbl_kermesse2" Relationship="Self.FK_tbl_kermesse_tbl_usuario2" FromRole="tbl_usuario" ToRole="tbl_kermesse" />
     <NavigationProperty Name="tbl_rol_usuario" Relationship="Self.FK_tbl_rol_usuario_tbl_usuario" FromRole="tbl_usuario" ToRole="tbl_rol_usuario" />
   </EntityType>
+  <EntityType Name="view_productos">
+    <Key>
+      <PropertyRef Name="id_producto" />
+      <PropertyRef Name="producto" />
+      <PropertyRef Name="id_comunidad" />
+      <PropertyRef Name="comunidad" />
+      <PropertyRef Name="id_cat_producto" />
+      <PropertyRef Name="cat_producto" />
+      <PropertyRef Name="desc_presentacion" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="precio_venta" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_producto" Type="Int32" Nullable="false" />
+    <Property Name="producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_comunidad" Type="Int32" Nullable="false" />
+    <Property Name="comunidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_cat_producto" Type="Int32" Nullable="false" />
+    <Property Name="cat_producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="desc_presentacion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="precio_venta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
   <EntityType Name="view_usuario_rol">
     <Key>
       <PropertyRef Name="nombres" />
@@ -405,6 +429,126 @@
     <Property Name="valor" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="valor_letras" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vw_Gastos">
+    <Key>
+      <PropertyRef Name="id_gasto" />
+      <PropertyRef Name="kermesse" />
+      <PropertyRef Name="categoria" />
+      <PropertyRef Name="fecha_gasto" />
+      <PropertyRef Name="concepto" />
+      <PropertyRef Name="monto" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_gasto" Type="Int32" Nullable="false" />
+    <Property Name="kermesse" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="categoria" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fecha_gasto" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="concepto" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="monto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vw_IngresoDet">
+    <Key>
+      <PropertyRef Name="id_ingresocom_det" />
+      <PropertyRef Name="id_ingresocom" />
+      <PropertyRef Name="bono" />
+      <PropertyRef Name="denominacion" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="subtotal" />
+    </Key>
+    <Property Name="id_ingresocom_det" Type="Int32" Nullable="false" />
+    <Property Name="id_ingresocom" Type="Int32" Nullable="false" />
+    <Property Name="bono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="denominacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vw_IngresoFiltrada">
+    <Key>
+      <PropertyRef Name="id_ingresocom" />
+      <PropertyRef Name="kermesse" />
+      <PropertyRef Name="comunidad" />
+      <PropertyRef Name="producto" />
+      <PropertyRef Name="cant_producto" />
+      <PropertyRef Name="total_bonos" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="id_ingresocom_det" />
+      <PropertyRef Name="bono" />
+      <PropertyRef Name="denominacion" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="subtotal" />
+    </Key>
+    <Property Name="id_ingresocom" Type="Int32" Nullable="false" />
+    <Property Name="kermesse" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="comunidad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cant_producto" Type="Int32" Nullable="false" />
+    <Property Name="precio_producto" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="total_bonos" Type="Int32" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="id_ingresocom_det" Type="Int32" Nullable="false" />
+    <Property Name="bono" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="denominacion" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="cantidad" Type="Int32" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vw_Kermesse">
+    <Key>
+      <PropertyRef Name="id_kermesse" />
+      <PropertyRef Name="Parroquia" />
+      <PropertyRef Name="Kermesse" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_fin" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="usuario_creacion" />
+      <PropertyRef Name="fecha_creacion" />
+    </Key>
+    <Property Name="id_kermesse" Type="Int32" Nullable="false" />
+    <Property Name="Parroquia" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Kermesse" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="fecha_inicio" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="fecha_fin" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="desc_general" Type="String" MaxLength="400" FixedLength="false" Unicode="true" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+    <Property Name="usuario_creacion" Type="Int32" Nullable="false" />
+    <Property Name="usuario_modificacion" Type="Int32" />
+    <Property Name="usuario_eliminacion" Type="Int32" />
+    <Property Name="fecha_creacion" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="fecha_modificacion" Type="DateTime" Precision="3" />
+    <Property Name="fecha_eliminacion" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="vw_listaprecio">
+    <Key>
+      <PropertyRef Name="id_listaprecio" />
+      <PropertyRef Name="lista_precio" />
+      <PropertyRef Name="id_kermesse" />
+      <PropertyRef Name="kermesse" />
+      <PropertyRef Name="descripcion" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_listaprecio" Type="Int32" Nullable="false" />
+    <Property Name="lista_precio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_kermesse" Type="Int32" Nullable="false" />
+    <Property Name="kermesse" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="descripcion" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="estado" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="vw_listaprecio_det">
+    <Key>
+      <PropertyRef Name="id_listaprecio_det" />
+      <PropertyRef Name="id_listaprecio" />
+      <PropertyRef Name="listaprecio" />
+      <PropertyRef Name="id_producto" />
+      <PropertyRef Name="producto" />
+      <PropertyRef Name="precio_venta" />
+    </Key>
+    <Property Name="id_listaprecio_det" Type="Int32" Nullable="false" />
+    <Property Name="id_listaprecio" Type="Int32" Nullable="false" />
+    <Property Name="listaprecio" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="id_producto" Type="Int32" Nullable="false" />
+    <Property Name="producto" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="precio_venta" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
   </EntityType>
   <Association Name="FK_tbl_arqueocaja_det_tbl_arqueocaja">
     <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="1" />
@@ -875,10 +1019,17 @@
     <EntitySet Name="tbl_tasacambio" EntityType="Self.tbl_tasacambio" />
     <EntitySet Name="tbl_tasacambio_det" EntityType="Self.tbl_tasacambio_det" />
     <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" />
+    <EntitySet Name="view_productos" EntityType="Self.view_productos" />
     <EntitySet Name="view_usuario_rol" EntityType="Self.view_usuario_rol" />
     <EntitySet Name="Vw_arqueoCaja" EntityType="Self.Vw_arqueoCaja" />
     <EntitySet Name="Vw_arqueoCajaDet" EntityType="Self.Vw_arqueoCajaDet" />
     <EntitySet Name="Vw_denominacion" EntityType="Self.Vw_denominacion" />
+    <EntitySet Name="Vw_Gastos" EntityType="Self.Vw_Gastos" />
+    <EntitySet Name="Vw_IngresoDet" EntityType="Self.Vw_IngresoDet" />
+    <EntitySet Name="Vw_IngresoFiltrada" EntityType="Self.Vw_IngresoFiltrada" />
+    <EntitySet Name="Vw_Kermesse" EntityType="Self.Vw_Kermesse" />
+    <EntitySet Name="vw_listaprecio" EntityType="Self.vw_listaprecio" />
+    <EntitySet Name="vw_listaprecio_det" EntityType="Self.vw_listaprecio_det" />
     <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_arqueocaja" Association="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja">
       <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />
       <End Role="tbl_arqueocaja_det" EntitySet="tbl_arqueocaja_det" />

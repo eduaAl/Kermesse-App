@@ -1,0 +1,85 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_kermesse>
+
+@{
+    ViewBag.Title = "Kermesse";
+}
+
+<h2>Lista de Kermesses</h2>
+
+<p>
+    @Html.ActionLink("Nueva Kermesse", "Vw_guardarKer")
+</p>
+
+@using (Html.BeginForm("BuscarKermesse", "Tbl_kermesse", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-8 col-md-8">
+
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingresa una palabra..." })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4" align="right">
+
+            @Html.ActionLink("PDF", "ViewRptKermesse", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Excel", "ViewRptKermesse", new { tipo = "Excel", cadena = Request.Form["cadena"] }, new { @class = "btn btn-success" })
+
+        </div>
+
+    </div>
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_parroquia.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_inicio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_fin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.desc_general)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_parroquia.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_inicio)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_fin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc_general)
+                </td>
+                <td>
+                    <a href="@Url.Action("Vw_EditKer", new { id = item.id_kermesse })"><i class="btn btn-outline-info">Editar</i></a> |
+                    <a href="@Url.Action("Vw_detKer", new { id = item.id_kermesse })"><i class="btn btn-outline-primary">Detalles</i></a> |
+                    <a href="@Url.Action("EliminarKer", new { id = item.id_kermesse })"><i class="btn btn-outline-danger">Eliminar</i></a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

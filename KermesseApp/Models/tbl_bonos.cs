@@ -11,7 +11,8 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_bonos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,7 +22,14 @@ namespace KermesseApp.Models
         }
     
         public int id_bono { get; set; }
+
+        [Display(Name = "Bono")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(50, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string nombre { get; set; }
+
+        [Display(Name = "Valor")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public double valor { get; set; }
         public int estado { get; set; }
     

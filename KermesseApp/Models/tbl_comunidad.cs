@@ -11,7 +11,8 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_comunidad
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,13 +21,26 @@ namespace KermesseApp.Models
             this.tbl_ingreso_com = new HashSet<tbl_ingreso_com>();
             this.tbl_productos = new HashSet<tbl_productos>();
         }
-    
+
+        [Display(Name = "Comunidad")]
         public int id_comunidad { get; set; }
+
+        [Display(Name = "Comunidad")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(50, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string nombre { get; set; }
+
+        [Display(Name = "Responsable")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(80, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string responsable { get; set; }
+
+        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(150, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string desc_contribucion { get; set; }
         public int estado { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_ingreso_com> tbl_ingreso_com { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

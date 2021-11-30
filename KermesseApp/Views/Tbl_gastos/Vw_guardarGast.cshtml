@@ -1,0 +1,54 @@
+﻿@model KermesseApp.Models.tbl_gastos
+@{
+    ViewBag.Title = "Guardar gastos";
+}
+
+<h2>Ingresar un nuevo gasto</h2>
+
+
+@using (Html.BeginForm("GuardarGast", "Tbl_gastos", FormMethod.Post))
+{
+<div class="container">
+
+    <h4>Gastos</h4>
+    <div class="form-group row">
+        @Html.LabelFor(x => x.id_kermesse, htmlAttributes: new { @class = "form-label mt-2 row" })
+        @Html.DropDownListFor(model => model.id_kermesse, ViewBag.id_kermesse as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.id_kermesse, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(x => x.id_cat_gasto, htmlAttributes: new { @class = "form-label mt-2 row" })
+        @Html.DropDownListFor(model => model.id_cat_gasto, ViewBag.id_cat_gasto as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.id_cat_gasto, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(x => x.fecha_gasto, htmlAttributes: new { @class = "form-label mt-2 row" })
+        @Html.ValidationMessageFor(x => x.fecha_gasto, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.fecha_gasto, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(x => x.concepto, htmlAttributes: new { @class = "form-label mt-2 row" })
+        @Html.ValidationMessageFor(x => x.concepto, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(x => x.concepto, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(x => x.monto, htmlAttributes: new { @class = "form-label mt-2 row" })
+        @Html.ValidationMessageFor(x => x.monto, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.monto, new { @class = "form-control" })
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            <input type="reset" value="Cancelar" class="btn btn-danger" />
+            @Html.ActionLink("Regresar a la vista", "Vw_tbl_gastos", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+</div>
+}
+

@@ -11,7 +11,9 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class tbl_productos
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,16 +22,33 @@ namespace KermesseApp.Models
             this.tbl_ingreso_com = new HashSet<tbl_ingreso_com>();
             this.tbl_listaprecio_det = new HashSet<tbl_listaprecio_det>();
         }
-    
+
+        [Display(Name = "Producto")]
         public int id_producto { get; set; }
+        [Display(Name = "Comunidad")]
+        [Required(ErrorMessage = "Seleccione una comunidad")]
         public int id_comunidad { get; set; }
+        [Display(Name = "Categoría del producto")]
+        [Required(ErrorMessage = "Seleccione una categoría")]
         public int id_cat_producto { get; set; }
+
+        [Display(Name = "Nombre del producto")]
+        [Required(ErrorMessage = "Digite un nombre para el prodcuto")]
+        [StringLength(50, ErrorMessage = "El límite de caracteres es de 50")]
         public string nombre { get; set; }
+
+        [Display(Name = "Descripción del producto")]
+        [Required(ErrorMessage = "Digite una descripción para el producto")]
+        [StringLength(200, ErrorMessage = "El límite de caracteres es de 200")]
         public string desc_presentacion { get; set; }
+
+        [Display(Name = "Cantidad")]
+        [Required(ErrorMessage = "Digite una cantidad valida")]
         public int cantidad { get; set; }
+        [Display(Name = "Precio de venta")]
+        [Required(ErrorMessage = "Digite un precio de venta")]
         public decimal precio_venta { get; set; }
         public int estado { get; set; }
-    
         public virtual tbl_cat_producto tbl_cat_producto { get; set; }
         public virtual tbl_comunidad tbl_comunidad { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

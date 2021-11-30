@@ -1,0 +1,228 @@
+﻿
+@model KermesseApp.Models.tbl_ingreso_com
+
+@{
+    ViewBag.Title = "Nuevo ingreso por Comunidad";
+
+}
+
+<h2>Nuevo ingreso por comunidad</h2>
+<hr />
+
+
+@using (Html.BeginForm("Create_IngresoCom", "IngresoCom", FormMethod.Post))
+{
+
+<div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(x => x.id_kermesse, "Nombre de la kermesse: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(x => x.id_kermesse, ViewBag.id_kermesse as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "ker", @onchange = "cambio();" })
+            @Html.ValidationMessageFor(x => x.id_kermesse, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            <label class="form-label mt-2 row">Fecha</label>
+            <input id="txtFecha" class="form-control" disabled />
+        </div>
+
+        @Html.DropDownListFor(x => x.tbl_kermesse.id_kermesse, ViewBag.fecha_inicio as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "fechaI", @hidden = "true" })
+        @Html.DropDownListFor(x => x.tbl_kermesse.id_kermesse, ViewBag.fecha_fin as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control", @id = "fechaF", @hidden = "true" })
+        <div class="form-group row">
+            @Html.LabelFor(x => x.id_comunidad, "Nombre de la comunidad: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(x => x.id_comunidad, ViewBag.id_comunidad as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.id_comunidad, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.id_producto, "Nombre del producto: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(x => x.id_producto, ViewBag.id_producto as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.id_producto, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.cant_producto, "Cantidad de productos: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(x => x.cant_producto, new { @class = "form-control", @id = "cant_producto" })
+            @Html.ValidationMessageFor(x => x.cant_producto, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.precio_producto, "Precio del producto: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(x => x.precio_producto, new { @class = "form-control", @id = "precio_producto" })
+            @Html.ValidationMessageFor(x => x.precio_producto, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.total_bonos, "Total de bonos: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(x => x.total_bonos, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.total_bonos, "", new { @class = "text-danger" })
+        </div>
+  </div>
+
+
+    <br />
+    <br />
+    <h3>Detalle del ingreso por comunidad</h3>
+    <hr />
+
+    <div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(x => x.detalle.id_bono, "Nombre del bono: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(x => x.detalle.id_bono, ViewBag.id_bono as SelectList, "Seleccione...", htmlAttributes: new { @id = "bono", @class = "form-select" })
+            @Html.ValidationMessageFor(x => x.detalle.id_bono, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group row">
+            @*@Html.LabelFor(x => x.detalle.denominacion, "Denominación: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.ValidationMessageFor(x => x.detalle.denominacion, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.detalle.denominacion, new { @class = "form-control", @id = "denominacion" })*@
+            @Html.DropDownListFor(x => x.id_kermesse, ViewBag.valor as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "valor", @hidden = "true" })
+            <input id="denominacion" class="form-control" type="text" disabled hidden />
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.detalle.cantidad, "Cantidad: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+
+            @Html.TextBoxFor(x => x.detalle.cantidad, new { @class = "form-control", @id = "cantidad", @type = "number" })
+            @Html.ValidationMessageFor(x => x.detalle.cantidad, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input value="Agregar" class="btn btn-outline-success" type="submit" onclick="AgregarDetalle(); return false;" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row" id="divDetalles" style="display: none;">
+        <table id="detalles" class="table table-hover" style="width:100%;">
+            <tr>
+                <td>Bono</td>
+                <td>Denominación</td>
+                <td>Cantidad</td>
+                <td>Subtotal</td>
+            </tr>
+        </table>
+        <div class="row-cols-2" align="right">
+            <label>Total: <input id="total" disabled /></label>
+        </div>
+
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            <input type="reset" value="Cancelar" class="btn btn-danger" />
+            @Html.ActionLink("Regresar a la vista", "Vw_tbl_IngresoCom", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+}
+
+
+<script>
+    var num = 0;
+    var total = 0;
+
+    function cambio() {
+        let ID = document.getElementById("ker").value;
+        console.log(ID);
+        $("#fechaI").val(ID);
+        var fecha_I = $("#fechaI option:selected").text()
+        $("#fechaF").val(ID);
+        var fecha_F = $("#fechaF option:selected").text()
+
+        document.getElementById("txtFecha").value = "Del " + fecha_I + " hasta " +fecha_F;
+        
+    }
+
+    function AgregarDetalle() {
+        let Bono = document.getElementById("bono").value;
+        let nombre_bono = $("#bono option:selected").text()
+
+        $("#valor").val(Bono);
+        let nombre_valor = $("#valor option:selected").text()
+        $("#denominacion").val(nombre_valor);
+
+        let Denominacion = document.getElementById("denominacion").value;
+        let Cantidad = document.getElementById("cantidad").value;
+
+        let cant_producto = document.getElementById("cant_producto").value;
+        //console.log(cant_producto);
+        let precio_producto = document.getElementById("precio_producto").value;
+        //console.log(precio_producto);
+        let subtotal = parseFloat(Denominacion) * parseFloat(Cantidad);
+
+        let total_Maestro = parseFloat(cant_producto) * parseFloat(precio_producto);
+        //console.log(total_Maestro);
+
+        total = total + subtotal;
+        //console.log(total);
+
+        if (Bono == 0 || Cantidad.length == 0) {
+            alert("Existen campos del detalle en blanco");
+        }else {
+
+            if (total_Maestro < total) {
+                alert("Esta pasando el límite del Ingreso por Comunidad");
+                total = total - subtotal;
+                //console.log(total);
+            } else {
+                $("#divDetalles").show();
+
+                let tabla = document.getElementById("detalles");
+                let TR = document.createElement("tr");
+                let TDBono = document.createElement("td");
+                let TDDenominacion = document.createElement("td");
+                let TDCantidad = document.createElement("td");
+                let TDSubtotal = document.createElement("td");
+
+                TR.appendChild(TDBono);
+                TR.appendChild(TDDenominacion);
+                TR.appendChild(TDCantidad);
+                TR.appendChild(TDSubtotal);
+
+                TDBono.innerHTML = nombre_bono;
+                TDDenominacion.innerHTML = Denominacion;
+                TDCantidad.innerHTML = Cantidad;
+                TDSubtotal.innerHTML = subtotal;
+
+                tabla.appendChild(TR);
+
+                //agregamos hiddens
+                let divDetalles = document.getElementById("divDetalles");
+
+                let HiddenIndex = document.createElement("input");
+                let HiddenBono = document.createElement("input");
+                let HiddenDenominacion = document.createElement("input");
+                let HiddenCantidad = document.createElement("input");
+
+                HiddenIndex.name = "ingresocom_Dets.Index";
+                HiddenIndex.value = num;
+                HiddenIndex.type = "hidden";
+
+                HiddenBono.name = "ingresocom_Dets[" + num + "].id_bono";
+                HiddenBono.value = Bono;
+                HiddenBono.type = "hidden";
+
+                HiddenDenominacion.name = "ingresocom_Dets[" + num + "].denominacion";
+                HiddenDenominacion.value = Denominacion;
+                HiddenDenominacion.type = "hidden";
+
+                HiddenCantidad.name = "ingresocom_Dets[" + num + "].cantidad";
+                HiddenCantidad.value = Cantidad;
+                HiddenCantidad.type = "hidden";
+
+                divDetalles.appendChild(HiddenIndex);
+                divDetalles.appendChild(HiddenBono);
+                divDetalles.appendChild(HiddenDenominacion);
+                divDetalles.appendChild(HiddenCantidad);
+
+                document.getElementById("bono").value = "";
+                document.getElementById("denominacion").value = "";
+                document.getElementById("cantidad").value = "";
+
+
+                document.getElementById("total").value = total;
+                num++;
+               
+            }
+        }
+    }
+
+</script>
+

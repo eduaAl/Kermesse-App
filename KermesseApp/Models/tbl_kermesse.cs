@@ -11,7 +11,8 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_kermesse
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,12 +23,29 @@ namespace KermesseApp.Models
             this.tbl_ingreso_com = new HashSet<tbl_ingreso_com>();
             this.tbl_listaprecio = new HashSet<tbl_listaprecio>();
         }
-    
+
+        [Display(Name = "Kermesse")]
         public int id_kermesse { get; set; }
         public int id_parroquia { get; set; }
+
+        [Display(Name = "Kermesse")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(200, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string nombre { get; set; }
+
+        [Display(Name = "Fecha inicio")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public System.DateTime fecha_inicio { get; set; }
+
+        [Display(Name = "Fecha fin")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public System.DateTime fecha_fin { get; set; }
+
+        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(400, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string desc_general { get; set; }
         public int estado { get; set; }
         public int usuario_creacion { get; set; }

@@ -1,0 +1,32 @@
+﻿@model KermesseApp.Models.tbl_cat_producto
+@{
+    ViewBag.Title = "Agregar nueva categoría de producto";
+}
+
+<h2>Agregar nueva categoría de producto</h2>
+
+@using (Html.BeginForm("InsertarCatProd", "Tbl_cat_producto", FormMethod.Post))
+{
+    <h4>Ingrese los datos de la nueva categoría</h4>
+    <hr />
+    <div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(model => model.nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger row" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger row" })
+        </div>
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Guardar</button>
+                <button type="reset" class="btn btn-danger">Cancelar</button>
+                @Html.ActionLink("Regresar a la vista", "ListCatProductos", "", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+
+    </div>
+}

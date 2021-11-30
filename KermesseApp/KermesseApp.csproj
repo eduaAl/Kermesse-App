@@ -150,9 +150,20 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IngresoComController.cs" />
+    <Compile Include="Controllers\rptFrmController.cs" />
     <Compile Include="Controllers\Tbl_arqueocajaController.cs" />
+    <Compile Include="Controllers\Tbl_bonoController.cs" />
+    <Compile Include="Controllers\Tbl_cat_gastosController.cs" />
+    <Compile Include="Controllers\Tbl_cat_productoController.cs" />
+    <Compile Include="Controllers\Tbl_comunidadController.cs" />
     <Compile Include="Controllers\Tbl_denominacionController.cs" />
+    <Compile Include="Controllers\Tbl_gastosController.cs" />
+    <Compile Include="Controllers\Tbl_kermesseController.cs" />
+    <Compile Include="Controllers\Tbl_listaprecioController.cs" />
     <Compile Include="Controllers\Tbl_monedaController.cs" />
+    <Compile Include="Controllers\Tbl_parroquiaController.cs" />
+    <Compile Include="Controllers\Tbl_productoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -171,6 +182,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModelKermesse.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\recuperarIDs.cs" />
     <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
@@ -243,6 +255,9 @@
     <Compile Include="Models\tbl_usuario.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\view_productos.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\view_usuario_rol.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
@@ -253,6 +268,24 @@
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vw_denominacion.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vw_Gastos.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vw_IngresoDet.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vw_IngresoFiltrada.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Vw_Kermesse.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_listaprecio.cs">
+      <DependentUpon>ModelKermesse.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\vw_listaprecio_det.cs">
       <DependentUpon>ModelKermesse.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -394,6 +427,51 @@
     <Content Include="Views\Tbl_arqueocaja\EditarArqueo.cshtml" />
     <Content Include="Views\Tbl_arqueocaja\VistaGuardarArqueoCajaDet.cshtml" />
     <Content Include="Views\Tbl_arqueocaja\EditarArqueoCajaDet.cshtml" />
+    <Content Include="Views\IngresoCom\Vw_Create_IngresoCom.cshtml" />
+    <Content Include="Views\IngresoCom\Vw_Create_IngresoComDet.cshtml" />
+    <Content Include="Views\IngresoCom\Vw_Details_ingresocom.cshtml" />
+    <Content Include="Views\IngresoCom\Vw_Edit_ingresocom.cshtml" />
+    <Content Include="Views\IngresoCom\Vw_Edit_ingresocomdet.cshtml" />
+    <Content Include="Views\IngresoCom\Vw_tbl_IngresoCom.cshtml" />
+    <Content Include="Views\Tbl_bono\Vw_Create_bono.cshtml" />
+    <Content Include="Views\Tbl_bono\Vw_Edit_bono.cshtml" />
+    <Content Include="Views\Tbl_bono\Vw_tbl_bono.cshtml" />
+    <Content Include="Views\tbl_cat_gastos\Vw_detCat_gastos.cshtml" />
+    <Content Include="Views\tbl_cat_gastos\Vw_EditCatGastos.cshtml" />
+    <Content Include="Views\tbl_cat_gastos\Vw_guardarCat_gastos.cshtml" />
+    <Content Include="Views\tbl_cat_gastos\Vw_tbl_cat_gastos.cshtml" />
+    <Content Include="Views\Tbl_cat_producto\EditCatProd.cshtml" />
+    <Content Include="Views\Tbl_cat_producto\InsertarCatProd.cshtml" />
+    <Content Include="Views\Tbl_cat_producto\ListCatProductos.cshtml" />
+    <Content Include="Views\Tbl_cat_producto\ReadCatProd.cshtml" />
+    <Content Include="Views\Tbl_comunidad\Vw_Create_comunidad.cshtml" />
+    <Content Include="Views\Tbl_comunidad\Vw_Details_comunidad.cshtml" />
+    <Content Include="Views\Tbl_comunidad\Vw_Edit_comunidad.cshtml" />
+    <Content Include="Views\Tbl_comunidad\Vw_tbl_comunidad.cshtml" />
+    <Content Include="Views\Tbl_gastos\Vw_detGast.cshtml" />
+    <Content Include="Views\Tbl_gastos\Vw_EditGast.cshtml" />
+    <Content Include="Views\Tbl_gastos\Vw_guardarGast.cshtml" />
+    <Content Include="Views\Tbl_gastos\Vw_tbl_gastos.cshtml" />
+    <Content Include="Views\Tbl_kermesse\Vw_detKer.cshtml" />
+    <Content Include="Views\Tbl_kermesse\Vw_EditKer.cshtml" />
+    <Content Include="Views\Tbl_kermesse\Vw_guardarKer.cshtml" />
+    <Content Include="Views\Tbl_kermesse\Vw_tbl_kermesse.cshtml" />
+    <Content Include="Views\Tbl_listaprecio\EditListaPrecio.cshtml" />
+    <Content Include="Views\Tbl_listaprecio\EditListaPrecioDet.cshtml" />
+    <Content Include="Views\Tbl_listaprecio\Inp.cshtml" />
+    <Content Include="Views\Tbl_listaprecio\LisListaPrecioDet.cshtml" />
+    <Content Include="Views\Tbl_listaprecio\ListListaPrecio.cshtml" />
+    <Content Include="Views\Tbl_listaprecio\ViewInsertListaPrecio.cshtml" />
+    <Content Include="Views\Tbl_listaprecio\VistaRptListaPrecio.cshtml" />
+    <Content Include="Views\Tbl_parroquia\Vw_detParroquia.cshtml" />
+    <Content Include="Views\Tbl_parroquia\Vw_EditParroquia.cshtml" />
+    <Content Include="Views\Tbl_parroquia\Vw_guardarParroquia.cshtml" />
+    <Content Include="Views\Tbl_parroquia\Vw_tbl_parroquia.cshtml" />
+    <Content Include="Views\Tbl_producto\EditProducto.cshtml" />
+    <Content Include="Views\Tbl_producto\ListProductos.cshtml" />
+    <Content Include="Views\Tbl_producto\ReadProducto.cshtml" />
+    <Content Include="Views\Tbl_producto\ViewInsertProducto.cshtml" />
+    <Content Include="Views\rptFrm\Vw_RptFrm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -407,8 +485,24 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Reportes\RptBono.rdlc" />
+    <EmbeddedResource Include="Reportes\RptCatGastos.rdlc" />
+    <EmbeddedResource Include="Reportes\rptCatProducto.rdlc" />
+    <EmbeddedResource Include="Reportes\RptComunidad.rdlc" />
+    <EmbeddedResource Include="Reportes\RptGastos.rdlc" />
+    <EmbeddedResource Include="Reportes\RptGastosFiltrados.rdlc" />
+    <EmbeddedResource Include="Reportes\RptIngresoDet.rdlc" />
+    <EmbeddedResource Include="Reportes\RptArqueoFiltrado.rdlc" />
+    <EmbeddedResource Include="Reportes\RptResumen.rdlc" />
+    <EmbeddedResource Include="Reportes\RptIngresoFiltrados.rdlc" />
+    <EmbeddedResource Include="Reportes\RptKermesse.rdlc" />
+    <EmbeddedResource Include="Reportes\rptListaPrecio.rdlc" />
+    <EmbeddedResource Include="Reportes\rptListaPrecioDet.rdlc" />
+    <EmbeddedResource Include="Reportes\rptListaPrecioFiltrada.rdlc" />
     <EmbeddedResource Include="Reportes\rptMoneda.rdlc" />
     <EmbeddedResource Include="Reportes\rptDenominacion.rdlc" />
+    <EmbeddedResource Include="Reportes\RptParroquia.rdlc" />
+    <EmbeddedResource Include="Reportes\rptProducto.rdlc" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

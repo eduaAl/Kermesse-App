@@ -11,16 +11,29 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_ingresocom_det
     {
         public int id_ingresocom_det { get; set; }
+
+        [Display(Name = "Comunidad")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int id_ingresocom { get; set; }
+
+        [Display(Name = "Bono")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int id_bono { get; set; }
+
+        [Display(Name = "Denominación")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(50, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string denominacion { get; set; }
+
+        [Display(Name = "Cantidad")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int cantidad { get; set; }
         public decimal subtotal { get; set; }
-    
         public virtual tbl_bonos tbl_bonos { get; set; }
         public virtual tbl_ingreso_com tbl_ingreso_com { get; set; }
     }

@@ -1,0 +1,62 @@
+﻿@model KermesseApp.Models.tbl_listaprecio_det
+
+@{
+    ViewBag.Title = "EditListaPrecioDet";
+}
+
+<h2>EditListaPrecioDet</h2>
+
+@using (Html.BeginForm("UpdateListPrecioDet", "Tbl_listaprecio", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>tbl_listaprecio_det</h4>
+        <hr />
+        <div class="container">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.id_listaprecio_det)
+
+
+            @{
+                int id = Model.id_listaprecio;
+            }
+
+            @*<div class="form-group">*@
+            @*@Html.LabelFor(model => model.id_listaprecio, "id_listaprecio", htmlAttributes: new { @class = "control-label col-md-2" })*@
+            @*<div class="col-md-10">*@
+            @Html.HiddenFor(model => model.id_listaprecio)
+            @*@Html.DropDownList("id_listaprecio", null, htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.id_listaprecio, "", new { @class = "text-danger" })*@
+            @*</div>
+        </div>*@
+
+
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.id_producto, htmlAttributes: new { @class = "form-label mt-2 row" })
+                @Html.DropDownListFor(model => model.id_producto, null, htmlAttributes: new { @class = "form-select" })
+                @*@Html.DropDownList("id_producto", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.id_producto, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group row">
+                @Html.LabelFor(model => model.precio_venta, htmlAttributes: new { @class = "form-label mt-2 row" })
+                @Html.EditorFor(model => model.precio_venta, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.precio_venta, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="container mt-3 col-xs-1" align="center">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Guardar cambios" class="btn btn-success" />
+                        <a href="@Url.Action("LisListaPrecioDet", new {id})"><i class="btn btn-primary">Regresar a la vista</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+}

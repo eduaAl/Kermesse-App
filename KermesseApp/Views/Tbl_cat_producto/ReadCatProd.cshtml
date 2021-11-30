@@ -1,0 +1,55 @@
+﻿@model KermesseApp.Models.tbl_cat_producto
+
+@{
+    ViewBag.Title = "Ver datos de categoría seleccionada";
+}
+
+<h2>Ver categoría de producto</h2>
+
+<div>
+    <h4>Categoría seleccionada</h4">
+    <hr />
+    <dl class="dl-horizontal">
+        
+        
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.descripcion)
+            </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.descripcion)
+        </dd>
+
+        @*
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+        *@
+
+    </dl>
+</div>
+
+<div class="container mt-3 col-xs-1" align="center">
+    <div class="form-group">
+        <p>
+            @*@Html.ActionLink("Edit", "Edit", new { id = Model.id_cat_producto }) |*@
+            @Html.ActionLink("Regresar a la vista", "ListCatProductos", "", new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_gastos>
+
+@{
+    ViewBag.Title = "Gastos";
+}
+
+<h2>Lista de Gastos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo gasto", "Vw_guardarGast")
+</p>
+
+@using (Html.BeginForm("BuscarGastos", "Tbl_gastos", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-8 col-md-8">
+
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingresa una palabra..." })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4" align="right">
+
+            @Html.ActionLink("PDF", "ViewRptGastos", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Excel", "ViewRptGastos", new { tipo = "Excel", cadena = Request.Form["cadena"] }, new { @class = "btn btn-success" })
+
+        </div>
+
+    </div>
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_cat_gastos.nombre_cat)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.fecha_gasto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.concepto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.monto)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_cat_gastos.nombre_cat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.fecha_gasto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.concepto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.monto)
+                </td>
+                <td>
+                    <a href="@Url.Action("Vw_EditGast", new { id = item.id_gasto })"><i class="btn btn-outline-info">Editar</i></a> |
+                    <a href="@Url.Action("Vw_detGast", new { id = item.id_gasto })"><i class="btn btn-outline-primary">Detalles</i></a> |
+                    <a href="@Url.Action("EliminarGast", new { id = item.id_gasto })"><i class="btn btn-outline-danger">Eliminar</i></a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

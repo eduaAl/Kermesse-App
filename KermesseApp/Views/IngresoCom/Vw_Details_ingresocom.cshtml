@@ -1,0 +1,90 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_ingresocom_det>
+
+@{
+    ViewBag.Title = "Detalle Ingreso por Comunidad";
+}
+
+<h2>Detalles de un ingreso por comunidad</h2>
+@*<a href="@Url.Action("Vw_Create_IngresoComDet", new { id = Model.id_ingresocom})"><i class="btn btn-primary">Nuevo detalle</i></a>*@
+
+
+
+@{int n = 0;
+    foreach (var item in Model)
+    {
+        if (n == 0)
+        {
+            <a href="@Url.Action("Vw_Create_IngresoComDet", new { id = item.id_ingresocom })"><i>Nuevo detalle</i></a>
+            n++;
+
+            using (Html.BeginForm("BuscarIngresoComDet", "IngresoCom", FormMethod.Post))
+            {
+                <br />
+                <div class="row">
+                    <div class="form-group col-xs-8 col-md-8">
+                        <div class="input-group">
+                            @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingresa una palabra..." })
+                            @Html.Hidden("id", new { value = item.id_ingresocom })
+                            <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+                        </div>
+                    </div>
+                    <div class="form-group col-xs-4 col-md-4" align="right">
+
+                        @Html.ActionLink("PDF", "ViewRptDetalle", new { tipo = "PDF", cadena = Request.Form["cadena"], id = item.id_ingresocom}, new { @class = "btn btn-danger" })
+                        @Html.ActionLink("Excel", "ViewRptDetalle", new { tipo = "Excel", cadena = Request.Form["cadena"], id = item.id_ingresocom }, new { @class = "btn btn-success" })
+
+                    </div>
+                </div>
+            }
+        }
+    }
+}
+
+<table class="table table-hover">
+
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_bonos.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.denominacion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.subtotal)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_bonos.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.denominacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.subtotal)
+                </td>
+                <td>
+                    <a href="@Url.Action("Vw_Edit_ingresocomdet", new { id = item.id_ingresocom_det})"><i class="btn btn-outline-info">Editar</i></a> |
+                    @*<a href="@Url.Action("Vw_Details_ingresocomdet", new { id = item.id_ingresocom_det})"><i class="btn btn-outline-primary">Detalle</i></a>*@
+                    <a href="@Url.Action("EliminarIngresoComDet", new { id = item.id_ingresocom_det, id2 = item.id_ingresocom})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

@@ -11,7 +11,8 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_parroquia
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,13 +22,37 @@ namespace KermesseApp.Models
         }
     
         public int idparroquia { get; set; }
+
+        [Display(Name = "Parroquia")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(200, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string nombre { get; set; }
+
+        [Display(Name = "Dirección")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(400, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string direccion { get; set; }
+
+        [Display(Name = "Teléfono")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(20, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string telefono { get; set; }
+
+        [Display(Name = "Párroco")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(100, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string parroco { get; set; }
+
+        [Display(Name = "Logo")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(200, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string url_logo { get; set; }
+
+        [Display(Name = "Sitio web")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(100, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string sitio_web { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_kermesse> tbl_kermesse { get; set; }
     }

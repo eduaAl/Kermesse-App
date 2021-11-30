@@ -1,0 +1,81 @@
+﻿@model KermesseApp.Models.tbl_productos
+
+@{
+    ViewBag.Title = "Ver datos del producto seleccionado";
+}
+
+<h2>Ver datos del producto</h2>
+
+<div>
+    <h4>Producto seleccionado</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <h5 class=" mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.desc_presentacion)
+            </dt>
+        </h5>
+
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.desc_presentacion)
+        </dd>
+
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.cantidad)
+            </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.cantidad)
+        </dd>
+
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.precio_venta)
+            </dt>
+        </h5>
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.precio_venta)
+        </dd>
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.tbl_cat_producto.nombre)
+            </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.tbl_cat_producto.nombre)
+        </dd>
+        <h5 class=" mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.tbl_comunidad.nombre)
+            </dt>
+        </h5>
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.tbl_comunidad.nombre)
+        </dd>
+
+    </dl>
+</div>
+
+<div class="container mt-3 col-xs-1" align="center">
+    <div class="form-group">
+        <p>
+            @*@Html.ActionLink("Edit", "Edit", new { id = Model.id_producto }) |*@
+            @Html.ActionLink("Regresar a la vista", "ListProductos", "", new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>
+

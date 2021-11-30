@@ -1,0 +1,85 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_productos>
+
+@{
+    ViewBag.Title = "Ver productos";
+}
+
+<h2>Tabla de productos</h2>
+
+<p>
+    @Html.ActionLink("Registrar nuevo Producto", "ViewInsertProducto", "", new { @class = "btn btn-primary" })
+</p>
+@using (Html.BeginForm("FilterProducto", "Tbl_producto", FormMethod.Post))
+{
+    <div class="row">
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingrese aquí los datos de la búsqueda" })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+        </div>
+        <div class="form-group col-xs-4 col-md-4" align="right">
+            @Html.ActionLink("PDF", "VerRptProductos", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Excel", "VerRptProductos", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+        </div>
+    </div>
+}
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.desc_presentacion)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.cantidad)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.precio_venta)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.tbl_cat_producto.nombre)
+            </th>
+            <th scope="col">
+                @Html.DisplayNameFor(model => model.tbl_comunidad.nombre)
+            </th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc_presentacion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cantidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precio_venta)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_cat_producto.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_comunidad.nombre)
+                </td>
+                <td>
+                    <a href="@Url.Action("EditProducto", new { id = item.id_producto})"><i class="btn btn-outline-info">Editar</i></a>  |
+                    <a href="@Url.Action("ReadProducto", new { id = item.id_producto})"><i class="btn btn-outline-primary">Visualizar</i></a> |
+                    <a href="@Url.Action("DeleteProducto", new { id = item.id_producto})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

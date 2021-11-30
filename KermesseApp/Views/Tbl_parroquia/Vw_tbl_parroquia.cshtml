@@ -1,0 +1,95 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_parroquia>
+
+@{
+    ViewBag.Title = "Parroquia";
+}
+
+<h2>Lista de Parroquias</h2>
+
+<p>
+    @Html.ActionLink("Nueva parroquia", "Vw_guardarParroquia")
+</p>
+
+@using (Html.BeginForm("BuscarParroquia", "Tbl_parroquia", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-8 col-md-8">
+
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingresa una palabra..." })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4" align="right">
+
+            @Html.ActionLink("PDF", "ViewRptParroquia", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Excel", "ViewRptParroquia", new { tipo = "Excel", cadena = Request.Form["cadena"] }, new { @class = "btn btn-success" })
+
+        </div>
+
+    </div>
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.parroco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefono)
+            </th>
+
+            @*<th>
+                @Html.DisplayNameFor(model => model.url_logo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sitio_web)
+            </th>*@
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.parroco)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.direccion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.telefono)
+                </td>
+
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.url_logo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.sitio_web)
+                </td>*@
+                <td>
+                    <a href="@Url.Action("Vw_EditParroquia", new { id = item.idparroquia })"><i class="btn btn-outline-info">Editar</i></a> |
+                    <a href="@Url.Action("Vw_detParroquia", new { id = item.idparroquia })"><i class="btn btn-outline-primary">Detalles</i></a> |
+                    <a href="@Url.Action("EliminarParroquia", new { id = item.idparroquia })"><i class="btn btn-outline-danger">Eliminar</i></a>
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

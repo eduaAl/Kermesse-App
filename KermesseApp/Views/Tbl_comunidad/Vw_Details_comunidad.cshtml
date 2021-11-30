@@ -1,0 +1,59 @@
+﻿@model KermesseApp.Models.tbl_comunidad
+
+@{
+    ViewBag.Title = "Detalle comunidad";
+}
+
+<h2>Detalle de una comunidad</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+      <h5 class="mt-2 col-xs-1" align="center">
+            <dt>
+                @Html.DisplayNameFor(model => model.nombre)
+            </dt>
+      </h5>
+
+      <dd class="mt-2 col-xs-1" align="center">
+         @Html.DisplayFor(model => model.nombre)
+      </dd>
+      
+      <h5 class=" mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.responsable)
+        </dt>
+      </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.responsable)
+        </dd>
+
+        <h5 class=" mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.desc_contribucion)
+        </dt>
+        </h5>
+
+        <dd class=" mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.desc_contribucion)
+        </dd>
+
+        @*<dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>*@
+
+        @*<dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>*@
+
+    </dl>
+</div>
+<div class="container mt-3 col-xs-1" align="center">
+    <div class="form-group">
+        <p>
+            @*@Html.ActionLink("Edit", "Vw_Edit_comunidad", new { id = Model.id_cat_producto }) |*@
+            @Html.ActionLink("Regresar a la vista", "Vw_tbl_comunidad", "", new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

@@ -1,0 +1,86 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_ingreso_com>
+
+@{
+    ViewBag.Title = "Ingreso por Comunidad";
+}
+
+<h2>Tabla de ingreso por comunidad</h2>
+
+<p>
+    @Html.ActionLink("Nuevo ingreso por comunidad", "Vw_Create_IngresoCom")
+</p>
+
+@using (Html.BeginForm("BuscarIngresoCom", "IngresoCom", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-8 col-md-8">
+
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingresa una palabra..." })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+                @*<input type="submit" class="btn-check" value="Buscar">*@
+            </div>
+
+        </div>
+
+    </div>
+ }
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_kermesse.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_comunidad.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.tbl_productos.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cant_producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.precio_producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.total_bonos)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_kermesse.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_comunidad.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.tbl_productos.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cant_producto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.precio_producto)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.total_bonos)
+                </td>
+                <td>
+                    <a href="@Url.Action("Vw_Edit_ingresocom", new { id = item.id_ingresocom})"><i class="btn btn-outline-info">Editar</i></a> |
+                    <a href="@Url.Action("Vw_Details_ingresocom", new { id = item.id_ingresocom})"><i class="btn btn-outline-primary">Detalle</i></a> |
+                    <a href="@Url.Action("Delete_ingresocom", new { id = item.id_ingresocom})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,72 @@
+﻿@model KermesseApp.Models.tbl_kermesse
+
+@{
+    ViewBag.Title = "Detalles de una kermesse";
+}
+
+<h2>Detalles de kermesse</h2>
+
+<div>
+    <h4>Kermesse</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        </h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_inicio)
+        </dt>
+        </h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.fecha_inicio)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.fecha_fin)
+        </dt>
+        </h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.fecha_fin)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.desc_general)
+        </dt>
+        </h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.desc_general)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.tbl_parroquia.nombre)
+        </dt>
+        </h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.tbl_parroquia.nombre)
+        </dd>
+
+    </dl>
+</div>
+<div class="container mt-3 col-xs-1" align="center">
+    <div class="form-group">
+        <p>
+            @*@Html.ActionLink("Edit", "Vw_Edit_comunidad", new { id = Model.id_cat_producto }) |*@
+            @Html.ActionLink("Regresar a la vista", "Vw_tbl_kermesse", "", new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

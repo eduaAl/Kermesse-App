@@ -269,6 +269,32 @@
     <Property Name="estado" Type="int" Nullable="false" />
   </EntityType>
   <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.view_productos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="view_productos">
+    <Key>
+      <PropertyRef Name="id_producto" />
+      <PropertyRef Name="producto" />
+      <PropertyRef Name="id_comunidad" />
+      <PropertyRef Name="comunidad" />
+      <PropertyRef Name="id_cat_producto" />
+      <PropertyRef Name="cat_producto" />
+      <PropertyRef Name="desc_presentacion" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="precio_venta" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_producto" Type="int" Nullable="false" />
+    <Property Name="producto" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_comunidad" Type="int" Nullable="false" />
+    <Property Name="comunidad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="id_cat_producto" Type="int" Nullable="false" />
+    <Property Name="cat_producto" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="desc_presentacion" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="precio_venta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
 advertencia 6002: La tabla o vista 'KERMESSE.dbo.view_usuario_rol' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
   <EntityType Name="view_usuario_rol">
     <Key>
@@ -339,6 +365,138 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_denominacion' no tiene defin
     <Property Name="valor" Type="decimal" Precision="18" Scale="0" Nullable="false" />
     <Property Name="valor_letras" Type="nvarchar" MaxLength="250" Nullable="false" />
     <Property Name="estado" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_Gastos' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Vw_Gastos">
+    <Key>
+      <PropertyRef Name="id_gasto" />
+      <PropertyRef Name="kermesse" />
+      <PropertyRef Name="categoria" />
+      <PropertyRef Name="fecha_gasto" />
+      <PropertyRef Name="concepto" />
+      <PropertyRef Name="monto" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_gasto" Type="int" Nullable="false" />
+    <Property Name="kermesse" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="categoria" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="fecha_gasto" Type="date" Nullable="false" />
+    <Property Name="concepto" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="monto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_IngresoDet' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Vw_IngresoDet">
+    <Key>
+      <PropertyRef Name="id_ingresocom_det" />
+      <PropertyRef Name="id_ingresocom" />
+      <PropertyRef Name="bono" />
+      <PropertyRef Name="denominacion" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="subtotal" />
+    </Key>
+    <Property Name="id_ingresocom_det" Type="int" Nullable="false" />
+    <Property Name="id_ingresocom" Type="int" Nullable="false" />
+    <Property Name="bono" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="denominacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_IngresoFiltrada' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Vw_IngresoFiltrada">
+    <Key>
+      <PropertyRef Name="id_ingresocom" />
+      <PropertyRef Name="kermesse" />
+      <PropertyRef Name="comunidad" />
+      <PropertyRef Name="producto" />
+      <PropertyRef Name="cant_producto" />
+      <PropertyRef Name="total_bonos" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="id_ingresocom_det" />
+      <PropertyRef Name="bono" />
+      <PropertyRef Name="denominacion" />
+      <PropertyRef Name="cantidad" />
+      <PropertyRef Name="subtotal" />
+    </Key>
+    <Property Name="id_ingresocom" Type="int" Nullable="false" />
+    <Property Name="kermesse" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="comunidad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="producto" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cant_producto" Type="int" Nullable="false" />
+    <Property Name="precio_producto" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="total_bonos" Type="int" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
+    <Property Name="id_ingresocom_det" Type="int" Nullable="false" />
+    <Property Name="bono" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="denominacion" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="cantidad" Type="int" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_Kermesse' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="Vw_Kermesse">
+    <Key>
+      <PropertyRef Name="id_kermesse" />
+      <PropertyRef Name="Parroquia" />
+      <PropertyRef Name="Kermesse" />
+      <PropertyRef Name="fecha_inicio" />
+      <PropertyRef Name="fecha_fin" />
+      <PropertyRef Name="estado" />
+      <PropertyRef Name="usuario_creacion" />
+      <PropertyRef Name="fecha_creacion" />
+    </Key>
+    <Property Name="id_kermesse" Type="int" Nullable="false" />
+    <Property Name="Parroquia" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="Kermesse" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="fecha_inicio" Type="date" Nullable="false" />
+    <Property Name="fecha_fin" Type="date" Nullable="false" />
+    <Property Name="desc_general" Type="nvarchar" MaxLength="400" />
+    <Property Name="estado" Type="int" Nullable="false" />
+    <Property Name="usuario_creacion" Type="int" Nullable="false" />
+    <Property Name="usuario_modificacion" Type="int" />
+    <Property Name="usuario_eliminacion" Type="int" />
+    <Property Name="fecha_creacion" Type="datetime" Nullable="false" />
+    <Property Name="fecha_modificacion" Type="datetime" />
+    <Property Name="fecha_eliminacion" Type="datetime" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_listaprecio' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_listaprecio">
+    <Key>
+      <PropertyRef Name="id_listaprecio" />
+      <PropertyRef Name="lista_precio" />
+      <PropertyRef Name="id_kermesse" />
+      <PropertyRef Name="kermesse" />
+      <PropertyRef Name="descripcion" />
+      <PropertyRef Name="estado" />
+    </Key>
+    <Property Name="id_listaprecio" Type="int" Nullable="false" />
+    <Property Name="lista_precio" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="id_kermesse" Type="int" Nullable="false" />
+    <Property Name="kermesse" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="descripcion" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="estado" Type="int" Nullable="false" />
+  </EntityType>
+  <!--Errores durante la generación:
+advertencia 6002: La tabla o vista 'KERMESSE.dbo.vw_listaprecio_det' no tiene definida ninguna clave principal. Se ha inferido la clave y la definición se creado como una vista o tabla de solo lectura.-->
+  <EntityType Name="vw_listaprecio_det">
+    <Key>
+      <PropertyRef Name="id_listaprecio_det" />
+      <PropertyRef Name="id_listaprecio" />
+      <PropertyRef Name="listaprecio" />
+      <PropertyRef Name="id_producto" />
+      <PropertyRef Name="producto" />
+      <PropertyRef Name="precio_venta" />
+    </Key>
+    <Property Name="id_listaprecio_det" Type="int" Nullable="false" />
+    <Property Name="id_listaprecio" Type="int" Nullable="false" />
+    <Property Name="listaprecio" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="id_producto" Type="int" Nullable="false" />
+    <Property Name="producto" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="precio_venta" Type="decimal" Precision="18" Scale="2" Nullable="false" />
   </EntityType>
   <Association Name="FK_tbl_arqueocaja_det_tbl_arqueocaja">
     <End Role="tbl_arqueocaja" Type="Self.tbl_arqueocaja" Multiplicity="1" />
@@ -809,6 +967,20 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_denominacion' no tiene defin
     <EntitySet Name="tbl_tasacambio" EntityType="Self.tbl_tasacambio" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_tasacambio_det" EntityType="Self.tbl_tasacambio_det" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tbl_usuario" EntityType="Self.tbl_usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="view_productos" EntityType="Self.view_productos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [view_productos].[id_producto] AS [id_producto], 
+    [view_productos].[producto] AS [producto], 
+    [view_productos].[id_comunidad] AS [id_comunidad], 
+    [view_productos].[comunidad] AS [comunidad], 
+    [view_productos].[id_cat_producto] AS [id_cat_producto], 
+    [view_productos].[cat_producto] AS [cat_producto], 
+    [view_productos].[desc_presentacion] AS [desc_presentacion], 
+    [view_productos].[cantidad] AS [cantidad], 
+    [view_productos].[precio_venta] AS [precio_venta], 
+    [view_productos].[estado] AS [estado]
+    FROM [dbo].[view_productos] AS [view_productos]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="view_usuario_rol" EntityType="Self.view_usuario_rol" store:Type="Views" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [view_usuario_rol].[nombres] AS [nombres], 
@@ -848,6 +1020,81 @@ advertencia 6002: La tabla o vista 'KERMESSE.dbo.Vw_denominacion' no tiene defin
     [Vw_denominacion].[valor_letras] AS [valor_letras], 
     [Vw_denominacion].[estado] AS [estado]
     FROM [dbo].[Vw_denominacion] AS [Vw_denominacion]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Vw_Gastos" EntityType="Self.Vw_Gastos" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vw_Gastos].[id_gasto] AS [id_gasto], 
+    [Vw_Gastos].[kermesse] AS [kermesse], 
+    [Vw_Gastos].[categoria] AS [categoria], 
+    [Vw_Gastos].[fecha_gasto] AS [fecha_gasto], 
+    [Vw_Gastos].[concepto] AS [concepto], 
+    [Vw_Gastos].[monto] AS [monto], 
+    [Vw_Gastos].[estado] AS [estado]
+    FROM [dbo].[Vw_Gastos] AS [Vw_Gastos]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Vw_IngresoDet" EntityType="Self.Vw_IngresoDet" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vw_IngresoDet].[id_ingresocom_det] AS [id_ingresocom_det], 
+    [Vw_IngresoDet].[id_ingresocom] AS [id_ingresocom], 
+    [Vw_IngresoDet].[bono] AS [bono], 
+    [Vw_IngresoDet].[denominacion] AS [denominacion], 
+    [Vw_IngresoDet].[cantidad] AS [cantidad], 
+    [Vw_IngresoDet].[subtotal] AS [subtotal]
+    FROM [dbo].[Vw_IngresoDet] AS [Vw_IngresoDet]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Vw_IngresoFiltrada" EntityType="Self.Vw_IngresoFiltrada" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vw_IngresoFiltrada].[id_ingresocom] AS [id_ingresocom], 
+    [Vw_IngresoFiltrada].[kermesse] AS [kermesse], 
+    [Vw_IngresoFiltrada].[comunidad] AS [comunidad], 
+    [Vw_IngresoFiltrada].[producto] AS [producto], 
+    [Vw_IngresoFiltrada].[cant_producto] AS [cant_producto], 
+    [Vw_IngresoFiltrada].[precio_producto] AS [precio_producto], 
+    [Vw_IngresoFiltrada].[total_bonos] AS [total_bonos], 
+    [Vw_IngresoFiltrada].[estado] AS [estado], 
+    [Vw_IngresoFiltrada].[id_ingresocom_det] AS [id_ingresocom_det], 
+    [Vw_IngresoFiltrada].[bono] AS [bono], 
+    [Vw_IngresoFiltrada].[denominacion] AS [denominacion], 
+    [Vw_IngresoFiltrada].[cantidad] AS [cantidad], 
+    [Vw_IngresoFiltrada].[subtotal] AS [subtotal]
+    FROM [dbo].[Vw_IngresoFiltrada] AS [Vw_IngresoFiltrada]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="Vw_Kermesse" EntityType="Self.Vw_Kermesse" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Vw_Kermesse].[id_kermesse] AS [id_kermesse], 
+    [Vw_Kermesse].[Parroquia] AS [Parroquia], 
+    [Vw_Kermesse].[Kermesse] AS [Kermesse], 
+    [Vw_Kermesse].[fecha_inicio] AS [fecha_inicio], 
+    [Vw_Kermesse].[fecha_fin] AS [fecha_fin], 
+    [Vw_Kermesse].[desc_general] AS [desc_general], 
+    [Vw_Kermesse].[estado] AS [estado], 
+    [Vw_Kermesse].[usuario_creacion] AS [usuario_creacion], 
+    [Vw_Kermesse].[usuario_modificacion] AS [usuario_modificacion], 
+    [Vw_Kermesse].[usuario_eliminacion] AS [usuario_eliminacion], 
+    [Vw_Kermesse].[fecha_creacion] AS [fecha_creacion], 
+    [Vw_Kermesse].[fecha_modificacion] AS [fecha_modificacion], 
+    [Vw_Kermesse].[fecha_eliminacion] AS [fecha_eliminacion]
+    FROM [dbo].[Vw_Kermesse] AS [Vw_Kermesse]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_listaprecio" EntityType="Self.vw_listaprecio" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_listaprecio].[id_listaprecio] AS [id_listaprecio], 
+    [vw_listaprecio].[lista_precio] AS [lista_precio], 
+    [vw_listaprecio].[id_kermesse] AS [id_kermesse], 
+    [vw_listaprecio].[kermesse] AS [kermesse], 
+    [vw_listaprecio].[descripcion] AS [descripcion], 
+    [vw_listaprecio].[estado] AS [estado]
+    FROM [dbo].[vw_listaprecio] AS [vw_listaprecio]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="vw_listaprecio_det" EntityType="Self.vw_listaprecio_det" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [vw_listaprecio_det].[id_listaprecio_det] AS [id_listaprecio_det], 
+    [vw_listaprecio_det].[id_listaprecio] AS [id_listaprecio], 
+    [vw_listaprecio_det].[listaprecio] AS [listaprecio], 
+    [vw_listaprecio_det].[id_producto] AS [id_producto], 
+    [vw_listaprecio_det].[producto] AS [producto], 
+    [vw_listaprecio_det].[precio_venta] AS [precio_venta]
+    FROM [dbo].[vw_listaprecio_det] AS [vw_listaprecio_det]</DefiningQuery>
     </EntitySet>
     <AssociationSet Name="FK_tbl_arqueocaja_det_tbl_arqueocaja" Association="Self.FK_tbl_arqueocaja_det_tbl_arqueocaja">
       <End Role="tbl_arqueocaja" EntitySet="tbl_arqueocaja" />

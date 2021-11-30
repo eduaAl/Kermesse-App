@@ -1,0 +1,58 @@
+﻿@model KermesseApp.Models.tbl_kermesse
+@{
+    ViewBag.Title = "Guardar Kermesse";
+}
+
+<h3>Ingresar nueva kermesse</h3>
+
+@using (Html.BeginForm("GuardarKer", "Tbl_kermesse", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+<div class="container">
+
+    <hr />
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Nombre de la Kermesse: </label>
+        @Html.ValidationMessageFor(x => x.nombre, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.nombre, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Nombre de la parroquia: </label>
+        @Html.DropDownListFor(model => model.id_parroquia, ViewBag.idparroquia as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.id_parroquia, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Fecha de inicio de la kermesse: </label>
+        @Html.ValidationMessageFor(x => x.fecha_inicio, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.fecha_inicio, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Fecha de finalización de la kermesse: </label>
+        @Html.ValidationMessageFor(x => x.fecha_fin, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.fecha_fin, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        <label class="form-label mt-2 row">Descripción de la kermesse: </label>
+        @Html.ValidationMessageFor(x => x.desc_general, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(x => x.desc_general, new { @class = "form-control" })
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            <input type="reset" value="Cancelar" class="btn btn-danger" />
+            @Html.ActionLink("Regresar a la vista", "Vw_tbl_kermesse", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+</div>
+
+}
+
+

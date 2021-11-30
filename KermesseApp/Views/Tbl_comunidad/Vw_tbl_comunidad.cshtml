@@ -1,0 +1,85 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_comunidad>
+
+@{
+    ViewBag.Title = "Comunidad";
+}
+
+<h2>Tabla de comunidades</h2>
+
+<p>
+    @Html.ActionLink("Nueva comunidad", "Vw_Create_comunidad")
+</p>
+
+@using (Html.BeginForm("BuscarComunidad","Tbl_comunidad", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-8 col-md-8">
+
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingresa una palabra..." })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4" align="right">
+
+            @Html.ActionLink("PDF", "ViewRptComunidad", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Excel", "ViewRptComunidad", new { tipo = "Excel", cadena = Request.Form["cadena"] }, new { @class = "btn btn-success" })
+
+        </div>
+
+    </div>
+}
+
+<div class="row">
+
+</div>
+<div class="row">
+
+</div>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.responsable)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.desc_contribucion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>*@
+            <th>Acciones</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class ="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.responsable)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.desc_contribucion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>*@
+                <td>
+                    <a href="@Url.Action("Vw_Edit_comunidad", new { id = item.id_comunidad })"><i class="btn btn-outline-info">Editar</i></a> |
+                    <a href="@Url.Action("Vw_Details_comunidad", new { id = item.id_comunidad })"><i class="btn btn-outline-primary">Detalles</i></a> |
+                    <a href="@Url.Action("Delete_comunidad", new { id = item.id_comunidad })"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,160 @@
+﻿@model KermesseApp.Models.tbl_ingreso_com
+@{
+    ViewBag.Title = "Nuevo detalle de ingreso comunidad";
+    var id = @ViewContext.RouteData.Values["id"];
+}
+
+<h2>Nuevo detalle de ingreso por comunidad</h2>
+
+@using (Html.BeginForm("Create_IngresoComDet", "IngresoCom", FormMethod.Post))
+{
+
+<div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(x => x.detalle.id_bono, "Nombre del bono: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(x => x.detalle.id_bono, ViewBag.id_bono as SelectList, "Seleccione...", htmlAttributes: new { @id = "bono", @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.detalle.id_bono, "", new { @class = "text-danger" })
+            <input value="@id" hidden id="id" />
+ 
+        </div>
+        <div class="form-group row">
+            @*@Html.LabelFor(x => x.detalle.denominacion, "Denominación: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.ValidationMessageFor(x => x.detalle.denominacion, "", new { @class = "text-danger" })
+            @Html.TextBoxFor(x => x.detalle.denominacion, new { @class = "form-control", @id = "denominacion" })*@
+              @Html.DropDownListFor(x => x.id_kermesse, ViewBag.valor as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "valor", @hidden = "true" })
+             <input id="denominacion" class="form-control" type="text" disabled hidden />
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(x => x.detalle.cantidad, "Cantidad: ", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(x => x.detalle.cantidad, new { @class = "form-control", @id = "cantidad" })
+            @Html.ValidationMessageFor(x => x.detalle.cantidad, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input value="Agregar" class="btn btn-outline-success" type="button" onclick="AgregarDetalle(); return false;" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row" id="divDetalles" style="display: none;">
+        <table id="detalles" class="table table-hover" style="width:100%;">
+            <tr>
+                <td>Bono</td>
+                <td>Denominación</td>
+                <td>Cantidad</td>
+                <td>Subtotal</td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-success"/>
+            <input type="reset" value="Cancelar" class="btn btn-danger" />
+            @{var id2 = @ViewContext.RouteData.Values["id"];
+            }
+            <a href="@Url.Action("Vw_Details_ingresocom", new { id = @id2})"><i class="btn btn-primary">Regresar a la vista</i></a>
+        </div>
+    </div>
+
+
+    }
+
+    <script>
+        var num = 0;
+
+        function AgregarDetalle() {
+            let id = document.getElementById("id").value;
+            let Bono = document.getElementById("bono").value;
+            let nombre_bono = $("#bono option:selected").text()
+
+            $("#valor").val(Bono);
+            let nombre_valor = $("#valor option:selected").text()
+            $("#denominacion").val(nombre_valor);
+
+            let Denominacion = document.getElementById("denominacion").value;
+            let Cantidad = document.getElementById("cantidad").value;
+
+            if (Bono == 0 || Cantidad.length == 0) {
+                alert("Existen campos del detalle en blanco");
+            } else {
+
+                $("#divDetalles").show();
+
+                let tabla = document.getElementById("detalles");
+                let TR = document.createElement("tr");
+                let TDBono = document.createElement("td");
+                let TDDenominacion = document.createElement("td");
+                let TDCantidad = document.createElement("td");
+                let TDSubtotal = document.createElement("td");
+
+                TR.appendChild(TDBono);
+                TR.appendChild(TDDenominacion);
+                TR.appendChild(TDCantidad);
+                TR.appendChild(TDSubtotal);
+
+                TDBono.innerHTML = nombre_bono;
+                TDDenominacion.innerHTML = Denominacion;
+                TDCantidad.innerHTML = Cantidad;
+                TDSubtotal.innerHTML = parseFloat(Denominacion) * parseFloat(Cantidad);
+
+                tabla.appendChild(TR);
+
+                //agregamos hiddens
+                let divDetalles = document.getElementById("divDetalles");
+
+                let HiddenIndex = document.createElement("input");
+                let HiddenId = document.createElement("input");
+                let HiddenBono = document.createElement("input");
+                let HiddenDenominacion = document.createElement("input");
+                let HiddenCantidad = document.createElement("input");
+
+                HiddenIndex.name = "ingresocom_Dets.Index";
+                HiddenIndex.value = num;
+                HiddenIndex.type = "hidden";
+
+                HiddenId.name = "ingresocom_Dets[" + num + "].id_ingresocom";
+                HiddenId.value = id;
+                HiddenId.type = "hidden";
+
+                HiddenBono.name = "ingresocom_Dets[" + num + "].id_bono";
+                HiddenBono.value = Bono;
+                HiddenBono.type = "hidden";
+
+                HiddenDenominacion.name = "ingresocom_Dets[" + num + "].denominacion";
+                HiddenDenominacion.value = Denominacion;
+                HiddenDenominacion.type = "hidden";
+
+                HiddenCantidad.name = "ingresocom_Dets[" + num + "].cantidad";
+                HiddenCantidad.value = Cantidad;
+                HiddenCantidad.type = "hidden";
+
+                divDetalles.appendChild(HiddenIndex);
+                divDetalles.appendChild(HiddenId);
+                divDetalles.appendChild(HiddenBono);
+                divDetalles.appendChild(HiddenDenominacion);
+                divDetalles.appendChild(HiddenCantidad);
+
+                document.getElementById("bono").value = "";
+                document.getElementById("denominacion").value = "";
+                document.getElementById("cantidad").value = "";
+
+                num++;
+            }
+        }
+
+    </script>
+
+     @*@section Scripts{
+        @Scripts.Render("~/bundles/jqueryval")
+        <script>
+            $(document).ready(function () {
+                var id = @ViewContext.RouteData.Values["id"];
+                alert(id);
+            });
+         </script>    
+     }*@
+

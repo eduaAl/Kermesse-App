@@ -1,0 +1,30 @@
+﻿@model KermesseApp.Models.vw_listaprecio_det
+@{
+    ViewBag.Title = "VistaRptListaPrecio";
+}
+
+<h2>Generar reporte filtrado por lista de precio y producto</h2>
+
+@using (Html.BeginForm("VerRptListaPrecioFiltrada", "Tbl_listaprecio", FormMethod.Post))
+{
+    <h4>Seleccione los datos de filtrado</h4>
+    <hr />
+    <div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_listaprecio, "Lista de precios", htmlAttributes: new {@class = "form-label mt-2 row" })
+            @Html.DropDownListFor(model => model.id_listaprecio, ViewBag.id_listaprecio as SelectList, "Seleccione una lista de precio", htmlAttributes: new { @class = "form-control"})
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_producto, "Producto", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(model => model.id_producto, ViewBag.id_producto as SelectList, "Seleccione un producto", htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <button type="submit" class="btn btn-success">Generar el reporte</button>
+                <button type="reset" class="btn btn-danger">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+}
+

@@ -1,0 +1,77 @@
+﻿@model KermesseApp.Models.tbl_parroquia
+
+@{
+    ViewBag.Title = "Detalles parroquia";
+}
+
+<h2>Detalles parroquia</h2>
+
+<div>
+    <h4>Parroquia</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.nombre)
+        </dt>
+        </h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.nombre)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.direccion)
+        </dt></h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.direccion)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.telefono)
+        </dt></h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.telefono)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.parroco)
+        </dt></h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.parroco)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center">
+        <dt>
+            @Html.DisplayNameFor(model => model.url_logo)
+        </dt>
+        </h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.url_logo)
+        </dd>
+
+        <h5 class="mt-2 col-xs-1" align="center"><dt>
+            @Html.DisplayNameFor(model => model.sitio_web)
+        </dt></h5>
+
+        <dd class="mt-2 col-xs-1" align="center">
+            @Html.DisplayFor(model => model.sitio_web)
+        </dd>
+
+    </dl>
+</div>
+<div class="container mt-3 col-xs-1" align="center">
+    <div class="form-group">
+        <p>
+            @*@Html.ActionLink("Edit", "Vw_Edit_comunidad", new { id = Model.id_cat_producto }) |*@
+            @Html.ActionLink("Regresar a la vista", "Vw_tbl_parroquia", "", new { @class = "btn btn-primary" })
+        </p>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_bonos>
+
+@{
+    ViewBag.Title = "Bono";
+}
+
+<h2>Tabla de bonos</h2>
+
+<p>
+    @Html.ActionLink("Nuevo bono", "Vw_Create_bono")
+</p>
+
+@using (Html.BeginForm("BuscarBono", "Tbl_bono", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-8 col-md-8">
+
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingresa una palabra..." })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4" align="right">
+
+            @Html.ActionLink("PDF", "ViewRptBono", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Excel", "ViewRptBono", new { tipo = "Excel", cadena = Request.Form["cadena"] }, new { @class = "btn btn-success" })
+
+        </div>
+
+    </div>
+}
+
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.valor)
+            </th>
+            @*<th>
+                @Html.DisplayNameFor(model => model.estado)
+            </th>*@
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.valor)
+                </td>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.estado)
+                </td>*@
+                <td>
+                    <a href="@Url.Action("Vw_Edit_bono", new { id = item.id_bono })"><i class="btn btn-outline-info">Editar</i></a> |
+                    @*@Html.ActionLink("Details", "Details", new { id=item.id_bono }) |*@
+                    <a href="@Url.Action("Delete_bono", new { id = item.id_bono })"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

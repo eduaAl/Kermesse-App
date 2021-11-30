@@ -11,7 +11,8 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tbl_ingreso_com
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,11 +22,29 @@ namespace KermesseApp.Models
         }
     
         public int id_ingresocom { get; set; }
+
+        [Display(Name="Kermesse")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int id_kermesse { get; set; }
+
+        [Display(Name = "Comunidad")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int id_comunidad { get; set; }
+
+        [Display(Name = "Producto")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int id_producto { get; set; }
+
+        [Display(Name = "Cantidad de productos")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int cant_producto { get; set; }
+
+        [Display(Name = "Precio del producto")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public Nullable<decimal> precio_producto { get; set; }
+
+        [Display(Name = "Total de bonos")]
+        [Required(ErrorMessage = "Campo obligatorio")]
         public int total_bonos { get; set; }
         public int usuario_creacion { get; set; }
         public Nullable<int> usuario_modificacion { get; set; }
@@ -34,6 +53,8 @@ namespace KermesseApp.Models
         public Nullable<System.DateTime> fecha_modificacion { get; set; }
         public Nullable<System.DateTime> fecha_eliminacion { get; set; }
         public int estado { get; set; }
+        public tbl_ingresocom_det detalle { get; set; }
+        public List<tbl_ingresocom_det> ingresocom_Dets { get; set; }
     
         public virtual tbl_comunidad tbl_comunidad { get; set; }
         public virtual tbl_kermesse tbl_kermesse { get; set; }

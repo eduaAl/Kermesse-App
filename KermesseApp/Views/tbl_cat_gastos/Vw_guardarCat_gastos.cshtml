@@ -1,0 +1,35 @@
+﻿@model KermesseApp.Models.tbl_cat_gastos
+
+@{
+    ViewBag.Title = "Guardar categoría gastos";
+}
+
+<h2>Agregar una nueva categoría</h2>
+
+@using (Html.BeginForm("GuardarCat_gastos", "Tbl_cat_gastos", FormMethod.Post))
+{
+<div class="container">
+
+    <div class="form-group row">
+        @Html.LabelFor(x => x.nombre_cat, htmlAttributes: new { @class = "form-label mt-2 row" })
+        @Html.ValidationMessageFor(x => x.nombre_cat, "", new { @class = "text-danger" })
+        @Html.TextBoxFor(x => x.nombre_cat, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(x => x.desc_cat, htmlAttributes: new { @class = "form-label mt-2 row" })
+        @Html.ValidationMessageFor(x => x.desc_cat, "", new { @class = "text-danger" })
+        @Html.TextAreaFor(x => x.desc_cat, new { @class = "form-control" })
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            <input type="reset" value="Cancelar" class="btn btn-danger" />
+            @Html.ActionLink("Regresar a la vista", "Vw_tbl_cat_gastos", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+
+</div>
+}
+

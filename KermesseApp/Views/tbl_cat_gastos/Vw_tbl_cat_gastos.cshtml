@@ -1,0 +1,68 @@
+﻿@model IEnumerable<KermesseApp.Models.tbl_cat_gastos>
+
+@{
+    ViewBag.Title = "Categoría gastos";
+}
+
+<h2>Lista de categorías de gastos</h2>
+
+<p>
+    @Html.ActionLink("Nueva categoría", "Vw_guardarCat_gastos")
+</p>
+
+@using (Html.BeginForm("BuscarCatGastos", "Tbl_cat_gastos", FormMethod.Post))
+{
+    <div class="row">
+
+        <div class="form-group col-xs-8 col-md-8">
+            <div class="input-group">
+                @Html.TextBox("cadena", null, new { @class = "form-control col-md-4", @placeholder = "Ingresa una palabra..." })
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
+            </div>
+
+        </div>
+
+        <div class="form-group col-xs-4 col-md-4" align="right">
+
+            @Html.ActionLink("PDF", "ViewRptCatGasto", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
+            @Html.ActionLink("Excel", "ViewRptCatGasto", new { tipo = "Excel", cadena = Request.Form["cadena"] }, new { @class = "btn btn-success" })
+
+        </div>
+
+    </div>
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.nombre_cat)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.desc_cat)
+            </th>
+            <th>
+                Acciones
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="table-active">
+                <td>
+                    @Html.DisplayFor(modelItem => item.nombre_cat)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.desc_cat)
+                </td>
+
+                <td>
+                    <a href="@Url.Action("Vw_EditCatGastos", new { id = item.id_cat_gasto})"><i class="btn btn-outline-info">Editar</i></a>  |
+                    @*<a href="@Url.Action("Vw_detCat_gastos", new { id = item.id_cat_gasto})"><i class="btn btn-outline-primary">Detalles</i></a> |*@
+                    <a href="@Url.Action("EliminarCat_gasto", new { id = item.id_cat_gasto})"><i class="btn btn-outline-danger">Eliminar</i></a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

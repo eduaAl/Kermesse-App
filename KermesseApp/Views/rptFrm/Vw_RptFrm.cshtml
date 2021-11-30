@@ -1,0 +1,114 @@
+﻿
+@model KermesseApp.Models.RecuperarIDs
+@{
+
+    ViewBag.Title = "Formularios de reportes";
+}
+
+<h3>Formularios de reportes</h3>
+
+@using (Html.BeginForm("ViewRpt", "rptFrm", FormMethod.Post))
+{
+
+    <div class="container row">
+        <div class="form-group row">
+            @Html.Label("Seleccione que reporte quiere visualizar", htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownList("Reportes", (List<SelectListItem>)ViewBag.reportes, "Seleccione un reporte", htmlAttributes: new { @class = "form-select", @id = "opciones", @onchange = "cambio();" })
+        </div>
+        <div class="form-group row">
+            @*@Html.DropDownList("Tipos", (List<SelectListItem>)ViewBag.tipos, "Seleccione un reporte", htmlAttributes: new { @class = "form-select", @id = "opciones", })*@
+            @Html.TextBox("Tipos",null, new { @class = "form-control", @hidden="true", @id="txtTipos" })
+        </div>
+    </div>
+
+    <div class="container row">
+
+        <div class="form-group row" id="divKermesse" style="display: none;">
+            <br />
+            <label class="form-label mt-2 row">Kermesse: </label>
+            @Html.DropDownListFor(x => x.id_kermesse, ViewBag.id_kermesse as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "kermesse" })
+        </div>
+
+        <div class="form-group row" id="divListaPrecio" style="display: none;">
+            <label class="form-label mt-2 row">Lista precio:</label>
+            @Html.DropDownListFor(x => x.id_listaprecio, ViewBag.id_listaprecio as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "listaprecio" })
+
+        </div>
+        <div class="form-group row" id="divProducto" style="display: none;">
+            <br />
+            <label class="form-label mt-2 row">Producto:</label>
+            @Html.DropDownListFor(x => x.id_producto, ViewBag.id_producto as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "producto" })
+        </div>
+
+        <div class="form-group row" id="divComunidad" style="display: none;">
+            <br />
+            <label class="form-label mt-2 row">Comunidad:</label>
+            @Html.DropDownListFor(x => x.id_comunidad, ViewBag.id_comunidad as SelectList, "Seleccione...", htmlAttributes: new { @class = "form-select", @id = "comunidad" })
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <button type="submit" class="btn btn-block btn-danger col-md-1" align="center" onclick="tipo_pdf();">PDF</button>
+                <button type="submit" class="btn btn-block btn-success col-md-1" align="center" onclick="tipo_excel();">Excel</button>
+            </div>
+        </div>
+
+    </div>
+
+    }
+
+    <script>
+
+        function tipo_pdf() {
+            document.getElementById("txtTipos").value = "PDF";
+            //document.getElementById("kermesse").value = 0;
+            //document.getElementById("comunidad").value = 0;
+            //document.getElementById("producto").value = 0;
+            //document.getElementById("listaprecio").value = 0;
+        }
+        function tipo_excel() {
+            document.getElementById("txtTipos").value = "Excel";
+            //document.getElementById("kermesse").value = 0;
+            //document.getElementById("comunidad").value = 0;
+            //document.getElementById("producto").value = 0;
+            //document.getElementById("listaprecio").value = 0;
+        }
+
+
+        function cambio() {
+            let opcion = document.getElementById("opciones").value;
+
+            if (opcion == 1) {
+                $("#divKermesse").show();
+                $("#divListaPrecio").hide();
+                $("#divProducto").hide();
+                $("#divComunidad").show();
+            }
+            if (opcion == 2) {
+                $("#divKermesse").show();
+                $("#divListaPrecio").hide();
+                $("#divProducto").hide();
+                $("#divComunidad").hide();
+            }
+            if (opcion == 3) {
+                $("#divKermesse").hide();
+                $("#divListaPrecio").show();
+                $("#divProducto").show();
+                $("#divComunidad").hide();
+            }
+            if (opcion == 4) {
+                $("#divKermesse").show();
+                $("#divListaPrecio").hide();
+                $("#divProducto").hide();
+                $("#divComunidad").hide();
+            }
+            if (opcion == 5) {
+                $("#divKermesse").show();
+                $("#divListaPrecio").hide();
+                $("#divProducto").hide();
+                $("#divComunidad").hide();
+            }
+        }
+
+    </script>
+

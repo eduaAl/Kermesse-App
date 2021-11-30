@@ -1,0 +1,121 @@
+﻿
+@model KermesseApp.Models.tbl_listaprecio
+@{
+    ViewBag.Title = "Nueva de lista de precios";
+}
+
+<h2>Nueva lista de precio</h2>
+
+@using (Html.BeginForm("InsertarListaPrecio", "Tbl_listaprecio", FormMethod.Post))
+{
+    <div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_kermesse, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(model => model.id_kermesse, ViewBag.id_kermmesse as SelectList, "Seleccione una kermesse...", htmlAttributes: new { @class = "form-select" })
+            @Html.ValidationMessageFor(model => model.id_kermesse, "", new { @class = "text-danger row" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(model => model.nombre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger row" })
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.descripcion, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextAreaFor(model => model.descripcion, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.descripcion, "", new { @class = "text-danger row" })
+        </div>
+
+    </div>
+
+
+    <br />
+    <br />
+    <h3>Productos de la lista de precios</h3>
+    <hr />
+    <div class="container">
+        <div class="form-group row">
+            @Html.LabelFor(model => model.detalle.id_producto, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.DropDownListFor(model => model.detalle.id_producto, ViewBag.id_producto as SelectList, "Seleccione un producto...", htmlAttributes: new { @class = "form-select", @id = "producto" })
+
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.detalle.precio_venta, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(model => model.detalle.precio_venta, new { @class = "form-control", @id = "precio" })
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input value="Agregar" class="btn btn-outline-success" type="button" onclick="AgregarProducto(); return false;" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+    <div class="row" id="divProducto" style="display: none;">
+        <table id="tablaProductos" class="table table-hover" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Precio de venta</th>
+                </tr>
+            </thead>
+
+        </table>
+
+
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-success" />
+            <input type="reset" value="Cancelar" class="btn btn-danger" />
+            @Html.ActionLink("Regresar a la vista", "ListListaPrecio", "", new { @class = "btn btn-primary" })
+        </div>
+    </div>
+}
+
+<script>
+    var num = 0;
+    function AgregarProducto() {
+        let producto = document.getElementById("producto").value;
+        let productonombre = $("#producto option:selected").text()
+        let precio = document.getElementById("precio").value;
+
+        //agregamos a la tabla
+        $("#divProducto").show();
+        let tabla = document.getElementById("tablaProductos");
+
+        let TR = document.createElement("tr");
+        let TDProducto = document.createElement("td");
+        let TDPrecio = document.createElement("td");
+        TR.appendChild(TDProducto);
+        TR.appendChild(TDPrecio);
+        TDProducto.innerHTML = productonombre;
+        TDPrecio.innerHTML = precio;
+        tabla.appendChild(TR);
+
+        //agregamos hiddens
+        let DivProducto = document.getElementById("divProducto");
+        let HiddenIndex = document.createElement("input");
+        let HiddenProducto = document.createElement("input");
+        let HiddenPrecio = document.createElement("input");
+        HiddenIndex.name = "listaprecio_Dets.Index";
+        HiddenIndex.value = num;
+        HiddenIndex.type = "hidden";
+        HiddenProducto.name = "listaprecio_Dets[" + num + "].id_producto";
+        HiddenProducto.value = producto;
+        HiddenProducto.type = "hidden";
+        HiddenPrecio.name = "listaprecio_Dets[" + num + "].precio_venta";
+        HiddenPrecio.value = precio;
+        HiddenPrecio.type = "hidden";
+        DivProducto.appendChild(HiddenIndex);
+        DivProducto.appendChild(HiddenProducto);
+        DivProducto.appendChild(HiddenPrecio);
+
+        document.getElementById("precio").value = "";
+        $("#producto").val("")
+        num++
+    }
+</script>
+

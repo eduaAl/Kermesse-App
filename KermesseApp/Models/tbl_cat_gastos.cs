@@ -11,6 +11,7 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class tbl_cat_gastos
     {
@@ -21,7 +22,15 @@ namespace KermesseApp.Models
         }
     
         public int id_cat_gasto { get; set; }
+
+        [Display(Name = "Categoría")]
+        [Required(ErrorMessage ="Campo obligatorio")]
+        [StringLength(50, ErrorMessage ="Ha excedido el valor máximo de caracteres")]
         public string nombre_cat { get; set; }
+
+        [Display(Name = "Descripción")]
+        [Required(ErrorMessage = "Campo obligatorio")]
+        [StringLength(100, ErrorMessage = "Ha excedido el valor máximo de caracteres")]
         public string desc_cat { get; set; }
         public int estado { get; set; }
     

@@ -11,7 +11,9 @@ namespace KermesseApp.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
+
     public partial class tbl_cat_producto
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +21,18 @@ namespace KermesseApp.Models
         {
             this.tbl_productos = new HashSet<tbl_productos>();
         }
-    
+
         public int id_cat_producto { get; set; }
+        [Display(Name = "Categoría de producto")]
+        [Required(ErrorMessage = "Digite un nombre para la categoría")]
+        [StringLength(50, ErrorMessage = "El límite de caracteres es de 50")]
         public string nombre { get; set; }
+        [Display(Name = "Descripción de categoría")]
+        [Required(ErrorMessage = "Digite una descripción para la categoría")]
+        [StringLength(100, ErrorMessage = "El límite de caracteres es de 100")]
         public string descripcion { get; set; }
         public int estado { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbl_productos> tbl_productos { get; set; }
     }

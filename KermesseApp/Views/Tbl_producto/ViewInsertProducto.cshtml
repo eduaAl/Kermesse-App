@@ -1,0 +1,71 @@
+﻿@model KermesseApp.Models.tbl_productos
+
+@{
+    ViewBag.Title = "Agregar nuevo producto";
+}
+
+<h2>Agregue la información del producto</h2>
+
+@using (Html.BeginForm("InsertProducto", "Tbl_producto", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>Ingrese los datos del nuevo producto</h4>
+    <hr />
+    <div class="container">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger row" })
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_comunidad, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @*@Html.DropDownList("id_comunidad", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownListFor(model => model.id_comunidad, ViewBag.id_comunidad as SelectList, "Seleccione una comunidad...", htmlAttributes: new { @class = "form-select" })
+            @Html.ValidationMessageFor(model => model.id_comunidad, "", new { @class = "text-danger row" })
+            
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_cat_producto, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @*@Html.DropDownList("id_cat_producto", null, htmlAttributes: new { @class = "form-control" })*@
+            @Html.DropDownListFor(model => model.id_cat_producto, ViewBag.id_cat_producto as SelectList, "Seleccione una categoría...", htmlAttributes: new { @class = "form-select" })
+            @Html.ValidationMessageFor(model => model.id_cat_producto, "", new { @class = "text-danger row" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextBoxFor(model => model.nombre, new { @class = "form-control" })
+            @*@Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })*@
+            @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger row" })
+
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.desc_presentacion, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.TextAreaFor(model => model.desc_presentacion, new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.desc_presentacion, "", new { @class = "text-danger row" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.cantidad, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.EditorFor(model => model.cantidad, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.cantidad, "", new { @class = "text-danger row" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.precio_venta, htmlAttributes: new { @class = "form-label mt-2 row" })
+            @Html.EditorFor(model => model.precio_venta, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.precio_venta, "", new { @class = "text-danger row" })
+        </div>
+
+        <div class="container mt-3 col-xs-1" align="center">
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <input type="reset" value="Cancelar" class="btn btn-danger" />
+                @Html.ActionLink("Regresar a la vista", "ListProductos", "", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+   
+</div>
+

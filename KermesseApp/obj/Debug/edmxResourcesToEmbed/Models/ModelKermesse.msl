@@ -293,6 +293,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="view_productos">
+      <EntityTypeMapping TypeName="KERMESSEModel.view_productos">
+        <MappingFragment StoreEntitySet="view_productos">
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+          <ScalarProperty Name="producto" ColumnName="producto" />
+          <ScalarProperty Name="id_comunidad" ColumnName="id_comunidad" />
+          <ScalarProperty Name="comunidad" ColumnName="comunidad" />
+          <ScalarProperty Name="id_cat_producto" ColumnName="id_cat_producto" />
+          <ScalarProperty Name="cat_producto" ColumnName="cat_producto" />
+          <ScalarProperty Name="desc_presentacion" ColumnName="desc_presentacion" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="view_usuario_rol">
       <EntityTypeMapping TypeName="KERMESSEModel.view_usuario_rol">
         <MappingFragment StoreEntitySet="view_usuario_rol">
@@ -338,6 +354,93 @@
           <ScalarProperty Name="valor" ColumnName="valor" />
           <ScalarProperty Name="valor_letras" ColumnName="valor_letras" />
           <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vw_Gastos">
+      <EntityTypeMapping TypeName="KERMESSEModel.Vw_Gastos">
+        <MappingFragment StoreEntitySet="Vw_Gastos">
+          <ScalarProperty Name="id_gasto" ColumnName="id_gasto" />
+          <ScalarProperty Name="kermesse" ColumnName="kermesse" />
+          <ScalarProperty Name="categoria" ColumnName="categoria" />
+          <ScalarProperty Name="fecha_gasto" ColumnName="fecha_gasto" />
+          <ScalarProperty Name="concepto" ColumnName="concepto" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vw_IngresoDet">
+      <EntityTypeMapping TypeName="KERMESSEModel.Vw_IngresoDet">
+        <MappingFragment StoreEntitySet="Vw_IngresoDet">
+          <ScalarProperty Name="id_ingresocom_det" ColumnName="id_ingresocom_det" />
+          <ScalarProperty Name="id_ingresocom" ColumnName="id_ingresocom" />
+          <ScalarProperty Name="bono" ColumnName="bono" />
+          <ScalarProperty Name="denominacion" ColumnName="denominacion" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vw_IngresoFiltrada">
+      <EntityTypeMapping TypeName="KERMESSEModel.Vw_IngresoFiltrada">
+        <MappingFragment StoreEntitySet="Vw_IngresoFiltrada">
+          <ScalarProperty Name="id_ingresocom" ColumnName="id_ingresocom" />
+          <ScalarProperty Name="kermesse" ColumnName="kermesse" />
+          <ScalarProperty Name="comunidad" ColumnName="comunidad" />
+          <ScalarProperty Name="producto" ColumnName="producto" />
+          <ScalarProperty Name="cant_producto" ColumnName="cant_producto" />
+          <ScalarProperty Name="precio_producto" ColumnName="precio_producto" />
+          <ScalarProperty Name="total_bonos" ColumnName="total_bonos" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="id_ingresocom_det" ColumnName="id_ingresocom_det" />
+          <ScalarProperty Name="bono" ColumnName="bono" />
+          <ScalarProperty Name="denominacion" ColumnName="denominacion" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vw_Kermesse">
+      <EntityTypeMapping TypeName="KERMESSEModel.Vw_Kermesse">
+        <MappingFragment StoreEntitySet="Vw_Kermesse">
+          <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+          <ScalarProperty Name="Parroquia" ColumnName="Parroquia" />
+          <ScalarProperty Name="Kermesse" ColumnName="Kermesse" />
+          <ScalarProperty Name="fecha_inicio" ColumnName="fecha_inicio" />
+          <ScalarProperty Name="fecha_fin" ColumnName="fecha_fin" />
+          <ScalarProperty Name="desc_general" ColumnName="desc_general" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="usuario_creacion" ColumnName="usuario_creacion" />
+          <ScalarProperty Name="usuario_modificacion" ColumnName="usuario_modificacion" />
+          <ScalarProperty Name="usuario_eliminacion" ColumnName="usuario_eliminacion" />
+          <ScalarProperty Name="fecha_creacion" ColumnName="fecha_creacion" />
+          <ScalarProperty Name="fecha_modificacion" ColumnName="fecha_modificacion" />
+          <ScalarProperty Name="fecha_eliminacion" ColumnName="fecha_eliminacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_listaprecio">
+      <EntityTypeMapping TypeName="KERMESSEModel.vw_listaprecio">
+        <MappingFragment StoreEntitySet="vw_listaprecio">
+          <ScalarProperty Name="id_listaprecio" ColumnName="id_listaprecio" />
+          <ScalarProperty Name="lista_precio" ColumnName="lista_precio" />
+          <ScalarProperty Name="id_kermesse" ColumnName="id_kermesse" />
+          <ScalarProperty Name="kermesse" ColumnName="kermesse" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="vw_listaprecio_det">
+      <EntityTypeMapping TypeName="KERMESSEModel.vw_listaprecio_det">
+        <MappingFragment StoreEntitySet="vw_listaprecio_det">
+          <ScalarProperty Name="id_listaprecio_det" ColumnName="id_listaprecio_det" />
+          <ScalarProperty Name="id_listaprecio" ColumnName="id_listaprecio" />
+          <ScalarProperty Name="listaprecio" ColumnName="listaprecio" />
+          <ScalarProperty Name="id_producto" ColumnName="id_producto" />
+          <ScalarProperty Name="producto" ColumnName="producto" />
+          <ScalarProperty Name="precio_venta" ColumnName="precio_venta" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

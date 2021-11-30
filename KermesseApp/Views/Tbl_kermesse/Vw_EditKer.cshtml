@@ -1,0 +1,70 @@
+﻿@model KermesseApp.Models.tbl_kermesse
+
+@{
+    ViewBag.Title = "Editar Kermesse";
+}
+
+<h2>Editar Kermesse</h2>
+
+@using (Html.BeginForm("UpdtKer", "Tbl_kermesse", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <h4>Registro a modificar</h4>   
+    <div class="container">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.id_kermesse)
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.id_parroquia, "Parroquia", htmlAttributes: new { @class = "form-label mt-2 row" })
+                @Html.DropDownListFor(model => model.id_parroquia, null, htmlAttributes: new { @class = "form-select" })
+                @Html.ValidationMessageFor(model => model.id_parroquia, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.nombre, htmlAttributes: new { @class = "form-label mt-2 row" })
+                @Html.EditorFor(model => model.nombre, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.nombre, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.fecha_inicio, htmlAttributes: new { @class = "form-label mt-2 row" })
+                @Html.EditorFor(model => model.fecha_inicio, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fecha_inicio, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.fecha_fin, htmlAttributes: new { @class = "form-label mt-2 row" })
+                @Html.EditorFor(model => model.fecha_fin, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fecha_fin, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.desc_general, htmlAttributes: new { @class = "form-label mt-2 row" })
+                @Html.EditorFor(model => model.desc_general, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.desc_general, "", new { @class = "text-danger" })
+        </div>
+
+        <div hidden>
+            @Html.LabelFor(model => model.usuario_creacion, "usuario_creacion", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.usuario_creacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.usuario_creacion, "", new { @class = "text-danger" })
+        </div>
+
+        <div hidden>
+            @Html.LabelFor(model => model.fecha_creacion, htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.EditorFor(model => model.fecha_creacion, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.fecha_creacion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="container mt-3 col-xs-1" align="center">
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Guardar cambios" class="btn btn-success" />
+                @Html.ActionLink("Regresar a la vista", "Vw_tbl_kermesse", "", new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+}
+
