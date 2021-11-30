@@ -5,6 +5,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using KermesseApp.Models;
+using Microsoft.Reporting.WebForms;
+using System.IO;
 
 namespace KermesseApp.Controllers
 {
@@ -277,6 +279,36 @@ namespace KermesseApp.Controllers
                  x.tbl_moneda.nombre.Contains(cadena) || x.cantidad.ToString().Contains(cadena)));
                 return View("ListArqueoCajaDet", listFiltrada);
             }
+        }
+
+        public ActionResult ViewRptDetalle(String tipo, String cadena, String id)
+        {
+            LocalReport rpt = new LocalReport();
+            String mt, enc, f;
+            String[] s;
+            Warning[] w;
+            ReportDataSource rd = null;
+            int ID = 0;
+            ID = Int32.Parse(id);
+
+            String ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptArqueoCajaDet.rdlc");
+            rpt.ReportPath = ruta;
+
+            if (String.IsNullOrEmpty(cadena))
+            {
+                var listafiltrada = db.Vw_arqueoCajaDet.Where(x => x.id_arqueocaja == ID);
+                rd = new ReportDataSource("dsRptArqueoDetalle", listafiltrada);
+            }
+            else
+            {
+                var listafiltrada = db.Vw_arqueoCajaDet.Where(x => (x.nombre.Contains(cadena) || x.valor.ToString().Contains(cadena) || x.subtotal.ToString().Contains(cadena) || x.cantidad.ToString().Contains(cadena)) && x.id_arqueocaja == ID);
+                rd = new ReportDataSource("dsRptArqueoDetalle", listafiltrada);
+            }
+
+            rpt.DataSources.Add(rd);
+            var b = rpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
+
+            return new FileContentResult(b, mt);
         }
     }
 }

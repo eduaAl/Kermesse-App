@@ -31,7 +31,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Bono</Value>
+                              <Value>Moneda</Value>
                               <Style>
                                 <FontFamily>Arial Black</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -67,7 +67,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>Denominación</Value>
+                              <Value>Valor</Value>
                               <Style>
                                 <FontFamily>Arial Black</FontFamily>
                                 <FontWeight>Bold</FontWeight>
@@ -173,14 +173,14 @@
               <TablixCells>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="bono">
+                    <Textbox Name="moneda">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!bono.Value</Value>
+                              <Value>=Fields!moneda.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -189,7 +189,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>bono</rd:DefaultName>
+                      <rd:DefaultName>moneda</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -205,14 +205,14 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="denominacion">
+                    <Textbox Name="valor_letras">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=Fields!denominacion.Value</Value>
+                              <Value>=Fields!valor_letras.Value</Value>
                               <Style />
                             </TextRun>
                           </TextRuns>
@@ -221,7 +221,7 @@
                           </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>denominacion</rd:DefaultName>
+                      <rd:DefaultName>valor_letras</rd:DefaultName>
                       <Style>
                         <Border>
                           <Color>LightGrey</Color>
@@ -321,9 +321,9 @@
             </TablixMember>
           </TablixMembers>
         </TablixRowHierarchy>
-        <DataSetName>dsRptIngreso</DataSetName>
-        <Top>4.97594cm</Top>
-        <Left>0.65826cm</Left>
+        <DataSetName>dsRptArqueo</DataSetName>
+        <Top>3.85411cm</Top>
+        <Left>0.65828cm</Left>
         <Height>1.54396cm</Height>
         <Width>15.19529cm</Width>
         <Style>
@@ -340,14 +340,16 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Producto: </Value>
+                <Value>Fecha: </Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
               <TextRun>
-                <Value>=First(Fields!producto.Value, "dsRptIngreso")</Value>
-                <Style />
+                <Value>=Fields!fecha_arqueo.Value</Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
               </TextRun>
             </TextRuns>
             <Style />
@@ -389,182 +391,6 @@
           <PaddingBottom>2pt</PaddingBottom>
         </Style>
       </Textbox>
-      <Textbox Name="cant_producto">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Cantidad:</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value>=Sum(Fields!cant_producto.Value, "dsRptIngreso")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>cant_producto</rd:DefaultName>
-        <Top>2.47976cm</Top>
-        <Left>0.65827cm</Left>
-        <Height>0.6cm</Height>
-        <Width>7.06376cm</Width>
-        <ZIndex>2</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-          <TopBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </TopBorder>
-          <BottomBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </BottomBorder>
-          <LeftBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </LeftBorder>
-          <RightBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </RightBorder>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="precio_producto">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Precio:</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value xml:space="preserve"> </Value>
-                <Style />
-              </TextRun>
-              <TextRun>
-                <Value>=Sum(Fields!precio_producto.Value, "dsRptIngreso")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>precio_producto</rd:DefaultName>
-        <Top>2.47976cm</Top>
-        <Left>8.01307cm</Left>
-        <Height>0.6cm</Height>
-        <Width>7.84049cm</Width>
-        <ZIndex>3</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-          <TopBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </TopBorder>
-          <BottomBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </BottomBorder>
-          <LeftBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </LeftBorder>
-          <RightBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </RightBorder>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
-      <Textbox Name="total_bonos">
-        <CanGrow>true</CanGrow>
-        <KeepTogether>true</KeepTogether>
-        <Paragraphs>
-          <Paragraph>
-            <TextRuns>
-              <TextRun>
-                <Value>Total de bonos:</Value>
-                <Style>
-                  <FontWeight>Bold</FontWeight>
-                </Style>
-              </TextRun>
-              <TextRun>
-                <Value xml:space="preserve"> </Value>
-                <Style />
-              </TextRun>
-              <TextRun>
-                <Value>=Sum(Fields!total_bonos.Value, "dsRptIngreso")</Value>
-                <Style />
-              </TextRun>
-            </TextRuns>
-            <Style />
-          </Paragraph>
-        </Paragraphs>
-        <rd:DefaultName>total_bonos</rd:DefaultName>
-        <Top>1.56902cm</Top>
-        <Left>10.55778cm</Left>
-        <Height>0.6cm</Height>
-        <Width>5.29577cm</Width>
-        <ZIndex>4</ZIndex>
-        <Style>
-          <Border>
-            <Style>Solid</Style>
-          </Border>
-          <TopBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </TopBorder>
-          <BottomBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </BottomBorder>
-          <LeftBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </LeftBorder>
-          <RightBorder>
-            <Color>Black</Color>
-            <Style>Solid</Style>
-            <Width>1pt</Width>
-          </RightBorder>
-          <PaddingLeft>2pt</PaddingLeft>
-          <PaddingRight>2pt</PaddingRight>
-          <PaddingTop>2pt</PaddingTop>
-          <PaddingBottom>2pt</PaddingBottom>
-        </Style>
-      </Textbox>
       <Textbox Name="subtotal1">
         <CanGrow>true</CanGrow>
         <KeepTogether>true</KeepTogether>
@@ -572,17 +398,19 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Total:</Value>
+                <Value>Total: </Value>
+                <Style>
+                  <FontWeight>Bold</FontWeight>
+                </Style>
+              </TextRun>
+              <TextRun>
+                <Value>=Sum(Fields!subtotal.Value, "dsRptArqueo")</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                 </Style>
               </TextRun>
               <TextRun>
                 <Value xml:space="preserve"> </Value>
-                <Style />
-              </TextRun>
-              <TextRun>
-                <Value>=Sum(Fields!subtotal.Value, "dsRptIngreso")</Value>
                 <Style />
               </TextRun>
             </TextRuns>
@@ -592,11 +420,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>subtotal1</rd:DefaultName>
-        <Top>6.88715cm</Top>
+        <Top>6.04048cm</Top>
         <Left>0.65826cm</Left>
         <Height>0.6cm</Height>
         <Width>15.19528cm</Width>
-        <ZIndex>5</ZIndex>
+        <ZIndex>2</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -614,7 +442,7 @@
           <Paragraph>
             <TextRuns>
               <TextRun>
-                <Value>Información del ingreso</Value>
+                <Value>Información del Arqueo</Value>
                 <Style>
                   <FontWeight>Bold</FontWeight>
                   <TextDecoration>Underline</TextDecoration>
@@ -628,8 +456,8 @@
         <Top>0.526cm</Top>
         <Left>0.65828cm</Left>
         <Height>0.6cm</Height>
-        <Width>4.21979cm</Width>
-        <ZIndex>6</ZIndex>
+        <Width>5.78082cm</Width>
+        <ZIndex>3</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -658,11 +486,11 @@
           </Paragraph>
         </Paragraphs>
         <rd:DefaultName>Textbox2</rd:DefaultName>
-        <Top>3.93912cm</Top>
-        <Left>0.65826cm</Left>
+        <Top>2.64795cm</Top>
+        <Left>0.65828cm</Left>
         <Height>0.6cm</Height>
         <Width>4.21979cm</Width>
-        <ZIndex>7</ZIndex>
+        <ZIndex>4</ZIndex>
         <Style>
           <Border>
             <Style>None</Style>
@@ -674,13 +502,13 @@
         </Style>
       </Textbox>
     </ReportItems>
-    <Height>3.375in</Height>
+    <Height>2.89167in</Height>
     <Style />
   </Body>
   <Width>6.78509in</Width>
   <Page>
     <PageHeader>
-      <Height>2.77812cm</Height>
+      <Height>2.60879cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -691,21 +519,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>Lista de ingresos de la comunidad: </Value>
-                  <Style>
-                    <FontFamily>Arial Black</FontFamily>
-                    <FontSize>12pt</FontSize>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value>=Fields!comunidad.Value</Value>
-                  <Style>
-                    <FontFamily>Arial Black</FontFamily>
-                    <FontSize>12pt</FontSize>
-                  </Style>
-                </TextRun>
-                <TextRun>
-                  <Value> en la </Value>
+                  <Value />
                   <Style>
                     <FontFamily>Arial Black</FontFamily>
                     <FontSize>12pt</FontSize>
@@ -719,7 +533,7 @@
             <Paragraph>
               <TextRuns>
                 <TextRun>
-                  <Value>kermesse: </Value>
+                  <Value>Lista de Arqueos de la kermesse: </Value>
                   <Style>
                     <FontFamily>Arial Black</FontFamily>
                     <FontSize>12pt</FontSize>
@@ -727,6 +541,13 @@
                 </TextRun>
                 <TextRun>
                   <Value>=Fields!kermesse.Value</Value>
+                  <Style>
+                    <FontFamily>Arial Black</FontFamily>
+                    <FontSize>12pt</FontSize>
+                  </Style>
+                </TextRun>
+                <TextRun>
+                  <Value xml:space="preserve"> </Value>
                   <Style>
                     <FontFamily>Arial Black</FontFamily>
                     <FontSize>12pt</FontSize>
@@ -761,7 +582,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>5.10646cm</Height>
+      <Height>1.57163cm</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>
@@ -823,59 +644,67 @@
     </DataSource>
   </DataSources>
   <DataSets>
-    <DataSet Name="dsRptIngreso">
+    <DataSet Name="dsRptArqueo">
       <Query>
         <DataSourceName>dsRpt</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
-        <Field Name="id_ingresocom">
-          <DataField>id_ingresocom</DataField>
+        <Field Name="id_arqueocaja">
+          <DataField>id_arqueocaja</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="id_kermesse">
+          <DataField>id_kermesse</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="kermesse">
           <DataField>kermesse</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="comunidad">
-          <DataField>comunidad</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="fecha_arqueo">
+          <DataField>fecha_arqueo</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
-        <Field Name="producto">
-          <DataField>producto</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="cant_producto">
-          <DataField>cant_producto</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
-        <Field Name="precio_producto">
-          <DataField>precio_producto</DataField>
+        <Field Name="gran_total">
+          <DataField>gran_total</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="total_bonos">
-          <DataField>total_bonos</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="estado">
           <DataField>estado</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="id_ingresocom_det">
-          <DataField>id_ingresocom_det</DataField>
+        <Field Name="moneda">
+          <DataField>moneda</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="valor">
+          <DataField>valor</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="valor_letras">
+          <DataField>valor_letras</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="signo">
+          <DataField>signo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="id_moneda">
+          <DataField>id_moneda</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="bono">
-          <DataField>bono</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="id_arqueocaja_det">
+          <DataField>id_arqueocaja_det</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="denominacion">
-          <DataField>denominacion</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+        <Field Name="id_denominacion">
+          <DataField>id_denominacion</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="cantidad">
           <DataField>cantidad</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
+          <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
         <Field Name="subtotal">
           <DataField>subtotal</DataField>
@@ -884,11 +713,11 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>dsRpt</rd:DataSetName>
-        <rd:SchemaPath>C:\Users\HP\source\repos\KermesseApp\KermesseApp\Reportes\dsRpt.xsd</rd:SchemaPath>
-        <rd:TableName>Vw_IngresoFiltrada</rd:TableName>
+        <rd:SchemaPath>C:\Users\Acer Nitro 5\source\repos\KermesseApp\KermesseApp\Reportes\dsRpt.xsd</rd:SchemaPath>
+        <rd:TableName>Vw_arqueoCaja</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
-        <rd:TableAdapterName>Vw_IngresoFiltradaTableAdapter</rd:TableAdapterName>
+        <rd:TableAdapterName>Vw_arqueoCajaTableAdapter</rd:TableAdapterName>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

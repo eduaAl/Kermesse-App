@@ -41,8 +41,9 @@ namespace KermesseApp.Controllers
 
                 db.tbl_bonos.Add(tbl);
                 db.SaveChanges();
+                ModelState.Clear();
+                return RedirectToAction("Vw_tbl_bono");
             }
-            ModelState.Clear();
 
             var list = db.tbl_bonos.ToList();
             return View("Vw_tbl_bono", list);

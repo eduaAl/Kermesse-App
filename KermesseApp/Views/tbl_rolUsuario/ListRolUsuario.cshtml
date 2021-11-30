@@ -56,7 +56,7 @@
     ViewBag.Title = "tbl_rol_usuario";
 }
 
-<h2>ListRolUsuario</h2>
+<h2>Tabla de rol usuario</h2>
 
 <p>
     @Html.ActionLink("Crear un nuevo rol para un usuario", "VguardarRolUsuario")
@@ -85,7 +85,7 @@
                 @Html.DisplayFor(modelItem => item.tbl_usuario.usuario)
             </td>
             <td>
-                <a href="@Url.Action("editRolUsuario", new { id = item.id_rol_usuario})"><i class="btn btn-outline-primary">Editar</i></a> |
+                <a href="@Url.Action("editRolUsuario", new { id = item.id_rol_usuario})"><i class="btn btn-outline-info">Editar</i></a> |
                 <a href="@Url.Action("verRolUsuario", new { id = item.id_rol_usuario})"><i class="btn btn-outline-primary">Visualizar</i></a> |
                 <a href="@Url.Action("deleteRolUsuario", new { id = item.id_rol_usuario})"><i class="btn btn-outline-danger">Eliminar</i></a>
             </td>

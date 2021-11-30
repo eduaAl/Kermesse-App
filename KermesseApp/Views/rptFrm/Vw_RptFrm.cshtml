@@ -1,4 +1,46 @@
-﻿
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string[] separado = url.Split('/');
+    string opcionActual = separado[separado.Length - 1];
+
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+}
+
 @model KermesseApp.Models.RecuperarIDs
 @{
 
@@ -16,7 +58,6 @@
             @Html.DropDownList("Reportes", (List<SelectListItem>)ViewBag.reportes, "Seleccione un reporte", htmlAttributes: new { @class = "form-select", @id = "opciones", @onchange = "cambio();" })
         </div>
         <div class="form-group row">
-            @*@Html.DropDownList("Tipos", (List<SelectListItem>)ViewBag.tipos, "Seleccione un reporte", htmlAttributes: new { @class = "form-select", @id = "opciones", })*@
             @Html.TextBox("Tipos",null, new { @class = "form-control", @hidden="true", @id="txtTipos" })
         </div>
     </div>
@@ -52,28 +93,18 @@
                 <button type="submit" class="btn btn-block btn-success col-md-1" align="center" onclick="tipo_excel();">Excel</button>
             </div>
         </div>
-
     </div>
 
     }
 
     <script>
-
         function tipo_pdf() {
             document.getElementById("txtTipos").value = "PDF";
-            //document.getElementById("kermesse").value = 0;
-            //document.getElementById("comunidad").value = 0;
-            //document.getElementById("producto").value = 0;
-            //document.getElementById("listaprecio").value = 0;
-        }
-        function tipo_excel() {
-            document.getElementById("txtTipos").value = "Excel";
-            //document.getElementById("kermesse").value = 0;
-            //document.getElementById("comunidad").value = 0;
-            //document.getElementById("producto").value = 0;
-            //document.getElementById("listaprecio").value = 0;
         }
 
+        function tipo_excel() {
+            document.getElementById("txtTipos").value = "Excel";
+        }
 
         function cambio() {
             let opcion = document.getElementById("opciones").value;
@@ -109,6 +140,5 @@
                 $("#divComunidad").hide();
             }
         }
-
     </script>
 

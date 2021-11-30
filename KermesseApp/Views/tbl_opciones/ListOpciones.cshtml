@@ -52,7 +52,7 @@
 @model IEnumerable<KermesseApp.Models.tbl_opciones>
 
 @{
-    ViewBag.Title = "tbl_opciones";
+    ViewBag.Title = "Tabla opciones";
 }
 
 <h2>Opciones</h2>
@@ -71,11 +71,10 @@
             </div>
         </div>
 
-        <div class="form-group col-xs-4 col-md-4" align="right">
+        @*<div class="form-group col-xs-4 col-md-4" align="right">
             @Html.ActionLink("PDF", "Placeholder", new { tipo = "PDF" }, new { @class = "btn btn-danger" })
-            @Html.ActionLink("Word", "Placeholder", new { tipo = "Word" }, new { @class = "btn btn-info" })
             @Html.ActionLink("Excel", "Placeholder", new { tipo = "Excel" }, new { @class = "btn btn-success" })
-        </div>
+        </div>*@
     </div>
 
 }
@@ -95,7 +94,7 @@
                 @Html.DisplayFor(modelItem => item.opcion)
             </td>
             <td>
-                <a href="@Url.Action("editOpcion", new { id = item.id_opciones})"><i class="btn btn-outline-primary">Editar</i></a> |
+                <a href="@Url.Action("editOpcion", new { id = item.id_opciones})"><i class="btn btn-outline-info">Editar</i></a> |
                 <a href="@Url.Action("verOpcion", new { id = item.id_opciones})"><i class="btn btn-outline-primary">Visualizar</i></a> |
                 <a href="@Url.Action("deleteOpcion", new { id = item.id_opciones})"><i class="btn btn-outline-danger">Eliminar</i></a>
             </td>

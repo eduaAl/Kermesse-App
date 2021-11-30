@@ -1,4 +1,54 @@
-﻿@model IEnumerable<KermesseApp.Models.tbl_productos>
+﻿@using KermesseApp.Models;
+
+@{
+    /*Instanciamos objetos y variables */
+    KERMESSEEntities ke = new KERMESSEEntities();
+    tbl_usuario tu = new tbl_usuario();
+    tbl_rol_usuario tru = new tbl_rol_usuario();
+    List<Vw_rol_opcion> listopc = new List<Vw_rol_opcion>();
+    Int32 idRol = 0;
+    String opcion = "";
+    Int32 longitud = 0;
+    Boolean acceso = false;
+
+    /* Obtenemos la sesion */
+    tu = Session["usuario"] as tbl_usuario;
+
+    /* Obtenemos el rol del usuario*/
+    tru = ke.tbl_rol_usuario.Where(x => x.id_usuario.Equals(tu.id_usuario)).FirstOrDefault();
+    idRol = tru.id_rol;
+    /* Obtenemos la lista de opciones del rol*/
+    listopc = ke.Vw_rol_opcion.Where(x => x.id_rol.Equals(idRol)).ToList();
+
+    string url = HttpContext.Current.Request.Url.AbsoluteUri;
+    string opcionActual;
+    string[] separado = url.Split('/');
+    if (separado.Length == 5)
+    {
+        opcionActual = separado[separado.Length - 1];
+    }
+    else
+    {
+        opcionActual = separado[separado.Length - 2];
+    }
+    longitud = listopc.Count();//Obtenemos la cantidad de elementos
+    for (int i = 0; i < longitud; i++)
+    {
+        //obtenemos la columna opcion de la matriz y/o lista de elementos
+        opcion = listopc[i].opcion;
+        if (opcionActual.Equals(opcion)) //COMPARAMOS LA OPCION ACTUAL CON CADA OPCIÓN DE LA MATRIZ
+        {
+            acceso = true; //ACCESO CONCEDIDO
+            break;
+        }
+    }
+    if (!acceso)
+    {
+        Response.Redirect("~/Home/Error");
+    }
+}
+
+@model IEnumerable<KermesseApp.Models.tbl_productos>
 
 @{
     ViewBag.Title = "Ver productos";
@@ -7,7 +57,7 @@
 <h2>Tabla de productos</h2>
 
 <p>
-    @Html.ActionLink("Registrar nuevo Producto", "ViewInsertProducto", "", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Registrar nuevo Producto", "ViewInsertProducto")
 </p>
 @using (Html.BeginForm("FilterProducto", "Tbl_producto", FormMethod.Post))
 {
@@ -20,7 +70,7 @@
         </div>
         <div class="form-group col-xs-4 col-md-4" align="right">
             @Html.ActionLink("PDF", "VerRptProductos", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
-            @Html.ActionLink("Excel", "VerRptProductos", new { tipo = "Excel" }, new { @class = "btn btn-success" })
+            @Html.ActionLink("Excel", "VerRptProductos", new { tipo = "Excel", cadena = Request.Form["cadena"] }, new { @class = "btn btn-success" })
         </div>
     </div>
 }

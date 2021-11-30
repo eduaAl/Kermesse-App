@@ -53,7 +53,7 @@
 @model IEnumerable<KermesseApp.Models.tbl_rol_opcion>
 
 @{
-    ViewBag.Title = "tbl_rol_opcion";
+    ViewBag.Title = "Tabla rol opciones";
 }
 
 <h2>ListRolOpcion</h2>
@@ -82,7 +82,7 @@
                 @Html.DisplayFor(modelItem => item.tbl_rol.rol)
             </td>
             <td>
-                <a href="@Url.Action("editRolOpcion", new { id = item.id_rol_opcion})"><i class="btn btn-outline-primary">Editar</i></a> |
+                <a href="@Url.Action("editRolOpcion", new { id = item.id_rol_opcion})"><i class="btn btn-outline-info">Editar</i></a> |
                 <a href="@Url.Action("verRolOpcion", new { id = item.id_rol_opcion})"><i class="btn btn-outline-primary">Visualizar</i></a> |
                 <a href="@Url.Action("deleteRolOpcion", new { id = item.id_rol_opcion})"><i class="btn btn-outline-danger">Eliminar</i></a>
             </td>

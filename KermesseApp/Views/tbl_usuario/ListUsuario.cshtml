@@ -46,9 +46,8 @@
     {
         Response.Redirect("~/Home/Error");
     }
-
-
 }
+
 @model IEnumerable<KermesseApp.Models.tbl_usuario>
 
 @{
@@ -119,7 +118,7 @@
                 @Html.DisplayFor(modelItem => item.email)
             </td>
             <td>
-                <a href="@Url.Action("editUsuario", new { id = item.id_usuario})"><i class="btn btn-outline-primary">Editar</i></a> |
+                <a href="@Url.Action("editUsuario", new { id = item.id_usuario})"><i class="btn btn-outline-info">Editar</i></a> |
                 <a href="@Url.Action("verUsuario", new { id = item.id_usuario})"><i class="btn btn-outline-primary">Visualizar</i></a> |
                 <a href="@Url.Action("deleteUsuario", new { id = item.id_usuario})"><i class="btn btn-outline-danger">Eliminar</i></a>
             </td>

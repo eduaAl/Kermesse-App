@@ -323,29 +323,5 @@ namespace KermesseApp.Controllers
             ViewBag.id_producto = new SelectList(db.tbl_productos.Where(x => x.estado !=3), "id_producto", "nombre");
             return View();
         }
-
-        [HttpPost]
-        public ActionResult VerRptListaPrecioFiltrada(vw_listaprecio_det vld)
-        {
-            LocalReport lrpt = new LocalReport();
-            string mt, enc, f, tipo;
-            String[] s;
-            Warning[] w;
-
-            string ruta = Path.Combine(Server.MapPath("~/Reportes"), "rptListaPrecioFiltrada.rdlc");
-            lrpt.ReportPath = ruta;
-
-            //List<tbl_cat_producto> lista = new List<tbl_cat_producto>();
-            var listaFiltrada = db.vw_listaprecio_det.Where(x => x.id_listaprecio == vld.id_listaprecio & x.id_producto == vld.id_producto);
-
-            ReportDataSource rds = new ReportDataSource("dsRptListaPrecioFiltrada", listaFiltrada);
-            lrpt.DataSources.Add(rds);
-            tipo = "PDF";
-            var b = lrpt.Render(tipo, null, out mt, out enc, out f, out s, out w);
-            return new FileContentResult(b, mt);
-        }
     }
-
-    
-
 }

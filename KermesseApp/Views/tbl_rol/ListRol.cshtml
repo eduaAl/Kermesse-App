@@ -52,7 +52,7 @@
 @model IEnumerable<KermesseApp.Models.tbl_rol>
 
 @{
-    ViewBag.Title = "tbl_rol";
+    ViewBag.Title = "Tabla rol";
 }
 
 <h2>Roles</h2>
@@ -73,7 +73,6 @@
 
         <div class="form-group col-xs-4 col-md-4" align="right">
             @Html.ActionLink("PDF", "Placeholder", new { tipo = "PDF" }, new { @class = "btn btn-danger" })
-            @Html.ActionLink("Word", "Placeholder", new { tipo = "Word" }, new { @class = "btn btn-info" })
             @Html.ActionLink("Excel", "Placeholder", new { tipo = "Excel" }, new { @class = "btn btn-success" })
         </div>
     </div>
@@ -94,7 +93,7 @@
                 @Html.DisplayFor(modelItem => item.rol)
             </td>
             <td>
-                <a href="@Url.Action("editRol", new { id = item.id_rol})"><i class="btn btn-outline-primary">Editar</i></a> |
+                <a href="@Url.Action("editRol", new { id = item.id_rol})"><i class="btn btn-outline-info">Editar</i></a> |
                 <a href="@Url.Action("verRol", new { id = item.id_rol})"><i class="btn btn-outline-primary">Visualizar</i></a> |
                 <a href="@Url.Action("deleteRol", new { id = item.id_rol})"><i class="btn btn-outline-danger">Eliminar</i></a>
             </td>

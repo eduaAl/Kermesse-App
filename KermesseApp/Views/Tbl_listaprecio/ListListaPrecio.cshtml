@@ -7,7 +7,7 @@
 <h2>Listas de precios activas</h2>
 
 <p>
-    @Html.ActionLink("Registrar nueva lista precio", "ViewInsertListaPrecio", "", new { @class = "btn btn-primary" })
+    @Html.ActionLink("Registrar nueva lista precio", "ViewInsertListaPrecio")
 </p>
 
 @using (Html.BeginForm("FilterListaPrecios", "Tbl_listaprecio", FormMethod.Post))
@@ -19,13 +19,7 @@
                 <button type="submit" class="btn btn-block btn-success col-md-1" align="center">Buscar</button>
             </div>
         </div>
-
-        <div class="form-group col-xs-4 col-md-4" align="right">
-            @Html.ActionLink("PDF", "VerRptListaPrecio", new { tipo = "PDF", cadena = Request.Form["cadena"] }, new { @class = "btn btn-danger" })
-            @Html.ActionLink("Excel", "VerRptListaPrecio", new { tipo = "Excel" }, new { @class = "btn btn-success" })
-        </div>
     </div>
-
 }
 
 

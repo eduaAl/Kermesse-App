@@ -47,12 +47,13 @@ namespace KermesseApp.Controllers
                 {
                     Text = "Reporte de arqueo",
                     Value = "4"
-                },
-                new SelectListItem()
-                {
-                    Text = "Reporte de resumen de ingresos y egresos",
-                    Value = "5"
                 }
+                //},
+                //new SelectListItem()
+                //{
+                //    Text = "Reporte de resumen de ingresos y egresos",
+                //    Value = "5"
+                //}
             };
         }
 
@@ -113,26 +114,20 @@ namespace KermesseApp.Controllers
                     }
                 case "3": //Lista precio
                     {
-                        ruta = Path.Combine(Server.MapPath("~/Reportes"), "RptGastos.rdlc"); //FALTA
+                        ruta = Path.Combine(Server.MapPath("~/Reportes"), "RptListaPrecio.rdlc"); 
                         rpt.ReportPath = ruta;
-                        var lista = db.tbl_listaprecio.Where(x => x.estado != 3); //FALTA
-                        rd = new ReportDataSource("dsRptGastos", lista);
+
+                        var lista = db.vw_listaprecio.Where(x => x.estado != 3 && x.id_listaprecio == id.id_listaprecio && x.id_producto == id.id_producto); 
+                        rd = new ReportDataSource("dsRptLisPrecio",lista);
                         break;
                     }
                 case "4": //Arqueo caja
                     {
-                        ruta = Path.Combine(Server.MapPath("~/Reportes"), "RptGastos.rdlc");
+                        ruta = Path.Combine(Server.MapPath("~/Reportes"), "RptArqueoFiltrado.rdlc");
                         rpt.ReportPath = ruta;
-                        String nombre = "";
-                        foreach (var x in db.tbl_kermesse)
-                        {
-                            if (x.id_kermesse == id.id_kermesse)
-                            {
-                                nombre = x.nombre;
-                            }
-                        }
-                        var lista = db.Vw_Gastos.Where(x => x.estado != 3 && x.kermesse == nombre);
-                        rd = new ReportDataSource("dsRptGastos", lista);
+
+                        var lista = db.Vw_arqueoCaja.Where(x => x.estado != 3 && x.id_kermesse == id.id_kermesse);
+                        rd = new ReportDataSource("dsRptArqueo", lista);
                         break;
                     }
                 case "5": //Resumen de ingresos y egresos
@@ -146,7 +141,6 @@ namespace KermesseApp.Controllers
                     }
                 default:
                     Console.WriteLine("NO EXISTE ESA OPCIÓN");
-
                     break;
             }
             rpt.DataSources.Add(rd);
